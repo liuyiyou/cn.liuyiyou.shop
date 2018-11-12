@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.prod.mapper.ProdSkuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.prod.entity.ProdSku">
+        <id column="sku_id" property="skuId"/>
+        <result column="sku_name" property="skuName"/>
+        <result column="prod_id" property="prodId"/>
+        <result column="sku_attr" property="skuAttr"/>
+        <result column="store" property="store"/>
+        <result column="saled" property="saled"/>
+        <result column="freez" property="freez"/>
+        <result column="sku_code" property="skuCode"/>
+        <result column="price" property="price"/>
+        <result column="refer_price" property="referPrice"/>
+        <result column="sku_pic" property="skuPic"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="status_time" property="statusTime"/>
+        <result column="create_suid" property="createSuid"/>
+        <result column="last_update" property="lastUpdate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sku_id, sku_name, prod_id, sku_attr,store,saled,freez, sku_code, price, refer_price, sku_pic, status, create_time, status_time, create_suid, last_update
+    </sql>
+
+</mapper>

@@ -1,0 +1,592 @@
+@import "variables.less";
+@import "mixins";
+@designWidth: 375; //必须在mixins 后面自定义效果图宽度
+@import "normalize";
+@import "common";
+.iba-coupon-bg {
+    margin: 0 auto;
+    .px2rem(margin-top, 8);
+    .px2rem(width, 351);
+    .px2rem(height, 114);
+    background: #f8eeee url('../../images/coupon/couponBg.png') no-repeat center;
+    background-size: 100%;
+    border: 1px solid #f3d4d4;
+    .px2rem(border-radius, 6);
+    .boxBottom {
+        .px2rem(height, 74);
+        display: flex;
+        .couponStateIcon{
+            display: none;
+            .px2rem(width, 80);
+            .px2rem(height, 80);
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            .px2rem(right,10);
+            .px2rem(top,-40);
+            z-index: 0;
+        }
+        &:before{
+            content: '';
+            display: block;
+            .px2rem(width, 16);
+            .px2rem(height, 16);
+            border:1px solid #f3d4d4;
+            border-radius: 100%  0  0 100%;
+            background: #f8f8f8;
+            position: absolute;
+            .px2rem(top,-8);
+            .px2rem(right,-8);
+            z-index: 0;
+        }
+        &:after{
+            content: '';
+            display: block;
+            .px2rem(width, 16);
+            .px2rem(height, 25);
+            background: #f8f8f8;
+            position: absolute;
+            .px2rem(top,-8);
+            .px2rem(right,-17);
+            z-index: 0;
+        }
+        .iba-coupon-conL {
+            .px2rem(width, 116);
+            height: 100%;
+            border-right: 1px dashed #f3d4d4;
+            box-sizing: border-box;
+            .denomination {
+                .px2rem(margin-top, 12);
+                .px2rem(line-height, 24);
+                .icon {
+                    color: #333333;
+                    .px2rem(font-size, 18);
+                }
+                .value {
+                    .px2rem(font-size, 30);
+                    font-weight: bold;
+                }
+            }
+            .useAmtLimit{
+                color:#333333;
+                .px2rem(font-size, 12);
+            }
+        
+        }
+        .iba-coupon-conR {
+            flex: 1;
+            height:100%;
+            display: inline-block;
+            vertical-align: middle;
+            box-sizing: border-box;
+            position: relative;
+            .box{
+                position: absolute;
+                top:50%;
+                .px2rem(left,14);
+                z-index: 0;
+                transform: translate3d(0,-50%,0);
+                text-align: left;
+                .fullCoupon{
+                    color:#333333;
+                    .px2rem(font-size, 12);
+                }
+                .timeLimit{
+                    color:#333333;
+                    .px2rem(font-size, 12);
+                    .px2rem(margin-top,4);
+                }
+                .couponState{
+                    color:#666666;
+                    .px2rem(font-size, 12);
+                    .px2rem(margin-top,4);
+                }
+            }
+            .giftBtn{
+                background: #D6B27A;
+                color:#FFFFFF;
+                .px2rem(padding, 0, 10);
+                .px2rem(height, 20);
+                .px2rem(line-height, 20);
+                .px2rem(border-radius, 4);
+                .px2rem(font-size, 11);
+                position: absolute;
+                .px2rem(right,20);
+                .px2rem(bottom,12);
+                z-index: 1;
+            }
+        
+        }
+    }
+    &.giving{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/givingCounpon@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+                .giftBtn{
+                    background-color:#333333 ;
+                    color:#ffffff;
+                }
+            }
+        }
+    }
+    &.gived{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/givedCoupon@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.overdue{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/overdueCoupon@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.received{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .receiveBtn{
+                display: none;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/receivedCoupon@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.sellOut {
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .receiveBtn{
+                display: none;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/couponSellOut@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.end {
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .receiveBtn{
+                display: none;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/couponActEnd@2.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.used{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .receiveBtn{
+                display: none;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: block;
+                background-image: url('../../images/coupon/usedCoupon@2x.png');
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+    &.notUse{
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        .iba-coupon-tit {
+            border-bottom: 1px dashed #DDDDDD;
+            .name{
+                color:#999999
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .receiveBtn{
+                display: none;
+            }
+        }
+        .boxBottom{
+            .couponStateIcon{
+                display: none;
+            }
+            &:before{
+                border-color:#DDDDDD;
+            }
+            .iba-coupon-conL {
+                border-right: 1px dashed #DDDDDD;
+                .useAmtLimit{
+                    color: #999999;
+                }
+                .denomination{
+                    .icon{
+                        color: #999999;
+                    }
+                    .value{
+                        color: #999999;
+                    }
+                }
+            }
+            .iba-coupon-conR{
+                .fullCoupon,.timeLimit{
+                    color: #999999;
+                }
+                .couponState{
+                    color: #999999;
+                }
+            }
+        }
+    }
+}
+
+.iba-coupon-tit {
+    .px2rem(height, 40);
+    position: relative;
+    border-bottom: 1px dashed #f3d4d4;
+    .name{
+        color:#333333;
+        .px2rem(font-size, 12);
+    }
+    &:before{
+        content: '';
+        display: block;
+        .px2rem(width, 16);
+        .px2rem(height, 16);
+        border:1px solid #f3d4d4;
+        border-radius: 0 100% 100% 0;
+        background: #f8f8f8;
+        position: absolute;
+        .px2rem(bottom,-8);
+        .px2rem(left,-8);
+        z-index: 0;
+    }
+    &:after{
+        content: '';
+        display: block;
+        .px2rem(width, 16);
+        .px2rem(height, 25);
+        background: #f8f8f8;
+        position: absolute;
+        .px2rem(bottom,-8);
+        .px2rem(left,-17);
+        z-index: 0;
+    }
+    
+    .receiveBtn , .useBtn {
+        position: absolute;
+        right: 5%;
+        top: 25%;
+        .px2rem(padding, 0, 10);
+        .px2rem(height, 20);
+        .px2rem(line-height, 20);
+        background-color: #C11C1C;
+        .px2rem(border-radius, 4);
+        color: #ffffff;
+        .px2rem(font-size, 12);
+    }
+    
+    .selectBtn{
+        position: absolute;
+        right: 5%;
+        top: 25%;
+        color: #ffffff;
+        background: #ffffff;
+        .px2rem(width, 25);
+        .px2rem(height, 25);
+        border-radius: 50%;
+        border:1px solid #999;
+        &.isSelect{
+            background: #c11c1c url('../../images/selected.png') no-repeat center;
+            .px2rem(background-size, 18,14);
+            border:none;
+        }
+        &:active{
+            border:1px solid #999!important;
+        }
+    }
+}
+
+.iba-coupon-tit img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.iba-coupon-tit p {
+    position: absolute;
+    left: 4%;
+    top: 25%;
+    color:#333333;
+    .px2rem(font-size, 12);
+}
+
+.iba-coupon-tit .receiveBtn ,.iba-coupon-tit .useBtn {
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    .px2rem(padding, 0, 10);
+    .px2rem(height, 20);
+    .px2rem(line-height, 20);
+    .px2rem(border-radius, 2);
+    background-color: #C11C1C;
+    .px2rem(border-radius, 4);
+    color: #ffffff;
+    .px2rem(font-size, 12);
+}
+
+
+
+
+

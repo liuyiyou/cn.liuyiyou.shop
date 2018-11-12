@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.base.mapper.BrandMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.base.entity.Brand">
+        <id column="brand_id" property="brandId" />
+        <result column="brand_first_char" property="brandFirstChar" />
+        <result column="brand_name_cn" property="brandNameCn" />
+        <result column="brand_name_en" property="brandNameEn" />
+        <result column="brand_descp" property="brandDescp" />
+        <result column="brand_keywords" property="brandKeywords" />
+        <result column="brand_icon" property="brandIcon" />
+        <result column="create_date" property="createDate" />
+        <result column="last_update" property="lastUpdate" />
+        <result column="country_id" property="countryId" />
+        <result column="prod_img" property="prodImg" />
+        <result column="banner_img" property="bannerImg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        brand_id, brand_first_char, brand_name_cn, brand_name_en, brand_descp, brand_keywords, brand_icon, create_date, last_update, country_id, prod_img, banner_img
+    </sql>
+
+</mapper>

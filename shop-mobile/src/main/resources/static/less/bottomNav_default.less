@@ -1,0 +1,200 @@
+@import "mixins";
+/*标签栏*/
+.bottomnav {
+  width: 100%;
+  background: #fff;
+  .px2rem(height, 50);
+  border-top: 1px solid #eaeaea;
+  color: #666666;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  h1 {
+    width: 24%;
+    .px2rem(height, 51);
+    position: absolute;
+    top: 0;
+    left: 38%;
+    z-index: 101;
+    background: #ffffff;
+    em {
+      .px2rem(width, 75);
+      .px2rem(height, 73);
+      border-radius: 100%;
+      display: block;
+      .px2rem(border-radius, 74, 74, 0, 0);
+      border: solid #eaeaea;
+      border-width: 1px;
+      position: absolute;
+      left: 50%;
+      .px2rem(top, -27);
+      .translate3d(-50%, 0, 0);
+      background-color: #ffffff;
+    }
+    &:last-child {
+      z-index: -1;
+      width: 24%;
+      .px2rem(height, 50);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      .translate3d(-50%, 0, 0);
+    }
+  }
+  a {
+    float: left;
+    width: 25%;
+    height: 100%;
+    .px2rem(padding-top, 4);
+    box-sizing: border-box;
+    text-align: center;
+    color: #666666;
+    position: relative;
+    i {
+      display: block;
+      .px2rem(width, 27);
+      .px2rem(height, 27);
+      .px2rem(font-size, 25);
+      margin: 0 auto;
+      .px2rem(margin-bottom, 4);
+    }
+    &:nth-child(2) {
+      i {
+        .px2rem(width, 24);
+        .px2rem(height, 24);
+        .px2rem(margin-top, 1);
+        .px2rem(margin-bottom, 6);
+        background: url("/images/nav-bottom-classify.png") no-repeat;
+        background-size: cover;
+      }
+      &.selected {
+        i {
+          background-image: url("/images/nav-bottom-classify-active.png");
+          background-size: cover;
+        }
+      }
+    }
+    img {
+      .px2rem(width, 30);
+      margin: auto;
+      display: block;
+    }
+    .name {
+      .px2rem(font-size, 12);
+      position: relative;
+      .px2rem(bottom, 2);
+      color: #666666;
+    }
+    &.selected {
+      color: #C11C1C;
+      .name {
+        color: #C11C1C;
+      }
+    }
+  }
+  .nav-more-shop {
+    .px2rem(width, 75);
+    .px2rem(height, 67);
+    .px2rem(padding-top, 8);
+    background: #ffffff;
+    border-radius: 50%;
+    margin: 0 auto;
+    .px2rem(margin-top, -25);
+    position: relative;
+    img {
+      .px2rem(width, 30);
+      .px2rem(height, 30)
+    }
+    i {
+      .px2rem(width, 43);
+      display: block;
+      margin: 0 auto;
+      .px2rem(font-size, 40);
+      color: #666;
+    }
+    p {
+      .px2rem(margin-top, 4) !important;
+      color: #666666;
+    }
+    .name {
+      .px2rem(font-size, 12);
+    }
+    &.selected {
+      .name {
+        color: #C11C1C;
+      }
+    }
+    .nav-shop-eye1 {
+      position: absolute;
+      .px2rem(top, 6);
+      .px2rem(left, 8);
+      color: #c11c1c;
+    }
+    .nav-shop-eye2 {
+      position: absolute;
+      .px2rem(top, 6);
+      .px2rem(left, 27);
+      color: #c11c1c;
+    }
+  }
+  .me-ri {
+    position: absolute;
+    .px2rem(top, 2);
+    left: 61%;
+    color: #FFFFFF;
+    background: #c11c1c;
+    .px2rem(padding, 0, 3);
+    .px2rem(border-radius, 5);
+    border: 1px solid #C11C1C;
+  }
+  &.fromShopkeeperMenu {
+    h1 {
+      width: 33%;
+      height: 100%;
+      left: 0;
+      em {
+        display: none;
+      }
+    }
+    .nav-more-shop {
+      width: 100%;
+      height: 100%;
+      .px2rem(padding-top, 4);
+      margin: 0 auto;
+      img {
+        .px2rem(width, 30);
+        .px2rem(height, 30);
+      }
+      i {
+        display: block;
+        .px2rem(font-size, 25);
+      }
+      p {
+        margin-top: 0 !important;
+      }
+    }
+  }
+
+  &.bottomnav5 {
+    a {
+      width: 20% !important;
+    }
+    .cart-red-dot {
+      left: 60%;
+    }
+    &.fromShopkeeperMenu {
+      a {
+        width: 33% !important;
+      }
+      .globalPurchaseBtn {
+        display: none;
+      }
+      .activityListBtn {
+        display: none;
+      }
+    }
+  }
+}

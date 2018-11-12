@@ -1,0 +1,299 @@
+@import "mixins";
+
+.selectProdInfoWrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all .2s;
+  transform: translateZ(0);
+  &.show {
+    display: block;
+
+  }
+  &.fade-enter {
+    .selectProdMask {
+      opacity: 1;
+      background: rgba(10, 10, 10, .5);
+    }
+    .box {
+      bottom: 0;
+    }
+  }
+  .selectProdMask {
+    position: absolute;
+    top: 0;
+    .px2rem(bottom, 50);
+    right: 0;
+    left: 0;
+    z-index: 3;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    background: rgba(10, 10, 10, 0);
+    transition: all .2s;
+  }
+  .box {
+    position: absolute;
+    bottom: -100%;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    background: #ffffff;
+    transition: all .2s;
+    .closeBtn {
+      .px2rem(width, 22);
+      .px2rem(height, 22);
+      background: url('../../images/icon_close.png?__inline') no-repeat center;
+      background-size: 100%;
+      position: absolute;
+      .px2rem(right, 10);
+      .px2rem(top, 10);
+      z-index: 2;
+    }
+    .buyProdInfo {
+      .px2rem(padding-left, 136);
+      .px2rem(height, 100);
+      .px2rem(padding-top, 10);
+      background: #ffffff;
+      .bdr-b(1px solid #ddd);
+      .prodImage {
+        .px2rem(width, 116);
+        .px2rem(height, 116);
+        .px2rem(border-radius, 5);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #ffffff;
+        background-size: 100%;
+        border: 1px solid #eee;
+        position: absolute;
+        .px2rem(left, 10);
+        .px2rem(top, -30);
+        z-index: 1;
+        overflow: hidden;
+      }
+      .prodPrice {
+        .px2rem(font-size, 18);
+        .px2rem(line-height, 28);
+        color: #c11c1c;
+      }
+      .prodSkuSel {
+        .px2rem(font-size, 14);
+        .px2rem(line-height, 28);
+        color: #666666;
+        &.hide {
+          display: none;
+        }
+      }
+      .popSkuCommission {
+        .px2rem(font-size, 14);
+        .px2rem(line-height, 28);
+        color: #999999;
+        &.hide {
+          display: none;
+        }
+      }
+    }
+    .buyProdAttr {
+      .attrWrapper {
+        background: #f5f5f5;
+        .px2rem(padding, 0, 15);
+        .attrBox {
+          .px2rem(padding, 10, 0);
+          .bdr-b(1px solid #dddddd);
+          &:last-child {
+            .bdr-b(0);
+          }
+        }
+      }
+      .attrtitle {
+        .px2rem(font-size, 14);
+        color: #3e3e3e;
+      }
+      .attrItem {
+        display: inline-block;
+        vertical-align: middle;
+        .px2rem(padding, 3, 15);
+        .px2rem(margin-top, 5);
+        .px2rem(margin-right, 5);
+        background: #e6e6e6;
+        .px2rem(border-radius, 5);
+        color: #3e3e3e;
+        &.isSelect {
+          background: #c11c1c;
+          color: #fff;
+        }
+      }
+
+    }
+    .buyProdSum {
+      .px2rem(padding, 15);
+      .label {
+        display: inline-block;
+        vertical-align: middle;
+        .px2rem(font-size, 14);
+        color: #333333;
+        .px2rem(margin-right, 16);
+        .px2rem(height, 30);
+        .px2rem(line-height, 30);
+      }
+      .sumTool {
+        display: inline-block;
+        vertical-align: middle;
+        .buyMinusBtn {
+          .px2rem(width, 30);
+          .px2rem(height, 30);
+          .px2rem(line-height, 30);
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          .px2rem(font-size, 22);
+          color: #333;
+          background: rgb(248, 248, 248);
+          .bdr(1px, #e6e6e6);
+          z-index: 2;
+        }
+        .sumValue {
+          .bdr(1px 0, #e6e6e6);
+          .px2rem(width, 50);
+          .px2rem(height, 30);
+          .px2rem(line-height, 30);
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          .px2rem(font-size, 14);
+          color: #333;
+        }
+        .buyPlusBtn {
+          .bdr(1px, #e6e6e6);
+          .px2rem(width, 30);
+          .px2rem(height, 30);
+          .px2rem(line-height, 30);
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+          .px2rem(font-size, 22);
+          color: #333;
+          background: rgb(248, 248, 248);
+          z-index: 2;
+        }
+      }
+      .prodSumTips {
+        display: none;
+        .px2rem(font-size, 12);
+        color: #333;
+        .px2rem(margin-left, 6);
+        .px2rem(height, 30);
+        .px2rem(line-height, 30);
+        &.show {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+    .btnBox {
+      position: relative;
+    }
+    .buyBtn {
+      width: 100%;
+      .px2rem(height, 50);
+      .px2rem(line-height, 50);
+      background: #999999;
+      color: #ffffff;
+      text-align: center;
+      .px2rem(font-size, 18);
+
+      &.show {
+        background-color: #c11c1c;
+      }
+    }
+    .arrivalBtn {
+      display: none;
+      width: 100%;
+      .px2rem(height, 50);
+      .px2rem(line-height, 50);
+      background: #c8bea0;
+      color: #fffefe;
+      text-align: center;
+      .px2rem(font-size, 18);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      &.notSubscribed {
+        display: block;
+      }
+      &.subscribed {
+        display: block;
+        background: #d9d9d9;
+        color: #333;
+      }
+    }
+    .loadingBox {
+      display: none;
+      background: rgba(255, 255, 255, 0.5);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      &.show {
+        display: block;
+      }
+      &:after {
+        content: '';
+        display: block;
+        .px2rem(width, 116);
+        .px2rem(height, 116);
+        .px2rem(border-radius, 5);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid #eee;
+        position: absolute;
+        .px2rem(left, 10);
+        .px2rem(top, -30);
+      }
+      .loadingWrapper {
+        .px2rem(padding, 12, 12);
+        background: rgba(51, 51, 51, 0);
+        .px2rem(border-radius, 5);
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        .translate3d(-50%, -50%, 0);
+        .icon {
+          .px2rem(width, 30);
+          .px2rem(height, 30);
+          margin: 0 auto;
+          background: url('../../images/loading_60_60.png?__inline') no-repeat center;
+          .px2rem(background-size, 30, 30);
+          opacity: 0.6;
+          .spin();
+        }
+      }
+    }
+  }
+
+}
+
+.ibaAppIOS {
+  .selectProdInfoWrapper {
+    .px2rem(bottom, 0);
+    .btnBox {
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        background: #ffffff;
+        .px2rem(height, 104);
+      }
+    }
+
+  }
+}
