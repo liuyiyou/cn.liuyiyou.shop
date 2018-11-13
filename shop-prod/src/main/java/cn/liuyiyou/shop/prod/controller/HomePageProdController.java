@@ -2,10 +2,8 @@ package cn.liuyiyou.shop.prod.controller;
 
 
 import cn.liuyiyou.shop.prod.entity.HomePageProd;
-import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.service.IHomePageProdService;
 import cn.liuyiyou.shop.prod.service.IProdService;
-import cn.liuyiyou.shop.prod.vo.ProdVo;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -18,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -41,7 +36,7 @@ public class HomePageProdController extends BaseController {
     private IProdService prodService;
 
     @RequestMapping(value = "/v2/selectednavs/prods", method = RequestMethod.GET)
-    public  IPage<Prod> getSelectedNavProd(@RequestParam(value = "reqBody") String reqBody) {
+    public IPage<HomePageProd> getSelectedNavProd(@RequestParam(value = "reqBody") String reqBody) {
         JSONObject body = JSONObject.parseObject(reqBody);
         String pageString = body.getString("page");
         String pageSizeString = body.getString("pageSize");
@@ -54,15 +49,7 @@ public class HomePageProdController extends BaseController {
                 .select()
                 .eq(HomePageProd::getNavId, body.getInteger("navId")).orderByDesc(HomePageProd::getWeight);
         IPage<HomePageProd> page = homePageProdService.page(pageQuery, bannerQueryWrapper);
-        List<Prod> prodVos = new ArrayList<>();
-        page.getRecords().forEach(homePageProd -> {
-            Prod prod = prodService.getProdById(homePageProd.getBossProdId());
-            prodVos.add(prod);
-        });
-        IPage<Prod> prods = new Page<>();
-        prods.setRecords(prodVos);
-        prods.setTotal(page.getTotal());
-        return prods;
+        return page;
     }
 
 }

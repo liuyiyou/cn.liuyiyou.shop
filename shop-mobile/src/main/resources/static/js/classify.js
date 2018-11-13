@@ -17,20 +17,6 @@ var _classify = {
     "picDomain": ConstUtil.get("PIC_DOMAIN"),
     windowHeight: $(window).height(),
     init: function () {
-        wx.checkJsApi({
-            jsApiList: ['scanQRCode'],
-            success: function (res) {
-
-            }
-        });
-        if (_classify.isWeixinInBrowsers()) {
-            $('#scan').show();
-            $('#scan').click(function () {
-                _classify.scanQRCodeWeixin();
-            })
-        }
-        this.isLoadMessageInfo();
-        /*点击搜索框跳转到搜索页*/
         $("#search").click(function () {
             var referUrl = location.href;
             common.setSessionStorage("referUrl", referUrl);
@@ -65,88 +51,8 @@ var _classify = {
             $("#classify-a").hide();
         }
     },
-    scanQRCodeWeixin: function () {
-        wx.scanQRCode({
-            needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-            scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-            success: function (res) {
-                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                if (result.indexOf(',') >= 0) {
-                    result = result.substring(result.indexOf(',') + 1, result.length);
-                }
-                $.ajax({
-                    type: 'GET',
-                    url: '/app/home/v2/qrcode/scan?parm=' + result,
-                    data: '',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        if (data.respHeader.resultCode == 0) {
-                            if (data.respBody.type == 1) {
-                                window.location.href = '/prod/' + data.respBody.result + '.html?result=' + result;
-                            } else {
-                                window.location.href = '/scan/scan-no.html?result=' + result;
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    },
-    isLoadMessageInfo: function () {
-        var trackId = common.getSessionStorage("trackId");
-        if (trackId != undefined && trackId != null && trackId != "") {
-            utils.getMessageList({mark: 'index'});
-        } else {
-            $('#message-num').css('display', 'none');
-        }
-    },
-    isWeixinInBrowsers: function () {
-        var ua = navigator.userAgent.toLowerCase();
-        var isWeixin = ua.indexOf('micromessenger') != -1;
-        if (isWeixin) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    refreshCart: function () {
-        $.ajax({
-            type: "GET",
-            url: "/app/busi/activity/shopsum",
-            dataType: "json",
-            contentType: "application/json",
-            data: "",
-            async: false,
-            success: function (data) {
-                var respBody = data.respBody;
-                parentrespBody = respBody;
-
-                if (respBody && respBody.count > 0) {
-                    $("#cart1,#cart").html(respBody.count).show();
-                } else {
-                    $("#cart1,#cart").hide();
-                }
-
-                $("#parentExpireState").click(function () {
-                    if ((respBody.parentExpiredState == false && respBody.bmclevel == 0) || respBody.expiredState == false) {
-                        window.location.href = "/store/shopkeeper-selected.html";
-                    }
-                    else if (respBody.expiredState == true && respBody.bmclevel > 0) {
-                        $("#expiredState-win,.the-light").show();
-                    }
-                    else if (respBody.parentExpiredState == true && respBody.bmclevel == 0) {
-                        window.location.assign("/index.html");
-                    }
-                });
-                $("#expiredState-win div").click(function () {
-                    $("#expiredState-win,.the-light").hide();
-                })
-            }
-        });
-    },
     loadData: function () {
-        common.ajax("GET", "/app/base/bossNavInfos", "", function (respBody) {
+        common.ajax("GET", ConstUtil.get("BASE_URL")+"nav4boss/bossNavInfos", "", function (respBody) {
             _classify.renderNavList(respBody.navList);
         });
     },
@@ -180,7 +86,7 @@ var _classify = {
         for (var i = 0; i < brandList.length; i++) {
             $(".article-right-item").eq(index).find(".brand ul").append(
                 '<li class="fl fs12 tac">' +
-                '<a href="/prod/brands-detail.html?brandId=' + brandList[i].brandId + '">' +
+                '<a href="/brands-detail.html?brandId=' + brandList[i].brandId + '">' +
                 '<img data-original="' + (brandList[i].brandIcon ? _classify.picDomain + brandList[i].brandIcon : "") + '">' +
                 '</a>' +
                 '</li>');
@@ -205,7 +111,7 @@ var _classify = {
     serchBrand: function (firstCatalogId, index) {
         common.ajax(
             "GET",
-            "/app/home/v2/searchSelectedBrand?navId=" + String(firstCatalogId),
+            ConstUtil.get("BASE_URL")+"brandGroup/v2/searchSelectedBrand?navId=" + String(firstCatalogId),
             "",
             function (respBody) {
                 _classify.renderBrandList(respBody.brandList, index);

@@ -1,6 +1,5 @@
 package cn.liuyiyou.shop.prod.mq;
 
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderMQConsumer {
 
-    @KafkaListener(topics = "someTopic")
+//    @KafkaListener(topics = "someTopic")
     public void processMessage(String content) {
     }
 }

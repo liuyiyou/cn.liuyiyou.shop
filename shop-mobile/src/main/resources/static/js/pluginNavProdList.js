@@ -64,10 +64,8 @@
     }
 
     function setMinHeight() {
-        // var titleHeight = cacheDom.$pluginNavTitleWrapper.height();
         var _minHeight = cacheOptions.minHeight;
         if (_minHeight) {
-            // cacheDom.$pluginNavProdListWrapper.css('min-height', _minHeight + titleHeight);
             cacheDom.$pluginNavProdListBox.css('min-height', _minHeight);
         }
         isSetMinHeight = true;
@@ -132,11 +130,8 @@
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('mouseleave', touchEndEvent); // PC端鼠标离开事件
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('touchend', touchEndEvent); // 移动端手指事件
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('touchcancel', touchEndEvent); // 移动端系统停止跟踪触摸
-
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('mousedown', touchStartEvent); // PC端鼠标事件
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('touchstart', touchStartEvent); // 移动端手指事件
-
-        // 移动端手指的滑动事件
         cacheDom.$pluginNavProdListWrapper[0].addEventListener('mousemove', touchMoveEvent, {
             passive: false
         });
@@ -256,8 +251,8 @@
                     direction: 'horizontal',
                     slidesPerView: 'auto',
                     freeMode: true,
-                    observer: true,//修改swiper自己或子元素时，自动初始化swiper
-                    observeParents: true,//修改swiper的父元素时，自动初始化swiper
+                    observer: true,
+                    observeParents: true,
                 });
                 bindNavBtnEvent();
 
@@ -278,9 +273,6 @@
                         },
                     }
                 });
-
-                // swiperCache['navSwiper'].params.control = swiperCache['prodListSwiper'];
-                // swiperCache['prodListSwiper'].params.control = swiperCache['navSwiper'];
             }
             var fristNavId = navs[0].navId;
             changeNav(0, fristNavId);
@@ -335,12 +327,12 @@
         var prodsName = cacheOptions.prodsName || 'prods';
 
         common.ajax(_method, _url, params,
-            function (respBody) {
+                function (respBody) {
                 nav['isLoading'] = false;
                 var prodList = respBody[prodsName];
                 if (prodList && prodList.length > 0) {
                     nav.page += 1;
-                    nav.totalPage = respBody.totalPage;
+                    nav.totalPage = respBody.pages;
                     if (respBody.page >= respBody.totalPage) {
                         showListEnding();
                     }

@@ -5,6 +5,7 @@ import cn.liuyiyou.shop.base.entity.Brand;
 import cn.liuyiyou.shop.base.service.IBrandService;
 import cn.liuyiyou.shop.base.vo.Prod;
 import cn.liuyiyou.shop.base.vo.SimpleProdVo;
+import cn.liuyiyou.shop.common.resp.Response;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -40,6 +42,11 @@ public class BrandController {
         return brandService.getBrandByPage(page, pageSize);
     }
 
+    @GetMapping("/getBrandInfos")
+    public Response getBrandInfos(@RequestParam("brandId") Integer brandId) {
+        return Response.builder().result(brandService.getById(brandId)).build();
+    }
+
     @GetMapping("/prods/{brandId}/{page}-{pageSize}")
     public IPage<SimpleProdVo> prods(@PathVariable("brandId") int brandId, @PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
         IPage<Prod> prods = brandService.getProdsPageByBrandId(brandId, page, pageSize);
@@ -50,8 +57,8 @@ public class BrandController {
             simpleProdVo.setPic(prod.getAlbum().split(",")[0]);
             simpleProdVo.setProdId(prod.getProdId());
             simpleProdVo.setProdName(prod.getProdName());
-            simpleProdVo.setProdPrice(Float.valueOf(String.valueOf(Math.random()*100)));
-            simpleProdVo.setReferPrice(Float.valueOf(String.valueOf(Math.random()*120)));
+            simpleProdVo.setProdPrice(Float.valueOf(String.valueOf(Math.random() * 100)));
+            simpleProdVo.setReferPrice(Float.valueOf(String.valueOf(Math.random() * 120)));
             simpleProdVos.add(simpleProdVo);
         });
         simpleProdVoPage.setRecords(simpleProdVos);

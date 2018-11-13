@@ -6,14 +6,13 @@ var _brandsDetail = {
     windowHeight: $(window).height(),
     loadData: function () {
         if (!common.getQueryStr('brandId')) {
-            window.location.href = "/prod/brands.html";
+            window.location.href = "/brands.html";
         }
-        // $.getJSON(
-        //     "/app/base/getBrandInfos?brandId=" + common.getQueryStr('brandId'),
-        //     function (respBody) {
-        //         _brandsDetail.initBrandsHall(respBody.catalogList);
-        //         _brandsDetail.brandInfo(respBody.brandInfo);
-        //     });
+        $.getJSON(
+            ConstUtil.get("BASE_URL") + "brand/getBrandInfos?brandId=" + common.getQueryStr('brandId'),
+            function (respBody) {
+                _brandsDetail.brandInfo(respBody.result);
+            });
     },
     brandInfo: function (brandInfo) {
         if (brandInfo.bannerImg) {
@@ -29,18 +28,16 @@ var _brandsDetail = {
     },
     loadProd: function () {
         $('#bottomLoadingWrapper').find('.text').html('加载中');
-        $.getJSON( ConstUtil.get("BASE_URL") +"brand/prods/" + common.getQueryStr('brandId') + "/0-10",
+        $.getJSON(ConstUtil.get("BASE_URL") + "brand/prods/" + common.getQueryStr('brandId') + "/" + _brandsDetail.page + "-" + _brandsDetail.pageSize,
             function (data) {
                 if (data && data.total) {
-                    _brandsDetail.totalPage = data.total;
+                    _brandsDetail.totalPage = data.pages;
                     _brandsDetail.page += 1;
                     _brandsDetail.fillProd(data.records);
                 } else {
                     if (_brandsDetail.page == 0 || _brandsDetail.totalPage == 0) {
                         $('#prodList').html("");
                         $('#bottomLoadingWrapper').find('.text').html('暂无数据');
-                    } else {
-
                     }
                 }
             });
@@ -55,9 +52,6 @@ var _brandsDetail = {
                 effect: "fadeIn"
             });
         }
-    },
-    cartBtnEvent: function () {
-        $.fn.cartInList && $('#prodList').cartInList();
     },
     showLoading: function () {
         _notesDetail.loading = true;
@@ -93,39 +87,10 @@ var _brandsDetail = {
                 _brandsDetail.scrollHandler();
             }, 200);
         });
-    },
-    initBrandsHall: function (catalogList) {
-        if (catalogList && catalogList.length > 0) {
-            var html = "";
-            for (var i = 0; i < catalogList.length; i++) {
-                html += '<div class="swiper-slide">';
-                html += '<a href="/prod/brands.html">';
-                html += '<span class="txt">' + catalogList[i].cataName + '</span>';
-                html += '<div class="img-box">';
-                for (var j = 0; j < catalogList[i].recommendBrands.length; j++) {
-                    var icon = catalogList[i].recommendBrands[j].brandIcon;
-                    html += '<img src="' + (icon ? (ConstUtil.get("PIC_DOMAIN") + icon) : "../images/banner-default.jpg") + '" />';
-                }
-                html += '</div><span class="more"></span></a></div>';
-            }
-            $(".brands-swiper .swiper-wrapper").html(html);
-            setTimeout(function () {
-                var mySwiper = new Swiper('.brands-swiper .swiper-container', {
-                    direction: 'vertical',
-                    loop: true,
-                    speed: 500,
-                    autoplay: true,
-                    delay: 5000
-                });
-            }, 1000)
-        } else {
-            $(".brands-hall").hide();
-        }
     }
 };
 $(function () {
-    // _brandsDetail.cartBtnEvent();
-    // _brandsDetail.loadData();
+    _brandsDetail.loadData();
     _brandsDetail.loadProd();
     _brandsDetail.bottomLoadingWrapperEvent();
 });

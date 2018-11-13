@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.user.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.user.entity.User">
+        <id column="uid" property="uid" />
+        <result column="account" property="account" />
+        <result column="real_name" property="realName" />
+        <result column="nickname" property="nickname" />
+        <result column="passwd" property="passwd" />
+        <result column="email" property="email" />
+        <result column="create_time" property="createTime" />
+        <result column="create_channel" property="createChannel" />
+        <result column="last_time" property="lastTime" />
+        <result column="last_channel" property="lastChannel" />
+        <result column="last_ip" property="lastIp" />
+        <result column="status" property="status" />
+        <result column="user_type" property="userType" />
+        <result column="inv_code" property="invCode" />
+        <result column="inv_code_new" property="invCodeNew" />
+        <result column="src" property="src" />
+        <result column="ditch" property="ditch" />
+        <result column="consume" property="consume" />
+        <result column="headimg" property="headimg" />
+        <result column="birthday" property="birthday" />
+        <result column="gender" property="gender" />
+        <result column="act_type" property="actType" />
+        <result column="customer_id" property="customerId" />
+        <result column="last_update" property="lastUpdate" />
+        <result column="third_party_channel" property="thirdPartyChannel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        uid, account, real_name, nickname, passwd, email, create_time, create_channel, last_time, last_channel, last_ip, status, user_type, inv_code, inv_code_new, src, ditch, consume, headimg, birthday, gender, act_type, customer_id, last_update, third_party_channel
+    </sql>
+
+</mapper>

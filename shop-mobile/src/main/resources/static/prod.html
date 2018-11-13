@@ -28,13 +28,7 @@
             <a href="/busi/my-order.html" class="item icon_order">我的订单</a>
         </li>
         <li class="border-b-1px">
-            <a href="javascript:;" class="item icon_customer" onclick="return ECHAT.miniChat(this,2)">售后客服</a>
-        </li>
-        <li class="border-b-1px">
             <a href="/index.html" class="item icon_homer">返回首页</a>
-        </li>
-        <li>
-            <a href="javascript:;" class="item icon_notice" onclick="showBuyread()">购物须知</a>
         </li>
     </ul>
 </div>
@@ -56,14 +50,8 @@
 
 
     <div class="container">
-        <!-- 秒杀提示 -->
-        <!-- 活动未开始 -->
         <div id="limited">
         </div>
-        <!-- 开始拼接价格信息 -->
-
-        <!-- 定义参考价为最大的参考价格-->
-
         <div class="head-bo-pay fs2 clearfix" id="price">
             <span id="selSkuPrice" class="dis-no"></span>
             <span id='norprice' style='text-align:left;'></span>
@@ -148,8 +136,6 @@
 <script src="/js/swiper-4.2.6.min.js"></script>
 <script src="/js/jquery.lazyload.min.js"></script>
 <script src="/js/pluginLogin.js?__inline"></script>
-<script src="/js/prod.js?v=3"></script>
+<script>document.write("<script type='text/javascript' src='/js/prod.js?v=" + Date.now() + "'><\/script>");</script>
 </body>
 </html>
-
-

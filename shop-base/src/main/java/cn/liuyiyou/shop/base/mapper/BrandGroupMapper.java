@@ -1,6 +1,6 @@
 package cn.liuyiyou.shop.base.mapper;
 
-import cn.liuyiyou.shop.base.entity.Nav4boss;
+import cn.liuyiyou.shop.base.entity.BrandGroup;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author liuyiyou.cn
  * @since 2018-11-13
  */
-public interface Nav4bossMapper extends BaseMapper<Nav4boss> {
+public interface BrandGroupMapper extends BaseMapper<BrandGroup> {
 
 }

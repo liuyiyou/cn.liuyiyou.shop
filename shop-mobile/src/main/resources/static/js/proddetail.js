@@ -43,7 +43,6 @@ var actprodDetailJSON = "";
 var skuType = 1;
 
 
-var isFromShopkeeperFlag= typeof isFromShopkeeper === "function" && isFromShopkeeper() || false;//是否店铺标识
 function initialSkuPannel(skuType) {
     skuType = skuType;
     showPopFunc = function (skuType, btnId) {
@@ -376,27 +375,7 @@ function initialSkuPannel(skuType) {
             gProdCache.isAddCart(null);
         };
 
-        $("#addCartBtn, #instBuyBtn").click(function (e) {
-            if(isAssignProd === false){
-                showActionSheet("#fanliActionSheet",null,"actionSheetCenterEnter");
-                return ;
-            }
-            $("body").addClass("body-hidden");
-            gProdCache.isAddCart(this.id == "addCartBtn" ? true : false);
-            var selSkuId = gProdCache.getSkuIdByDesc(false);
-//			if (!selSkuId) {
-            showPopFunc(skuType, this.id);
-            var id = $(this).attr("id");
-            if(id == 'addCartBtn'){
-            	optype = 1;
-            }else if(id == 'instBuyBtn'){
-            	optype = 2;
-            }
-            return;
-//			}
-//			doBtnClickFunc(selSkuId);
 
-        });
         //立刻秒杀弹出弹窗
         $("#buy-now-btn").click(function () {
             //返利网非指定商品判断
@@ -2651,155 +2630,7 @@ function loadFirtBuyProd(prodId){
     },function(){});
 }
 
-//打开分享赚奖励弹窗
-function shared(type,value) {
-    $("#share4Money").show();
-    $(".the-light2").show();
-    var trackId = common.getSessionStorage("trackId");
-    var reqBodyShopId =  common.getReqBodyShopId();
-    var codeUrl ="/app/user/all/qrcode?trackId="+trackId+"&type="+type+"&value="+value;
-    if(reqBodyShopId!=''){
-        codeUrl = codeUrl+"&shareShopPreview="+reqBodyShopId;
-    }
-    $("#my-shop-qrcode").attr("src",codeUrl);
-    $("#share4Money").show();
-    $(".the-light2").show();
-    $("#sharemfr").click(function() {
-        $("#share-guide").show();
-        $("#share-C").hide();
-        $("#share4Money").hide();
-        $("#share-guide-close").click(function(){
-            $(".the-light2").hide();
-            $("#share-guide").hide();
-        })
-    })
-    $("#sharemmo").click(function() {
-        $("#share-guide").show();
-        $("#share4Money").hide();
-        $("#share-guide-close").click(function(){
-            $(".the-light2").hide();
-            $("#share-guide").hide();
-        })
-    });
-    $("#WeChat-QR").click(function(){
-        $(".the-light2").show();
-        $("#share-QR").show();
-        $("#share4Money").hide();
-    });
-    $(".share-close").click(function(){
-        $("#share-QR").hide();
-        $(".the-light2").hide();
-    })
-    $("#close").click(function () {
-        $("#share4Money").hide();
-        $(".the-light2").hide();
-    })
 
-    $("#close").click(function () {
-        $("#share4Money").hide();
-        $(".the-light2").hide();
-    })
-}
-
-function commshared(type,value){
-    var trackId = common.getSessionStorage("trackId");
-    if (trackId != undefined && trackId != null && $.trim(trackId) != "") {
-        common.ajax('GET', '/app/busi/activity/shopsum', "", function(respBody) {
-            if(respBody.bmclevel <1 || respBody.expiredState == true){
-                $(".the-light2").show();
-                $("#share-C").show();
-                $("#sharefr").click(function() {
-                    $("#share-guide").show();
-                    $("#share-C").hide();
-                    $("#share-guide-close").click(function(){
-                        $("#share-C").hide();
-                        $(".the-light2").hide();
-                        $("#share-guide").hide();
-                    })
-                })
-                $("#sharemo").click(function() {
-                    $("#share-guide").show();
-                    $("#share-C").hide();
-                    $("#share-guide-close").click(function(){
-                        $("#share-C").hide();
-                        $(".the-light2").hide();
-                        $("#share-guide").hide();
-                    })
-                })
-                $("#close-C").click(function () {
-                    $("#share-C").hide();
-                    $(".the-light2").hide();
-                })
-            }else{
-                var trackId = common.getSessionStorage("trackId");
-                var codeUrl ="/app/user/all/qrcode?trackId="+trackId+"&type="+type+"&value="+value;
-                var reqBodyShopId = common.getReqBodyShopId();
-                if(reqBodyShopId!=''){
-                    codeUrl = codeUrl+"&shareShopPreview="+reqBodyShopId;
-                }
-                $("#my-shop-qrcode").attr("src",codeUrl);
-                $("#share4Money").show();
-                $(".the-light2").show();
-                $("#sharemfr").click(function() {
-                    $("#share-guide").show();
-                    $("#share-C").hide();
-                    $("#share4Money").hide();
-                    $("#share-guide-close").click(function(){
-                        $(".the-light2").hide();
-                        $("#share-guide").hide();
-                    })
-                })
-                $("#sharemmo").click(function() {
-                    $("#share-guide").show();
-                    $("#share4Money").hide();
-                    $("#share-guide-close").click(function(){
-                        $(".the-light2").hide();
-                        $("#share-guide").hide();
-                    })
-                });
-                $("#WeChat-QR").click(function(){
-                    $(".the-light2").show();
-                    $("#share-QR").show();
-                    $("#share4Money").hide();
-                });
-                $(".share-close").click(function(){
-                    $("#share-QR").hide();
-                    $(".the-light2").hide();
-                })
-                $("#close").click(function () {
-                    $("#share4Money").hide();
-                    $(".the-light2").hide();
-                })
-            }
-        });
-    }
-    else{
-        $(".the-light2").show();
-        $("#share-C").show();
-        $("#sharefr").click(function() {
-            $("#share-guide").show();
-            $("#share-C").hide();
-            $("#share-guide-close").click(function(){
-                $("#share-C").hide();
-                $(".the-light2").hide();
-                $("#share-guide").hide();
-            })
-        })
-        $("#sharemo").click(function() {
-            $("#share-guide").show();
-            $("#share-C").hide();
-            $("#share-guide-close").click(function(){
-                $("#share-C").hide();
-                $(".the-light2").hide();
-                $("#share-guide").hide();
-            })
-        })
-        $("#close-C").click(function () {
-            $("#share-C").hide();
-            $(".the-light2").hide();
-        })
-    }
-}
 
 function goBack(){
     if(/offlineAct=([^"]*)/i.test(location.hash)){
@@ -2848,101 +2679,7 @@ function getUrlHashParam(patt,patt2){
     }
     return null;
 }
-/**
- * 初始化福利专区活动
- */
-var cacheInitWelfare = null;
-function initWelfare(data){
-    //分享提示文案
-    $("#pomitit").html("分享");
-    $("#share4Money").addClass("welfareWrapper");
 
-    $("#nav-bot,#btnPopSku").addClass("onlyInstBuyBtn");
-    $("#onSaleStatus,#shopNameWrapper,#coupon,#activity,#prodBrandTitle,#prodBrandList,#recommend-title,#recommend,#popSkuCommission").remove();
-    $("#prod-explain .shopExName[name=1]").html("包邮");
-    $("#prod-explain .shopExName[name=2]").html("包邮");
-    $("#price_sale_comm_con1").html("福利专区商品，不参与销售奖励");
-
-    if(typeof data =="undefined"){
-       return;
-    }
-    cacheInitWelfare = data;
-    var baseActivity = data.baseActivity;
-    var totalStore = 0;
-    var buyNowSkuProdInfoList = data.buyNowSkuProdInfoList;
-    if(baseActivity) {
-        gtype = buynowType;
-        gstatus = baseActivity.status;
-        var referPrices = new Array();
-        var prodPrices = new Array();
-        var valids = new Array();
-        var skuDisplayCon = "";
-        var _welfareDeduction = 0 ;
-        var _cachProdPrice = 0;
-        var _buyNum = data.subsNumInWeal?Number(data.subsNumInWeal):0;
-        if(buyNowSkuProdInfoList[0].num !== 0){
-            pNum = buyNowSkuProdInfoList[0].num -_buyNum;
-        }
-
-        for (var i in buyNowSkuProdInfoList) {
-            var prod = buyNowSkuProdInfoList[i];
-            gprice[prod.bossSkuId] = prod.prodPrice;
-            gnum[prod.bossSkuId] = prod.num;
-            gstore[prod.bossSkuId] = prod.store;
-            referPrices.push(prod.referPrice);
-            prodPrices.push(prod.prodPrice);
-            valids.push(prod.valids);
-            skuDisplayCon += '<span class="fl spetion">'+prod.validNames +'</span>';
-            gProdCache.setStock (prod.bossSkuId, prod.store); //缓存库存
-            totalStore = totalStore + prod.store;
-            //活动价最低的福利折扣显示
-            if(_cachProdPrice==0){
-                _welfareDeduction = prod.welfareDeduction;
-                _cachProdPrice = prod.prodPrice;
-            }else{
-                if(prod.prodPrice < _cachProdPrice){
-                    _welfareDeduction = prod.welfareDeduction;
-                }
-            }
-        }
-
-        limitedBuyTips(data);
-        showWealFuli(_welfareDeduction);
-        $("#skuDisplayCon").html(skuDisplayCon);
-        referPrices.sort(sortNumber);
-        prodPrices.sort(sortNumber);
-        $("#oriprice").html('¥' + referPrices[referPrices.length -1]); //设置最高价
-        if(prodPrices[0] == prodPrices[prodPrices.length -1]){
-            gprisection = '¥' +toFixed(prodPrices[0]);
-        }else{
-            gprisection = '¥' +toFixed(prodPrices[0]) +"-"+toFixed(prodPrices[prodPrices.length -1]);
-        }
-        $("#norprice").html(gprisection);
-        $("#norprice").show();
-        actId = data.baseActivity.id;
-        var opemTime = data.openTime;
-        var li = $("#bossProdSkuPannel ul li");
-        for(var i = 0 ;i <li.length;i++){
-            if(valids.indexOf($(li[i]).attr("valid"))== -1) {
-                $($(li[i])).remove();
-            }
-        }
-
-        //库存不足
-        if(totalStore < 1){
-            $("#addCartBtn").hide();
-            $("#instBuyBtn").hide();
-            $("#popSkuBtn").unbind("click");//取消sku点击事件
-            $("#nav-bot .nav-botb-fst").html("已抢光").show();
-        }else if(pNum <=0 && buyNowSkuProdInfoList[0].num !=0){
-            //达到限购数量
-            $("#addCartBtn").hide();
-            $("#instBuyBtn").hide();
-            $("#nav-bot .nav-botb-fst").html("限购"+buyNowSkuProdInfoList[0].num+"件,已购"+_buyNum+"件").show();
-        }
-    }
-
-}
 //限购提示
 function limitedBuyTips(data){
     var _limitedNum = data.buyNowSkuProdInfoList[0]?data.buyNowSkuProdInfoList[0].num:0;
@@ -2952,93 +2689,6 @@ function limitedBuyTips(data){
         var _limitedTips = "限购"+_limitedNum+"件" + _buyNumTips;
         $("#btnCartLimitedTip").html(_limitedTips).addClass("btnCartLimitedTip").show();//限购提示
     }
-}
-/**
- * 初始化0利润商品
- */
-function initZeroProfit(data){
-	 $(".del").unbind("click"); //移除加入购物车点击事件
-	 $(".del").click(function(){
-		 $(".the-light").hide();
-		 $("#popSkuPannel").hide();
-	 });
-	$("#selSkuPrice").remove();
-	var openTime = data.openTime;
-	var baseActivity = data.baseActivity;
-	var buyNowSkuProdInfoList = data.buyNowSkuProdInfoList;
-	var totalStore = 0;
-	 if(baseActivity) {
-         gtype = buynowType;
-         gstatus = baseActivity.status;
-         var referPrices = new Array();
-         var prodPrices = new Array();
-         var valids = new Array();
-         var skuDisplayCon = "";
-         for (var i in buyNowSkuProdInfoList) {
-             var prod = buyNowSkuProdInfoList[i];
-             gprice[prod.bossSkuId] = prod.prodPrice;
-             gnum[prod.bossSkuId] = prod.num;
-             gstore[prod.bossSkuId] = prod.store;
-             referPrices.push(prod.referPrice);
-             prodPrices.push(prod.prodPrice);
-             valids.push(prod.valids);
-             skuDisplayCon += '<span class="fl spetion">'+prod.validNames +'</span>';
-             gProdCache.setStock (prod.bossSkuId, prod.store); //缓存库存
-             totalStore = totalStore + prod.store;
-         }
-         $("#skuDisplayCon").html(skuDisplayCon);
-         referPrices.sort(sortNumber);
-		 prodPrices.sort(sortNumber);
-		$("#oriprice").html('¥' + referPrices[referPrices.length -1]); //设置最高价
-		if(prodPrices[0] == prodPrices[prodPrices.length -1]){
-			gprisection = '¥' +toFixed(prodPrices[0]);
-		}else{
-			 gprisection = '¥' +toFixed(prodPrices[0]) +"-"+toFixed(prodPrices[prodPrices.length -1]);
-		}
-		$("#norprice").html('<e class="fs14">零利润价</e>' + gprisection);
-         $("#norprice").show();
-     	actId = data.baseActivity.id;
-     	var opemTime = data.openTime;
-     	var li = $("#bossProdSkuPannel ul li");
-     	for(var i = 0 ;i <li.length;i++){
-		  if(valids.indexOf($(li[i]).attr("valid"))== -1) {
-			  $($(li[i])).remove();
-		  }
-     	}
-     	//库存不足
-        if(totalStore < 1){
-     	   $("#addCartBtn").hide();
-     	   $("#instBuyBtn").hide();
-     	   $("#storeEmtpyBtn").show();
-        }
-        //未开放
-  	  if(opemTime == 0){
-  		  var level = common.getSessionStorage("level");
-  		if(level < 1){
-			  $("#addCartBtn").unbind("click"); //移除加入购物车点击事件
-			  $("#instBuyBtn").unbind("click"); //移除立即下
-            // 单点击事件
-			  $("#skuDisplayCon").unbind("click");
-			  $("#popSkuBtn").unbind("click");
-			  $("#addCartBtn").click(function(){
-				  $(".the-light2").show();
-				  $(".zero-profit").show();
-			  })
-			  $("#instBuyBtn").click(function(){
-				  $(".the-light2").show();
-				  $(".zero-profit").show();
-			  })
-			  $("#skuDisplayCon").click(function(){
-				  $(".the-light2").show();
-				  $(".zero-profit").show();
-			  })
-			  $("#popSkuBtn").click(function(){
-				  $(".the-light2").show();
-				  $(".zero-profit").show();
-			  })
-		  }
-  	  }
-     }
 }
 
 function hideZero(){
@@ -3052,70 +2702,7 @@ function getCoupons(){
         showActionSheet("#coupon-pop");
     });
 }
-var couponObj = (function($){
-    var couponPage = 1;
-    var couponPageSize = 10;
-    var loadCoupons  = function() {
-        var param = new Object();
-        var reqBody = new Object();
-        reqBody.bossProdId = prodId;
-        reqBody.page = couponPage;
-        reqBody.pageSize = couponPageSize;
-        param.reqBody = JSON.stringify(reqBody);
 
-        $.ajax({
-            type: "GET",
-            url: "/app/coupon/list4prod",
-            contentType: "application/json",
-            dataType: "json",
-            data: param,
-            success: function (data) {
-                var respBody = data.respBody;
-                if(respBody && respBody.couponList){
-                    initCouponsList(respBody.couponList);
-                }
-            }
-        });
-    }
-        var setPage = function(){
-            page ++ ;
-        };
-        return{
-            setPage:setPage,
-            loadCoupons:loadCoupons,
-        }
-
-})(window.jQuery || $);
-
-function initCouponsList(couponList){
-    if(couponList.length == 0 ){
-        return
-    }else{
-        $("#coupon").show();
-    }
-    var couponHtml = '';
-    var couponListLth;
-    if(couponList.length < 3){
-        couponListLth = couponList.length;
-    }else if(couponList.length >= 3){
-        couponListLth = 3;
-    }
-    for(var j = 0;j < couponListLth;j++){
-        var couponListCon = couponList[j];
-        var couponProdHtml = '<span class="coupon">'
-            +couponListCon.displayName
-            +'</span>';
-        $(couponProdHtml).appendTo( $("#couponProd"));
-    }
-
-    for(var i = 0;i < couponList.length;i++){
-        var couponListCon = couponList[i];
-        couponHtml += getActCouponItemHtml(couponListCon);
-    }
-    $(".coupon-height").html(couponHtml);
-
-    couponPopEvent();
-}
 function couponPopEvent(){
     $("#coupon-pop").on('click','.receiveBtn',function(){
         var actId = $(this).attr('actid');
@@ -3142,47 +2729,6 @@ function getActCouponItemHtml(couponListCon) {
     return _html;
 }
 
-/**
- * 领取优惠券
- * @param actId
- */
-function getCard(actId){
-    var trackId = common.getSessionStorage("trackId");
-    if(!trackId || trackId==''){
-        common.setSessionStorage("hisUrl", window.location.href);
-        if(common.isWeixin()){
-            // window.location.href ="/user/login-binding.html";
-            gotoPageUrl("/user/login-binding.html");
-        }else{
-            // window.location.href ="/user/login.html";
-            gotoPageUrl("/user/login.html");
-        }
-    }else{
-        var url = "/app/coupon/take/"+actId;
-
-        $.ajax({
-            type : "POST",
-            url : url,
-            dataType : "json",
-            contentType: "application/json",
-            success : function(data) {
-                var respHeader = data.respHeader;
-                var hasNext = respHeader.hasNext;
-                var resultCode = respHeader.resultCode;
-                if(resultCode == 0 && hasNext== false){
-                    resultCode = 105;
-                }
-                if(resultCode== 103 || resultCode ==105 ||  resultCode==106){
-                    changeStyle(actId,resultCode);
-                }
-                common.toast(respHeader.message);
-            },
-            error:function(){
-                common.toast('网络繁忙,请重试');
-            }
-        });
-    }
-}
 
 function changeStyle(actId, code) {
     code = code + '';
@@ -3604,7 +3150,7 @@ var assessObj = {
             },500);
 
         });
-        this.queryAssessList(this.addAssessMode)
+       // this.queryAssessList(this.addAssessMode)
     },
     initSearch:function(){
         this.page = 1;
@@ -3622,7 +3168,7 @@ var assessObj = {
         var clientRect = this._scrollerPullUp[0].getBoundingClientRect();
         var _assessBoxClientRect = this._assessBox[0].getBoundingClientRect();
         if(clientRect.top!==0 && clientRect.top<_assessBoxClientRect.bottom){
-            this.queryAssessList();
+         //   this.queryAssessList();
         }
     },
     // 显示评论
@@ -3936,12 +3482,25 @@ function initNoSkuRemindBtn(bossSkuId){
 
 }
 $(document).ready(function(){
-    pageSetGIO();
+    $("#addCartBtn, #instBuyBtn").click(function (e) {
+        if(isAssignProd === false){
+            showActionSheet("#fanliActionSheet",null,"actionSheetCenterEnter");
+            return ;
+        }
+        $("body").addClass("body-hidden");
+        gProdCache.isAddCart(this.id == "addCartBtn" ? true : false);
+        var selSkuId = gProdCache.getSkuIdByDesc(false);
+//			if (!selSkuId) {
+        showPopFunc(skuType, this.id);
+        var id = $(this).attr("id");
+        if(id == 'addCartBtn'){
+            optype = 1;
+        }else if(id == 'instBuyBtn'){
+            optype = 2;
+        }
+        return;
+    });
 
-    if(!checkUpAct()){
-        getCoupons();
-        couponObj.loadCoupons();
-    }
     $("#popSkuCommission").hide();
     $("#nShoper").show();
     $("#iShoper").hide();
@@ -4008,16 +3567,8 @@ $(document).ready(function(){
         }
     });
 
-    /*店铺判断*/
-    if(isFromShopkeeperFlag){
-        $("#prodBrandTitle,#prodBrandList,#recommend-title,#recommend,#nsh,#coupon,#shopNameWrapper,#get-weal-tips").remove();
-    }else{
-        //品牌信息
-        brandInfo();
-    }
     assignprods();
 
-    //初始评价界面
     assessObj.initAssess();
 
     $("#addRemindBtn").click(function(){
@@ -4663,6 +4214,4 @@ function upBulletinBtnEvent(){
     });
 }
 
-function pageSetGIO() {
-    typeof gio == 'function' && gio('page.set', pageSetGIOOptions);
-}
+

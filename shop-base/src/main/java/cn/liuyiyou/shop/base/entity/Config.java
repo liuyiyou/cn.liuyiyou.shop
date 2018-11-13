@@ -20,6 +20,9 @@ import java.io.Serializable;
  */
 public class Config extends Model<Config> {
 
+    //精选品牌配置
+    public final static Integer CONFIG_BRAND_CHOICE = 10031;
+
     private static final long serialVersionUID = 1L;
 
     @TableId("config_id")

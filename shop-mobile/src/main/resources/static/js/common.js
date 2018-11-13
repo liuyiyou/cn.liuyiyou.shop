@@ -1114,7 +1114,6 @@ var common = (function ($) {
                 window.localStorage.setItem(cacheKey, JSON.stringify(data));
                 ajaxLock = ajaxLock.replace(key, "");
 
-                /*营销接口返回的数据判断*/
                 var message = data.message;
                 var success = data.success;
 
@@ -1131,9 +1130,6 @@ var common = (function ($) {
                 if (callbackWithHead) {
                     callbackWithHead(data.respHeader);
                 } else {
-                    if (data.respHeader.resultCode != 0) {
-                        alert(data.respHeader.message);
-                    }
                 }
                 if (callbackWithBody && data.respBody) {
                     callbackWithBody(data.respBody);
