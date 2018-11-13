@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>洋老板商城 - 乐享正品,全球购</title>
+    <meta name="description" content="洋老板商城是一个销售海外商品的跨境购物平台，全球购的首选，100%原装正品,品质保证，产地直邮。">
+    <meta name="Keywords" content="洋老板商城,洋老板,全球购">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="/js/flexible.js?__inline"></script><!--ignore-->
+    <link href="/less/login.less" type="text/css" rel="stylesheet/less">
+    <script src="/js/less.min.js"></script> <!--delete-->
+</head>
+<body>
+
+<section class="loginWrapper" id="loginWrapper">
+
+</section>
+</body>
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/config.js"></script>
+<script>document.write("<script type='text/javascript' src='/js/pluginLogin.js?v=" + Date.now() + "'><\/script>");</script>
+<script>
+    $(function () {
+        function isLoginUrl(url){
+            if(url.indexOf("/user/login.html")<0 && url.indexOf("/user/login-binding.html")<0){
+                return false;
+            }
+            return true;
+        }
+        function goBack(){
+            var hisUrl = common.getSessionStorage('hisUrl');
+            var currentPageLoginHisUrl = common.getSessionStorage('currentPageLoginHisUrl');
+
+            if(currentPageLoginHisUrl){
+                common.setSessionStorage('currentPageLoginHisUrl','');
+                gotoPageUrl(currentPageLoginHisUrl,"replace");
+                return;
+            }
+
+            //只有历史记录是 线下推广详情页 才返回详情页
+            if(hisUrl&&!isLoginUrl(hisUrl)&& /#offlineAct=/ig.test(hisUrl)){
+                common.setSessionStorage('hisUrl',"");
+                gotoPageUrl(hisUrl,"replace");
+            }else{
+                commonGoBack && commonGoBack();
+            }
+        }
+        $.showLoginPopup({
+        	id:"#loginWrapper",
+            isPage:true,
+            backFn:function(){
+                goBack();
+            }
+        });
+    })
+</script>
+</html>

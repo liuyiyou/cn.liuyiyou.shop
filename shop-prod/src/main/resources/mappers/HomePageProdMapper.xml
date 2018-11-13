@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.prod.mapper.HomePageProdMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.prod.entity.HomePageProd">
+        <id column="id" property="id" />
+        <result column="nav_id" property="navId" />
+        <result column="country_id" property="countryId" />
+        <result column="type" property="type" />
+        <result column="boss_prod_id" property="bossProdId" />
+        <result column="prod_name" property="prodName" />
+        <result column="price" property="price" />
+        <result column="album" property="album" />
+        <result column="weight" property="weight" />
+        <result column="prom_name" property="promName" />
+        <result column="prom_tag" property="promTag" />
+        <result column="cell" property="cell" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, nav_id, country_id, type, boss_prod_id, prod_name, price, album, weight, prom_name, prom_tag, cell
+    </sql>
+
+</mapper>

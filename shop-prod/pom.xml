@@ -84,6 +84,13 @@
             <version>1.2.47</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>cn.liuyiyou.shop</groupId>
             <artifactId>shop-order-api</artifactId>

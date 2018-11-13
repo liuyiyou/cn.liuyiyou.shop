@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.base;
+package cn.liuyiyou.shop.prod;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -31,7 +31,7 @@ public class GeneratorServiceEntity {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-base\\src\\main\\java");
+        gc.setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-user\\src\\main\\java");
         gc.setFileOverride(true);
         gc.setActiveRecord(true);
         gc.setEnableCache(false);// XML 二级缓存
@@ -49,16 +49,8 @@ public class GeneratorServiceEntity {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        /*dsc.setTypeConvert(new MySqlTypeConvert(){
-            // 自定义数据库表字段类型转换【可选】
-            @Override
-            public DbColumnType processTypeConvert(String fieldType) {
-                System.out.println("转换类型：" + fieldType);
-                return super.processTypeConvert(fieldType);
-            }
-        });*/
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://localhost:3306/shop-base");
+        dsc.setUrl("jdbc:mysql://localhost:3306/shop-user");
         dsc.setUsername("root");
         dsc.setPassword("123456");
         mpg.setDataSource(dsc);
@@ -68,13 +60,13 @@ public class GeneratorServiceEntity {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         //strategy.setTablePrefix(new String[] { "SYS_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"nav4boss"}); // 需要生成的表
+        strategy.setInclude(new String[]{"user"}); // 需要生成的表
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("cn.liuyiyou.shop.base");
+        pc.setParent("cn.liuyiyou.shop.user");
         // pc.setModuleName("tbldept");//模块名称，单独生成模块时使用！！！！！！！！！！！
         pc.setController("controller");
         pc.setService("service");
@@ -98,7 +90,7 @@ public class GeneratorServiceEntity {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return "F:\\github\\cn.liuyiyou.shop\\shop-base\\src\\main\\resources" + "/mappers/" + tableInfo.getEntityName() + "Mapper.xml";
+                return "F:\\github\\cn.liuyiyou.shop\\shop-user\\src\\main\\resources" + "/mappers/" + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -113,5 +105,47 @@ public class GeneratorServiceEntity {
         mpg.execute();
     }
 
+    @Test
+    public void generateCode() {
+        String packageName = "cn.liuyiyou.shop.prod";
+        boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
+        generateByTables(serviceNameStartWithI, packageName, "prod");
+    }
 
+    private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
+        GlobalConfig config = new GlobalConfig();
+        String dbUrl = "jdbc:mysql://localhost:3306/shop-prod";
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setDbType(DbType.MYSQL)
+                .setUrl(dbUrl)
+                .setUsername("root")
+                .setPassword("123456")
+                .setDriverName("com.mysql.jdbc.Driver");
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig
+                .setCapitalMode(true)
+                .setEntityLombokModel(true)
+                .setDbColumnUnderline(true)
+                .setNaming(NamingStrategy.underline_to_camel)
+                .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
+        config.setActiveRecord(false)
+                .setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-prod\\src\\main\\java")
+                .setFileOverride(true);
+        if (!serviceNameStartWithI) {
+            config.setServiceName("%sService");
+        }
+        config.setAuthor("liuyiyou@yanglaoban.com");
+        new AutoGenerator().setGlobalConfig(config)
+                .setDataSource(dataSourceConfig)
+                .setStrategy(strategyConfig)
+                .setPackageInfo(new PackageConfig()
+                                .setParent(packageName)
+//                                .setController("controller")
+                                .setEntity("entity")
+                ).execute();
+    }
+
+    private void generateByTables(String packageName, String... tableNames) {
+        generateByTables(true, packageName, tableNames);
+    }
 }

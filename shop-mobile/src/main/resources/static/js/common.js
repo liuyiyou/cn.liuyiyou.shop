@@ -1073,15 +1073,10 @@ var common = (function ($) {
                 }
                 return;
             } else {
-                // localStorage.clear();
             }
         }
 
         var key = getKey(method, url, param);
-        // if( ajaxLock.indexOf(key) >= 0 ){
-        // 	return;
-        // }
-
         if (typeof this.promise_ == "undefined") {
             this.promise_ = {};
         }

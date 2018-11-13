@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.common.req;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,6 @@ import lombok.NoArgsConstructor;
 public class ReqBody {
     int page;
     int pageSize;
+
+    JSONObject reqBody;
 }

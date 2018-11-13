@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.base.mapper.Nav4bossMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.base.entity.Nav4boss">
+        <id column="nav_id" property="navId" />
+        <result column="nav_name" property="navName" />
+        <result column="nav_url" property="navUrl" />
+        <result column="banner" property="banner" />
+        <result column="banner_v2" property="bannerV2" />
+        <result column="width" property="width" />
+        <result column="height" property="height" />
+        <result column="weight" property="weight" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="status_time" property="statusTime" />
+        <result column="update_suid" property="updateSuid" />
+        <result column="last_update" property="lastUpdate" />
+        <result column="icon" property="icon" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        nav_id, nav_name, nav_url, banner, banner_v2, width, height, weight, status, create_time, status_time, update_suid, last_update, icon
+    </sql>
+
+</mapper>

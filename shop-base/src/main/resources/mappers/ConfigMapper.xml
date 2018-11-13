@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.base.mapper.ConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.base.entity.Config">
+        <id column="config_id" property="configId" />
+        <result column="config_value" property="configValue" />
+        <result column="update_suid" property="updateSuid" />
+        <result column="modual" property="modual" />
+        <result column="state" property="state" />
+        <result column="create_date" property="createDate" />
+        <result column="last_update" property="lastUpdate" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        config_id, config_value, update_suid, modual, state, create_date, last_update, remark
+    </sql>
+
+</mapper>

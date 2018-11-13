@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.base.mapper.BannerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.base.entity.Banner">
+        <id column="banner_id" property="bannerId" />
+        <result column="type" property="type" />
+        <result column="pic" property="pic" />
+        <result column="redirect_url" property="redirectUrl" />
+        <result column="weight" property="weight" />
+        <result column="create_date" property="createDate" />
+        <result column="last_update" property="lastUpdate" />
+        <result column="filter_channels" property="filterChannels" />
+        <result column="apply_crowd" property="applyCrowd" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="pic_v2" property="picV2" />
+        <result column="width" property="width" />
+        <result column="height" property="height" />
+        <result column="position" property="position" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        banner_id, type, pic, redirect_url, weight, create_date, last_update, filter_channels, apply_crowd, start_time, end_time, pic_v2, width, height, position
+    </sql>
+
+</mapper>

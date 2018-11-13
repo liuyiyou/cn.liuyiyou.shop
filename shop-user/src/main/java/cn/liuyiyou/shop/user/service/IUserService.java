@@ -1,12 +1,18 @@
 package cn.liuyiyou.shop.user.service;
 
+import cn.liuyiyou.shop.user.entity.User;
+import cn.liuyiyou.shop.user.vo.LoginVo;
+import com.baomidou.mybatisplus.extension.service.IService;
+
 /**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/10/30
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author liuyiyou.cn
+ * @since 2018-11-12
  */
-public interface IUserService {
+public interface IUserService extends IService<User> {
 
-
+    String login(LoginVo loginVo);
 }
