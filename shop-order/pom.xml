@@ -79,6 +79,12 @@
             <version>0.2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- #################################### DB Relate & ORM 『Start』 #################################### -->
         <dependency>
             <groupId>com.baomidou</groupId>

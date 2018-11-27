@@ -23,7 +23,7 @@ public class Response<T> {
     /**
      * 返回消息
      */
-    private String msg;
+    private String msg = "success";
     /**
      * 响应码
      */

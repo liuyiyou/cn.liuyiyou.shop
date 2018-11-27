@@ -1,19 +1,18 @@
 package cn.liuyiyou.shop.order.controller;
 
 
+import cn.liuyiyou.shop.common.resp.Response;
 import cn.liuyiyou.shop.order.busi.IOrderManager;
 import cn.liuyiyou.shop.order.vo.SubmitVo;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
@@ -31,17 +30,23 @@ public class OrderController {
     @Autowired
     private IOrderManager orderManager;
 
-    @PostMapping("/add")
-    public String add(@RequestBody SubmitVo submitVo) throws ExecutionException, InterruptedException {
-        orderManager.addOrder2(submitVo);
-        return "success";
+    @PostMapping("/addOrderNoTransaction")
+    public Response addOrderNoTransaction(@RequestBody SubmitVo submitVo) {
+        orderManager.addOrderNoTransaction(submitVo);
+        return Response.builder().result("success").build();
     }
 
-
-    @GetMapping("/test")
-    public String test() throws ExecutionException, InterruptedException {
-        orderManager.addOrderTransaction();
-        return "success";
+    @PostMapping("/addOrderTransactionUseLocalMessage")
+    public Response addOrderTransactionUseLocalMessage(@RequestBody SubmitVo submitVo) {
+        orderManager.addOrderTransactionUseLocalMessage(submitVo);
+        return Response.builder().result("success").build();
     }
+
+    @GetMapping("/list")
+    public Response  list(@RequestParam(value = "reqBody") String reqBody){
+        JSONObject json = JSONObject.parseObject(reqBody);
+        return Response.builder().result(orderManager.getMyOrder(json)).build();
+    }
+
 }
 

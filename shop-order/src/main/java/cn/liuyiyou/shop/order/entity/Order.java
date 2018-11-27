@@ -5,7 +5,12 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +21,9 @@ import java.io.Serializable;
  * @since 2018-11-05
  */
 @TableName("t_order")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order extends Model<Order> {
 
     private static final long serialVersionUID = 1L;
@@ -150,6 +158,16 @@ public class Order extends Model<Order> {
     @TableField("last_update_time")
     private LocalDateTime lastUpdateTime;
 
+    @TableField(exist = false)
+    private List<OrderProd> orderProds;
+
+    public List<OrderProd> getOrderProds() {
+        return orderProds;
+    }
+
+    public void setOrderProds(List<OrderProd> orderProds) {
+        this.orderProds = orderProds;
+    }
 
     public Long getOrderId() {
         return orderId;

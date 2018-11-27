@@ -3064,10 +3064,7 @@ function isFromShopkeeper(type) {
     }
 }
 
-function getFromShopkeeperFlagStr(type) {
-    var _splieStr = type == 1 ? "?" : "&";
-    return isFromShopkeeper() ? _splieStr + "fromShopkeeper=" + isFromShopkeeper("value") : "";
-}
+
 
 /*非店铺链接显示*/
 function noFromShopkeeperFlagShow(domStr) {

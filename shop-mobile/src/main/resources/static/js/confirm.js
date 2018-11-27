@@ -6,20 +6,21 @@ $(function () {
 
 var order = {
     prodId: common.getQueryStr("id"),
+    skuId: common.getQueryStr("skuId"),
     submit: function () {
         var params = {
             prodId: this.prodId,
             payType: 1,
-            payAmount: 212
+            skuId: this.skuId
         };
         $.ajax({
             type: "POST",
-            url: ConstUtil.get("ORDER_URL") + "order/add",
+            url: ConstUtil.get("ORDER_URL") + "order/addOrderNoTransaction",
             data: JSON.stringify(params),
-            dataType:"json",
+            dataType: "json",
             contentType: "application/json",
             success: function (data) {
-                alert("success");
+                window.location.href = "/my-order.html"
             }
         });
     }

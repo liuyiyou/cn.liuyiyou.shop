@@ -15,7 +15,7 @@ public class SubmitVo {
 
 //    private Order order;
 //    private OrderProd orderProd;
-//    private Long prodId;
+    private Long prodId;
     private Long skuId;
     private int payType;
     private Float payAmount;

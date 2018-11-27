@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.common.config;
+package cn.liuyiyou.shop.prod.config;
 
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.ToStringSerializer;

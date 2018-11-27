@@ -32,7 +32,6 @@ public class ProdSkuController {
         return prodSku;
     }
 
-
     @GetMapping("/increseSaled/{skuId}")
     public boolean increseSaled(@PathVariable("skuId") Long skuId) {
         ProdSku prodSku = prodSkuService.getById(skuId);

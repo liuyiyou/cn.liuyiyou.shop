@@ -1,0 +1,12 @@
+@import "mixins";
+.loadingIcon {
+    display: inline-block;
+    vertical-align: middle;
+    .px2rem(width, 30);
+    .px2rem(height, 30);
+    margin: 0 auto;
+    background: url("../images/loading_60_60.png?__inline") no-repeat center;
+    .px2rem(background-size, 30 ,30);
+    opacity: 1;
+    .spin();
+}

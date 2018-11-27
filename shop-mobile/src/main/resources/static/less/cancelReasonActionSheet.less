@@ -1,0 +1,30 @@
+@import "mixins";
+.cancelReasonWrapper{
+  .item{
+    .px2rem(font-size, 16);
+    color:#333333;
+    .px2rem(padding,14,20);
+    text-align: left;
+    position: relative;
+    &:after{
+      content: '';
+      display: block;
+      .px2rem(width,20);
+      .px2rem(height,20);
+      background-repeat:  no-repeat;
+      background-image: url("../images/pop_icon_unchecked@2x.png?__inline");
+      background-size: 100%;
+      position: absolute;
+      .px2rem(top,14);
+      .px2rem(right,20);
+    }
+    &.isChecked{
+      &:after{
+        content: '';
+        .px2rem(width,20);
+        .px2rem(height,20);
+        background-image: url("../images/pop_icon_checked@2x.png?__inline")
+      }
+    }
+  }
+}

@@ -1,8 +1,16 @@
 $(function () {
     prod.loadProd();
-
     $("#instBuyBtn").click(function () {
-        window.location.href = "/order-confirm.html?id=" + prod.prodId;
+        $("#popSkuPannel").show()
+    });
+
+    $("#popSkuPannel .del").click(function () {
+        $("#popSkuPannel").hide()
+    });
+
+    $("#btnCardBuy").click(function () {
+       var skuId = $("#submit_skuId").val();
+        window.location.href = "/order-confirm.html?id=" + prod.prodId + "&skuId=" + skuId;
     });
 });
 
@@ -11,7 +19,6 @@ var prod = {
     prodId: common.getQueryStr('id'),
     loadProd: function () {
         $.getJSON(ConstUtil.get("PROD_URL") + "prod/" + this.prodId, function (data) {
-            console.info(data);
             $("#prodName").html(data.prodName);
             $("#brief").html(data.brief);
             $("#descp").html(data.descp);
@@ -21,6 +28,7 @@ var prod = {
             ConstUtil.get("PIC_DOMAIN") + data.album.split(",")[0]
             var pic = ConstUtil.get("PIC_DOMAIN") + data.album.split(",")[0];
             $("#album").attr("src", pic);
+
 
             //sku
             var minPrice = 99999;
@@ -33,6 +41,8 @@ var prod = {
                 minReferPrice = Math.min(value.referPrice, minReferPrice);
                 maxReferPrice = Math.max(value.referPrice, maxReferPrice);
             });
+
+            $("#submit_skuId").val(data.prodSkus[0].skuId);
             if (minReferPrice == maxReferPrice) {
                 $("#oriprice").html(minReferPrice)
             } else {
@@ -43,6 +53,10 @@ var prod = {
             } else {
                 $("#norprice").html('¥' + minPrice + "-" + maxPrice)
             }
+
+            $("#skuPicImg").attr("src", pic);
+            $("#popSkuPrice").html('¥' + minPrice)
+            return data;
         });
     }
 }

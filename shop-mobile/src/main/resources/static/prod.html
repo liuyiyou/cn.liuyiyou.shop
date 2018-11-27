@@ -124,10 +124,38 @@
 <div class="the-light"></div>
 <div class="the-light2"></div>
 
-
-<!--点击购物车弹窗的小窗口-->
-<div class="shop-view cor3e fs18 " style="display:none;">
-    <span><i class="iconfont">&#xe612;</i><br>加入购物车成功</span>
+<div style="padding:0;" id="popSkuPannel" class="selected-checkbox prod-ri dis-no">
+    <div class="sel-img clearfix border-b-1px">
+        <div class="fl left"></div>
+        <div class="fl mid">
+            <img src="" id="skuPicImg">
+        </div>
+        <div class="fl right">
+            <img class="del" src="/images/cancel.png">
+            <h1 class="fs18 cord6" id="popSkuPrice"></h1>
+        </div>
+    </div>
+    <div class="selected-scroll-cont">
+        <div class="cont-box">
+            <ol class="btn-add-less clearfix">
+                <div class="fs14 numLabel">数量</div>
+                <li class="btn-rem1 border-1px" id="btnCartLess">-</li>
+                <li class="btn-rem2 border-1px" id="txtCartNum">1</li>
+                <li class="btn-rem3 border-1px" id="btnCartMore">+</li>
+                <li id="btnCartLimitedTip" class="btn-rem0 dis-no"></li>
+                <li id="btnCartTip" class="btn-rem0 dis-no"></li>
+            </ol>
+        </div>
+    </div>
+    <div class="fs18 tac corfff popBtn4detail submit1" id="btnCardBuy">
+        立即购买
+    </div>
+</div>
+<div class="hide">
+    <input type="hidden" id="submit_skuId">
+    <input type="hidden" id="submit_prodId">
+    <input type="hidden" id="submit_payType">
+    <input type="hidden" id="submit_prodNum">
 </div>
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>

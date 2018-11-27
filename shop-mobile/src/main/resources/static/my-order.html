@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>洋老板商城 - 乐享正品,全球购</title>
+    <meta name="description" content="洋老板商城是一个销售海外商品的跨境购物平台，全球购的首选，100%原装正品,品质保证，产地直邮。">
+    <meta name="Keywords" content="洋老板商城,洋老板,全球购">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>IBA洋老板-我的订单</title>
+    <script type="text/javascript" src="/js/flexible.js?__inline"></script><!--ignore-->
+    <link rel="stylesheet" href="/css/iconfont.css">
+    <link href="/less/my-order.less" type="text/css" rel="stylesheet/less">
+    <script src="/js/less.min.js"></script>
+</head>
+<body>
+<div class="head">
+    <div class="nav">
+        <div class="iba-nav-left-wrapper">
+            <div class="iba-nav-back" id="go-to-myorder"></div>
+        </div>
+        <div class="iba-nav-title">我的订单</div>
+        <div class="iba-nav-right-wrapper"></div>
+    </div>
+    <div class="clearfix order-nav">
+        <ul>
+            <li style="text-align:20%" class="order-selected">
+                全部
+            </li>
+            <li class=" ">
+                待付款
+                <span id="order-no-pay"></span>
+            </li>
+            <li class=" ">
+                待发货
+                <span id="order-no-send"></span>
+            </li>
+            <li class=" ">
+                待收货
+                <span id="order-no-confirm"></span>
+            </li>
+            <li class=" ">
+                待评价
+                <span id="order-success"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<section class="pt99">
+    <div class="pb10">
+        <div class="cont">
+            <div class="cont-box">
+            </div>
+        </div>
+        <div id="no-order-img" class="order-null"></div>
+        <div id="scroller-pullUp">
+            <div class="loadingIcon"></div>
+            <span id="pullUp-msg" class="pull-up-msg">已加载完成</span>
+        </div>
+    </div>
+</section>
+<div class="the-light"></div>
+<div class="weather"><!--弹出框，显示是否操作当前对象-->
+    <ul>
+        <li>确定是否删除该商品？</li>
+        <li class="clearfix"><span class="sure fr">确定</span><span class="lose fl">取消</span></li>
+    </ul>
+</div>
+<!-- 支付方式选择 -->
+<div class="order-confirm" style="display:none">
+    <div class="mask" style="display:;"></div>
+    <div class="pay-ways">
+        <div class="pay-wecat">
+            <div class="clearfix pay-wecat-tit">
+                <div class="fl">请选择支付方式</div>
+                <div class="fr">
+                    <img src="../images/cancel.png" id="close-pay-ways">
+                </div>
+            </div>
+            <div class="bot dis-no" id="wxpay">
+                <img class="fl" src="../images/order-wecat.png">
+                <p class="fl">微信支付</p>
+                <div style=" margin-top:14px;" id="pay1" class="btn-sel1 fr check"><!-- 公共样式，点击选中状态  -->
+                    <div class="btn-sel1-ba">
+                    </div>
+                </div>
+            </div>
+            <div class="bot" id="zfbpay" style="display: ">
+                <img class="fl" src="../images/as.png">
+                <div style=" margin-top:14px;" id="pay2" class="btn-sel1 fr check">
+                    <div class="btn-sel1-ba">
+                    </div>
+                </div>
+            </div>
+            <div class="bot" id="unionpay" style="display:block;">
+                <img class="fl" src="../images/UnionPay.png">
+                <div style=" margin-top:14px;" id="pay3" class="btn-sel1 fr">
+                    <div class="btn-sel1-ba">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bot clearfix iphoneX-fixed-b">
+            <div class="fl nav-bo-pa fs14">应付总额：<span id="pay-total"></span></div>
+            <div class="fr nav-bo-sb" id="submit">立即支付</div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/config.js"></script>
+<script type="text/javascript" src="/js/my-order.js"></script>
+<script src="/js/arttmpl.js"></script>
+<script id="subs-inf" type="text/html">
+    <%if(records){%>
+    <%for(var i = 0; i < records.length;i++){%>
+    <%var subs = records[i];%>
+    <div class="one-order border-b-1px">
+        <div class="one-order-details">
+            <nav class="clearfix">
+                <span class="fl">订单号：<%=subs.orderId%></span>
+                <span class="fr corea6"><%=getStatusStr(subs.status)%></span>
+            </nav>
+            <%var prodList = subs.orderProds;%>
+            <%for(var j = 0; j < prodList.length; j++){%>
+            <%var prod = prodList[j];%>
+            <div class="or-con clearfix border-b-1px <%if(j>1){%>prod-more-<%=subs.subsId%><%}%>" <%if(j>1){%>style="display:none"<%}%>>
+            <div class="or-con-l ">
+                <a class="alink total-link" href="order-details.html?subsId=<%=subs.orderId%>"><img src="<%=getPictUrl(prod.album)%>"></a>
+            </div>
+            <div class="clearfix or-con-r">
+                <h1>
+                    <a class="alink" href="order-details.html?subsId=<%=subs.subsId%>"><%=prod.prodName%></a>
+                </h1>
+                <h4 class="clearfix">
+                    <%if(prod.prodAttr){%>
+                    <%=prod.prodAttr.split(",").join(" ")%>
+                    <%}%>
+                    <% _refundStatusObj =renderRefundStatus(subs.status,prod)%>
+                    <span class="cancelReason"><%=_refundStatusObj.name%></span>
+                </h4>
+                <h2 class="clearfix">
+                    <span class="unitPrice">¥<%=toFix(prod.unitPrice)%></span>
+                    <span class="prodNum">x<%=prod.prodNum%></span>
+                </h2>
+            </div>
+        </div>
+        <%}%>
+    </div>
+    <div class="one-order-pay">
+        <%if(subs.orderProds.length>2){%>
+        <div class="more-fa" data-subsid="<%=subs.subsId%>" data-show="false">
+            <img class="more" src="../images/more.png">
+            <div class="more-block">
+                <img class="more1" src="../images/more1.png">
+            </div>
+        </div>
+        <%}%>
+        <div class="pay-nav border-b-1px border-before-t-1px">
+            <ul class="clearfix">
+                <li class="pay1">共<%=subs.orderProds.length%>件</li>
+                <li class="pay4">
+                    <span class="label">应付总额:</span><span>¥<%=toFix(subs.totalPrice)%></span>
+                </li>
+            </ul>
+        </div>
+        <div class="pay-nav-bo">
+            <div class="clearfix">
+                <%if(subs.status == '1') {%>
+                <%
+                var totalmoney = toFix(subs.totalPrice+subs.freightPrice+subs.taxPrice);
+                if(subs.deductPrice){
+                totalmoney = totalmoney - subs.deductPrice;
+                }
+                if (subs.actDeductPrice){
+                totalmoney = totalmoney - subs.actDeductPrice;
+                }
+                %>
+                <%if(subs.src != 9){%><div class="item"><div class="pay-bo2" subsId ="<%=subs.subsId%>">取消订单</div></div><%}%>
+                <div class="item"><div class="pay-bo4 data-pay"><a style="color:#FFFFFF" href="javascript:selectPayAlert(<%=subs.orderId%>,<%=toFix(totalmoney)%>,<%=subs.src%>,'<%=subs.subsno%>');">去付款</a></div></div>
+                <%}%>
+                <!--增加一个判断，是否有存在物流-->
+                <%if(subs.subsId &&  (subs.status == 4)){%>
+                <div class="item"><div class="pay-bo3"><a style="color:#3D3E3E" href="../user/logistics.html?subsId=<%=subs.orderId%>">查看物流</a></div></div>
+                <%}%>
+                <%if(subs.status == '3' &&  !hasRefundProd(subs.orderProds)){%>
+                <div class="item"><div class="pay-bo4 data-confirm"><a style="color:#FFFFFF" href="javascript:sureOrder('<%=subs.subsId%>','<%=subs.sendStatus%>','<%=subs.needCommentProdNum%>','<%=subs.orderProds[0].prodId%>');">确认收货</a></div></div>
+                <%}%>
+                <%if(subs.status == '4' &&  !hasRefundProd(subs.orderProds) ){%>
+                <%if(subs.surplusCommentProdNum!=0){%>
+                <div class="item">
+                    <div class="pay-bo4">
+                        <a style="color:#fff;" href="/busi/comment-list.html?status=<%=status%>&subsId=<%=subs.orderId%>">立即评价</a>
+                    </div>
+                </div>
+                <%}%>
+                <%}%>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <%}%>
+    <%}%>
+</script>
+</html>

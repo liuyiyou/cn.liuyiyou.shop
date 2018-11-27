@@ -1,8 +1,9 @@
 package cn.liuyiyou.shop.order.busi;
 
 import cn.liuyiyou.shop.order.entity.Order;
-import cn.liuyiyou.shop.order.entity.OrderProd;
 import cn.liuyiyou.shop.order.vo.SubmitVo;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.concurrent.ExecutionException;
 
@@ -15,7 +16,18 @@ import java.util.concurrent.ExecutionException;
 public interface IOrderManager {
 
 
-    void addOrder(SubmitVo submitVo);
+    /**
+     * 不使用分布式事务，会出现事务不一致
+     * @param submitVo
+     */
+    void addOrderNoTransaction(SubmitVo submitVo);
+
+
+    /**
+     * 不使用分布式事务，会出现事务不一致
+     * @param submitVo
+     */
+    void addOrderTransactionUseLocalMessage(SubmitVo submitVo);
 
     /**
      * 使用本地消息表
@@ -28,4 +40,6 @@ public interface IOrderManager {
     void addOrder3(SubmitVo submitVo);
 
     void addOrderTransaction();
+
+    IPage<Order> getMyOrder(JSONObject json);
 }
