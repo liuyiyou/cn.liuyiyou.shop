@@ -1,0 +1,78 @@
+@import "mixins";
+
+.downLoadAppBannerWrapper {
+    width: 100%;
+    .px2rem(height, 50);
+    .px2rem(line-height, 50);
+    background: #000000;
+    text-align: center;
+    color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+    &.hidden{
+        display: none;
+    }
+    .downloadCloseBtn {
+        .px2rem(width, 44);
+        .px2rem(height, 50);
+        .px2rem(line-height, 50);
+        background: url("../images/pop_icon_close@2x.png?__inline") no-repeat center;
+        .px2rem(background-size, 16, 16);
+        .px2rem(background-position, 8, 17);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+    }
+    .downLoadTextWrapper {
+        width: 100%;
+        text-align: left;
+        .px2rem(height, 50);
+        .px2rem(padding-left, 86);
+        .px2rem(padding-right, 118);
+        box-sizing: border-box;
+        display: table-cell;
+        vertical-align: middle;
+        position: relative;
+        &:after {
+            content: '';
+            display: block;
+            .px2rem(width, 35);
+            .px2rem(height, 35);
+            background: url("../images/share_default_logo2.png?__inline") no-repeat center;
+            background-size: 100%;
+            position: absolute;
+            .px2rem(left, 44);
+            .px2rem(top, 7);
+            z-index: 1;
+        }
+        .downLoadTitle {
+            .px2rem(line-height, 14);
+            color: #ffffff;
+            .px2rem(font-size, 14);
+            
+        }
+        .downLoadSubTitle {
+            .px2rem(line-height, 14);
+            color: #999999;
+            .px2rem(font-size, 12);
+            .px2rem(margin-top, 4);
+        }
+    }
+    .downloadBtn {
+        //.bdr-b(1px solid rgba(0,0,0,.5));
+        .px2rem(width, 118);
+        .px2rem(height, 50);
+        .px2rem(line-height, 50);
+        background: #D6B27A;
+        color: #FFFFFF;
+        .px2rem(font-size, 14);
+        text-align: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
+}
+
+

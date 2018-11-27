@@ -1,6 +1,6 @@
 var status = common.getQueryStr("status") ? common.getQueryStr("status") : common.getSessionStorage("myOrderStatus");
 var getWealCount = 0;
-MyOrderPage = {
+orderList = {
     page: 1,
     pageSize: 5,
     status: status,
@@ -124,12 +124,12 @@ MyOrderPage = {
             $(this).addClass("order-selected").siblings(".order-nav li").removeClass("order-selected");
             var index = $(".order-nav li").index($(this));
             if (index == 0)
-                MyOrderPage.status = null;
+                orderList.status = null;
             else
-                MyOrderPage.status = index;
+                orderList.status = index;
             $(".cont-box").html("");
-            MyOrderPage.page = 1;
-            MyOrderPage.isOver = false;
+            orderList.page = 1;
+            orderList.isOver = false;
             common.setSessionStorage("myOrderStatus", index);
             loadUserSubs();
         });
@@ -158,7 +158,7 @@ MyOrderPage = {
                 url: "/app/busi/activity/subssts",
                 dataType: "json",
                 contentType: "application/json",
-                data: MyOrderPage.wrapPostParam(param),
+                data: orderList.wrapPostParam(param),
                 success: function (respData) {
                     if (respData.respHeader.resultCode !== 0) {
                         if (respData.respBody && respData.respBody.errInf) {
@@ -180,7 +180,6 @@ MyOrderPage = {
                 }
             });
         }
-
     },
     loadCancelSubsReason: function (cb) {
         var _this = this;
@@ -222,7 +221,7 @@ MyOrderPage = {
 }
 //var myScroll;
 $(function () {
-    MyOrderPage.goToOrderDetail();
+    orderList.goToOrderDetail();
     if (!common.isWeixin()) {
         $("#wxpay").hide();
         $("#zfbpay").show();
@@ -244,9 +243,9 @@ $(function () {
         $(".order-nav li:eq(" + status + ")").addClass("order-selected");
     }
 
-    MyOrderPage.cleanPage();
+    orderList.cleanPage();
     // getOrderCount();
-    MyOrderPage.delegatePageEvent();
+    orderList.delegatePageEvent();
 
     loadUserSubs();
 
@@ -308,7 +307,7 @@ $(function () {
         var h = scrollTop + height - contentHeight;
 
         if (h >= 0) {
-            if (MyOrderPage.isOver || MyOrderPage.isLoaded) {
+            if (orderList.isOver || orderList.isLoaded) {
                 return;
             }
             loadUserSubs();
@@ -331,29 +330,6 @@ function remindDeliver(e) {
         }
     });
 }
-
-////提示获得的福利
-function showActivityInfo() {
-    $("#first-order-to-my-weal,#double11-activity-to-my-weal,#Christmas-activity-weal,#weal-activity-to-my-weal").click(function () {
-        location.href = "/user/my-benefits-package.html";
-    });
-
-    $("#double11-activity-cancel").click(function () {
-        $("#double11-activity,.the-light").hide();
-    });
-    $("#Christmas-activity-close").click(function () {
-        $("#Christmas-activity,.the-light").hide();
-    });
-    $("#weal-activity-cancel").click(function () {
-        $("#weal-activity,.the-light").hide();
-    });
-    var subsId = common.getSessionStorage("lastPaySubsId");
-//	var subsId = 15056;
-    if (subsId && subsId != "" && subsId > 0) {
-        getOrderWeal(subsId);
-    }
-}
-
 function renderRefundStatus(subStatus, prod) {
     if (subStatus == 1 || prod.prodId == 0) {
         return {refundStatus: prod.refundStatus, name: ''};
@@ -418,19 +394,19 @@ function getOrderWeal(subsId) {
 
 
 function loadUserSubs(choose) {
-    MyOrderPage.isLoaded = true;
+    orderList.isLoaded = true;
     $("#scroller-pullUp").show().find('img').show().end().find('#pullUp-msg').hide();
     var param = {};
     $("#no-order-img").hide();
-    param.pageSize = MyOrderPage.pageSize;
+    param.pageSize = orderList.pageSize;
     if (choose == 1) {
         param.page = 1;
     } else {
-        param.page = MyOrderPage.page;
+        param.page = orderList.page;
     }
-    MyOrderPage.page++;
-    param.status = MyOrderPage.status;
-    var _param = MyOrderPage.wrapGetParam(param);
+    orderList.page++;
+    param.status = orderList.status;
+    var _param = orderList.wrapGetParam(param);
     $.ajax({
         url: ConstUtil.get("ORDER_URL") + "/order/list",
         type: "GET",
@@ -439,19 +415,19 @@ function loadUserSubs(choose) {
         contentType: "application/json",
         success: function (data) {
             if (data.result) {
-                template.helper("getStatusStr", MyOrderPage.getStatusStr);
-                template.helper("getPictUrl", MyOrderPage.getPictUrl);
-                template.helper("toFix", MyOrderPage.toFix);
-                template.helper("formatDate", MyOrderPage.formatDate);
-                template.helper("version", MyOrderPage.version);
+                template.helper("getStatusStr", orderList.getStatusStr);
+                template.helper("getPictUrl", orderList.getPictUrl);
+                template.helper("toFix", orderList.toFix);
+                template.helper("formatDate", orderList.formatDate);
+                template.helper("version", orderList.version);
                 template.helper("log", window.console.log);
-                template.helper("status", MyOrderPage.status);
+                template.helper("status", orderList.status);
                 template.helper("renderRefundStatus", renderRefundStatus);
                 template.helper("hasRefundProd", hasRefundProd);
                 console.info(data.result);
                 var subsHtml = template("subs-inf", data.result);
                 $(".cont-box").append(subsHtml);
-                MyOrderPage.isLoaded = false;
+                orderList.isLoaded = false;
             }
         }
     });
@@ -459,7 +435,7 @@ function loadUserSubs(choose) {
 
 function getOrderCount() {
     var param = new Object();
-    param = MyOrderPage.wrapGetParam(param);
+    param = orderList.wrapGetParam(param);
     $.ajax({
         url: ConstUtil.get("ORDER_URL") + "/order/count",
         type: "GET",
@@ -468,28 +444,6 @@ function getOrderCount() {
         contentType: "application/json",
         success: function (data) {
             if (data.respBody) {
-                if (!data.respBody.unpaidCount) {
-                    $("#order-no-pay").hide();
-                } else {
-                    $("#order-no-pay").html(data.respBody.unpaidCount);
-                }
-                if (!data.respBody.paidCount) {
-                    $("#order-no-send").hide();
-                } else {
-                    $("#order-no-send").html(data.respBody.paidCount);
-                }
-
-                if (!data.respBody.deliveredCount) {
-                    $("#order-no-confirm").hide();
-                } else {
-                    $("#order-no-confirm").html(data.respBody.deliveredCount);
-                }
-
-                if (!data.respBody.doneCount) {
-                    $("#order-success").hide();
-                } else {
-                    $("#order-success").html(data.respBody.doneCount);
-                }
             }
         }
     });
@@ -499,7 +453,7 @@ function doSureOrder(subsId, needCommentProdNum, prodId) {
     var reqBody = new Object();
     reqBody.subsId = subsId;
     reqBody.status = "4";
-    var params = MyOrderPage.wrapPostParam(reqBody);
+    var params = orderList.wrapPostParam(reqBody);
     $.ajax({
         url: "/app/busi/activity/subssts",
         type: "POST",
