@@ -13,34 +13,8 @@ public class BusiException extends RuntimeException {
     public BusiException() {
     }
 
-    public BusiException(String msg, int code) {
-        this.msg = msg;
-        this.code = code;
+    public BusiException(String message) {
+        super(message);
     }
 
-    /**
-     * 异常信息
-     */
-    private String msg;
-
-    /**
-     * 具体异常码
-     */
-    private int code = Code.FAILED;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 }
