@@ -17,8 +17,8 @@
         <module>shop-order</module>
         <module>shop-order-api</module>
         <module>shop-prod</module>
-        <module>shop-user</module>
         <module>shop-mobile</module>
+        <module>shop-user</module>
     </modules>
 
 </project>

@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>cn.liuyiyou.shop</groupId>
     <artifactId>shop-base-api</artifactId>
 
     <properties>

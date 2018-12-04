@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>shop-user</name>
+    <name>shop-common</name>
     <description>用户中心</description>
 
     <parent>
@@ -29,10 +29,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -56,9 +52,6 @@
             <version>23.0</version>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-    </dependencyManagement>
 
     <build>
         <plugins>

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.liuyiyou.shop</groupId>
-    <artifactId>shop-user</artifactId>
+    <artifactId>shop-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
