@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.common.web.BaseController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/category")
-public class CategoryController {
+public class CategoryController  extends BaseController {
 
     @Autowired
     private ICategoryService categoryService;

@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.base.controller;
 
+import cn.liuyiyou.shop.common.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
  */
 @Controller
-public class BrandIndexController {
+public class BrandIndexController extends BaseController {
 
     @GetMapping("/brands")
     public String brands(){

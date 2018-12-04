@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.service.IBannerService;
 import cn.liuyiyou.shop.base.vo.BannerVo;
+import cn.liuyiyou.shop.common.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

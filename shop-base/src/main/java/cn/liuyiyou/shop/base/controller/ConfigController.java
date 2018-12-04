@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.base.controller;
 
 
+import cn.liuyiyou.shop.common.web.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 @RequestMapping("/config")
-public class ConfigController {
+public class ConfigController  extends BaseController {
 
 }
 

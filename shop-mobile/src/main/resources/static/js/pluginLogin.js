@@ -1,6 +1,6 @@
 ;(function ($) {
     var cacheDom = {};
-    var loginType = 2;//1密码 2 验证码
+    var loginType = 1;//1密码 2 验证码
     var optionsCache = null;
     var _sendSmsTimer = null;
     var _sendSmsRemainingTime = 60;
@@ -224,69 +224,68 @@
 
     function postLoginRegister(param) {
         common.showLoading();
-        common.ajax("POST", ConstUtil.get("USER_URL") + "user/login", param, respBodyFunc, function (data) {
-            common.hideLoading();
-            if (data.code === 0) {
-                common.setSessionStorage("rid", "");
-            } else {
-                common.toast(data.message)
+        $.ajax({
+            url: ConstUtil.get("USER_URL") + "user/login",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(param),
+            success: function (data) {
+                loginSuccess(data);
             }
-        }, function () {
-            common.hideLoading();
-            common.toast('网络繁忙,请稍后重试')
         });
+
+        // common.ajax("POST", ConstUtil.get("USER_URL") + "user/login", param, respBodyFunc, function (data) {
+        //     common.hideLoading();
+        //     // if (data.code == 0) {
+        //     //     common.setSessionStorage("rid", "");
+        //     // } else {
+        //     //     common.toast(data.msg)
+        //     // }
+        // }, function () {
+        //     common.hideLoading();
+        //     common.toast('网络繁忙,请稍后重试')
+        // });
     }
 
     function respBodyFunc(data) {
-        if (typeof data.userInfo === 'undefined') {
-            return;
-        }
         loginSuccess(data);
     }
 
     function loginSuccess(data) {
-        if (data && data.userInfo) {
-            data = data.userInfo;
-            var trackId = data.result;
-            common.setSessionStorage("trackId", trackId);
-            $(".submit").hide();
-            $(".preSubnit").show();
-            common.toast('登录成功');
-
-            if (data.modifyPassword === true && optionsCache.isPage) {
-                common.setSessionStorage("msgcode", getLoginCodeVal());
-                common.setSessionStorage("account", Base64.encode(getAccountVal()));
-                var url = "/user/forgot-password.html?fromFirstLogin=1";
-                if (common.getQueryStr("coup")) {
-                    url = url + "&coup=1";
-                }
-                window.location.href = url;
+        var trackId = data.result;
+        common.setSessionStorage("trackId", trackId);
+        $(".submit").hide();
+        $(".preSubnit").show();
+        common.toast('登录成功');
+        if (data.modifyPassword === true && optionsCache.isPage) {
+            common.setSessionStorage("msgcode", getLoginCodeVal());
+            common.setSessionStorage("account", Base64.encode(getAccountVal()));
+            var url = "/user/forgot-password.html?fromFirstLogin=1";
+            if (common.getQueryStr("coup")) {
+                url = url + "&coup=1";
+            }
+            window.location.href = url;
+        } else {
+            common.setSessionStorage('up2m', '');
+            common.setSessionStorage("rid", "");
+            if (data.user && data.user.account) {
+                common.setSessionStorage('account', Base64.encode(data.user.account));
+            }
+            var hisUrl = common.getSessionStorage('hisUrl');
+            var mobile = common.getQueryStr("mobile"); //有此参数代表是更换手机号码跳转过来的
+            if (!optionsCache.isPage) {
+                hide();
+                optionsCache.success(data);
+            } else if (hisUrl && !isLoginUrl(hisUrl)) {
+                common.setSessionStorage('hisUrl', "");
+                common.setSessionStorage('registerBackUrl', "");
+                common.setSessionStorage('currentPageLoginHisUrl', "");
+                gotoPageUrl(hisUrl, "replace");
+            } else if (mobile && mobile == 1) {
+                gotoPageUrl("/user/account.html");
             } else {
-                //置空一下参数， 这个是升级弹窗用的
-                common.setSessionStorage('up2m', '');
-                // 置空一下参数，店铺拉新标识店铺ID
-                common.setSessionStorage("rid", "");
-                common.setSessionStorage('trackId', data.trackId);
-                if (data.user && data.user.account) {
-                    common.setSessionStorage('account', Base64.encode(data.user.account));
-                }
-
-                var hisUrl = common.getSessionStorage('hisUrl');
-                var mobile = common.getQueryStr("mobile"); //有此参数代表是更换手机号码跳转过来的
-
-                if (!optionsCache.isPage) {
-                    hide();
-                    optionsCache.success(data);
-                } else if (hisUrl && !isLoginUrl(hisUrl)) {
-                    common.setSessionStorage('hisUrl', "");
-                    common.setSessionStorage('registerBackUrl', "");
-                    common.setSessionStorage('currentPageLoginHisUrl', "");
-                    gotoPageUrl(hisUrl, "replace");
-                } else if (mobile && mobile == 1) {
-                    gotoPageUrl("/user/account.html");
-                } else {
-                    gotoPageUrl("/index.html");
-                }
+                gotoPageUrl("/index.html");
             }
         }
     }

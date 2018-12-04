@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.prod.controller;
 
 
+import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/prod")
 @CrossOrigin //其他前端使用 $.getJSON()调用接口的时候，method不是get而是option，加上该注解解决跨域问题
-public class ProdController {
+public class ProdController  extends BaseController {
 
     @Autowired
     private IProdService prodService;

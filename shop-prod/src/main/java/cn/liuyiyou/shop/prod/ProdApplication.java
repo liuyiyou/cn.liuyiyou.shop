@@ -1,10 +1,16 @@
 package cn.liuyiyou.shop.prod;
 
+import cn.liuyiyou.shop.prod.config.SpringProperties;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -12,7 +18,21 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.prod.mapper")
+@EnableDiscoveryClient
+@RestController
 public class ProdApplication {
+
+    @Autowired
+    SpringProperties springProperties;
+//
+//    @Autowired
+//    private NacosConfigProperties nacosConfigProperties;
+
+    @GetMapping("/test")
+    public String test(){
+        String name = springProperties.getName();
+        return name;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(ProdApplication.class, args);
@@ -80,5 +100,7 @@ public class ProdApplication {
 //    public ConsumerFactory<String, String> consumerFactory() {
 //        return new DefaultKafkaConsumerFactory(consumerConfigs(), new StringDeserializer(), new StringDeserializer());
 //    }
+
+
 
 }

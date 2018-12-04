@@ -35,7 +35,7 @@ public abstract class SkuUtils {
                 }
             }
             Collections.sort(strList);
-            rst = org.apache.commons.lang.StringUtils.join(strList.iterator(), ",");
+            rst = org.apache.commons.lang3.StringUtils.join(strList.iterator(), ",");
         }
         return rst;
     }

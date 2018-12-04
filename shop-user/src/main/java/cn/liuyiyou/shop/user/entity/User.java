@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -20,6 +21,7 @@ public class User extends Model<User> {
     /**
      * 会员ID由系统自动按注册时间顺序生成
      */
+    @TableId("uid")
     private Integer uid;
     /**
      * 账号(电话号码)

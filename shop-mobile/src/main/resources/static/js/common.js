@@ -1188,6 +1188,15 @@ var common = (function ($) {
         }
     }
 
+    var needLogin = function (needLogin) {
+        if(needLogin){
+            var trackId = getSessionStorage("trackId");
+            if(trackId == undefined || trackId == "" || trackId == "undefined"){
+                gotoPageUrl("/login.html", "replace");
+            }
+        }
+    }
+
     //获取连接中的参数
     var getQueryStr = function (name) {
         var url = location.href;
@@ -1778,7 +1787,8 @@ var common = (function ($) {
         setMini: setMini,
         isMini: isMini,
         goLogin: goLogin,
-        validatePhone: validatePhone
+        validatePhone: validatePhone,
+        needLogin:needLogin
     }
 })(window.jQuery || $);
 (function ($, common) {

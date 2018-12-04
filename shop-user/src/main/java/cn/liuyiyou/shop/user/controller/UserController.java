@@ -3,6 +3,8 @@ package cn.liuyiyou.shop.user.controller;
 
 import cn.liuyiyou.shop.common.req.ReqBody;
 import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.web.BaseController;
+import cn.liuyiyou.shop.user.entity.User;
 import cn.liuyiyou.shop.user.service.IUserService;
 import cn.liuyiyou.shop.user.vo.LoginVo;
 import cn.liuyiyou.shop.user.vo.Prod;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 /**
  * <p>
  * 前端控制器
@@ -30,7 +35,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private IUserService userService;
@@ -53,5 +58,13 @@ public class UserController {
         return Response.builder().result(userService.login(loginVo)).build();
     }
 
+
+    @PostMapping("/detail")
+    public Response detail(@RequestBody ReqBody reqBody, HttpServletRequest request) {
+        String uid = getUid(request);
+        Optional.ofNullable(uid).orElseThrow(() -> new RuntimeException("账号或密码不正确"));
+        User user = userService.getById(Integer.valueOf(uid));
+        return Response.builder().result(user).build();
+    }
 }
 

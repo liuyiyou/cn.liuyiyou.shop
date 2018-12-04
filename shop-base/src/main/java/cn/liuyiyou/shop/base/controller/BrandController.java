@@ -6,6 +6,7 @@ import cn.liuyiyou.shop.base.service.IBrandService;
 import cn.liuyiyou.shop.base.vo.Prod;
 import cn.liuyiyou.shop.base.vo.SimpleProdVo;
 import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.web.BaseController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/brand")
-public class BrandController {
+public class BrandController extends BaseController {
 
     @Autowired
     private IBrandService brandService;

@@ -10,11 +10,12 @@ import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
 import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
-import com.alibaba.dubbo.config.annotation.Reference;
+//import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,10 @@ import java.util.List;
 @Service
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
-    @Reference(version = "${dubbo.service.version}",
-            application = "${dubbo.application.id}",
-            url = "dubbo://localhost:12345")
-    private CountryService countryService;
+//    @Reference(version = "${dubbo.service.version}",
+//            application = "${dubbo.application.id}",
+//            url = "dubbo://localhost:12345")
+//    private CountryService countryService;
 
     @Autowired
     private IProdSkuService prodSkuService;

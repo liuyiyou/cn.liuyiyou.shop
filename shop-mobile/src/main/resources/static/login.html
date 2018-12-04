@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="/js/flexible.js?__inline"></script><!--ignore-->
     <link href="/less/login.less" type="text/css" rel="stylesheet/less">
-    <script src="/js/less.min.js"></script> <!--delete-->
+    <script src="/js/less.min.js"></script>
 </head>
 <body>
-
 <section class="loginWrapper" id="loginWrapper">
-
 </section>
 </body>
 <script src="/js/jquery-1.11.1.min.js"></script>
@@ -23,7 +21,7 @@
 <script>
     $(function () {
         function isLoginUrl(url){
-            if(url.indexOf("/user/login.html")<0 && url.indexOf("/user/login-binding.html")<0){
+            if(url.indexOf("/login.html")<0 && url.indexOf("/user/login-binding.html")<0){
                 return false;
             }
             return true;
@@ -37,7 +35,6 @@
                 gotoPageUrl(currentPageLoginHisUrl,"replace");
                 return;
             }
-
             //只有历史记录是 线下推广详情页 才返回详情页
             if(hisUrl&&!isLoginUrl(hisUrl)&& /#offlineAct=/ig.test(hisUrl)){
                 common.setSessionStorage('hisUrl',"");
