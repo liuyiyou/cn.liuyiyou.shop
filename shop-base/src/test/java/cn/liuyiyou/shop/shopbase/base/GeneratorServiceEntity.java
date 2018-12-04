@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.base;
+package cn.liuyiyou.shop.shopbase.base;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;

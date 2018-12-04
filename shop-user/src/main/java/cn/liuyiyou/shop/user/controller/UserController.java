@@ -10,6 +10,8 @@ import cn.liuyiyou.shop.user.vo.LoginVo;
 import cn.liuyiyou.shop.user.vo.Prod;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -55,16 +58,26 @@ public class UserController extends BaseController {
     @PostMapping("/login")
     public Response login(@RequestBody ReqBody reqBody) {
         LoginVo loginVo = JSONObject.parseObject(reqBody.getReqBody().toJSONString(), LoginVo.class);
-        return Response.builder().result(userService.login(loginVo)).build();
+        return Response.builder().data(userService.login(loginVo)).build();
     }
 
 
-    @PostMapping("/detail")
-    public Response detail(@RequestBody ReqBody reqBody, HttpServletRequest request) {
+    @GetMapping("/get")
+    public Response get(HttpServletRequest request) {
         String uid = getUid(request);
-        Optional.ofNullable(uid).orElseThrow(() -> new RuntimeException("账号或密码不正确"));
+        Optional.ofNullable(uid).orElseThrow(() -> new RuntimeException("未登陆"));
         User user = userService.getById(Integer.valueOf(uid));
-        return Response.builder().result(user).build();
+        return Response.builder().data(user).build();
+    }
+
+
+    @GetMapping("/list")
+    public Response list() {
+        LambdaQueryWrapper<User> userWrap = new QueryWrapper<User>()
+                .lambda()
+                .select().last("1= 1 limit 10");
+        List<User> list = userService.list(userWrap);
+        return Response.builder().data(list).build();
     }
 }
 

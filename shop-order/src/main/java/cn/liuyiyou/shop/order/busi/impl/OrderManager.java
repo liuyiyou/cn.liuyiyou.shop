@@ -19,11 +19,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,8 +51,8 @@ public class OrderManager implements IOrderManager {
     private ITransactionMessageService transactionMessageService;
 
     //
-    @Autowired
-    private KafkaTemplate kafkaTemplate;
+//    @Autowired
+//    private KafkaTemplate kafkaTemplate;
 
 
     public static Long gerOrderId() {
@@ -142,21 +139,21 @@ public class OrderManager implements IOrderManager {
     @Transactional(rollbackFor = Exception.class)
     public void addOrder2(SubmitVo submitVo) throws ExecutionException, InterruptedException {
 
-        ListenableFuture send = kafkaTemplate.send("topic-1", "key", "sku增加1");
+//        ListenableFuture send = kafkaTemplate.send("topic-1", "key", "sku增加1");
 //        kafkaTemplate.executeInTransaction(kafkaOperations ->
 //                kafkaOperations.send("topic-1", "key", "sku增加1")
 //        );
-        send.addCallback(new ListenableFutureCallback() {
-            @Override
-            public void onFailure(Throwable ex) {
-                ex.printStackTrace();
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                System.out.println(result);
-            }
-        });
+//        send.addCallback(new ListenableFutureCallback() {
+//            @Override
+//            public void onFailure(Throwable ex) {
+//                ex.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onSuccess(Object result) {
+//                System.out.println(result);
+//            }
+//        });
         Order order = Order.builder()
                 .orderId(System.currentTimeMillis())
                 .uid(1)
@@ -190,21 +187,21 @@ public class OrderManager implements IOrderManager {
     @Override
     @Transactional
     public void addOrderTransaction() {
-        ListenableFuture send = kafkaTemplate.send("topic-1", "key", "sku增加1");
-//        kafkaTemplate.executeInTransaction(kafkaOperations ->
-//                kafkaOperations.send("topic-1", "key", "sku增加1")
-//        );
-        send.addCallback(new ListenableFutureCallback() {
-            @Override
-            public void onFailure(Throwable ex) {
-                ex.printStackTrace();
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                System.out.println(result);
-            }
-        });
+//        ListenableFuture send = kafkaTemplate.send("topic-1", "key", "sku增加1");
+////        kafkaTemplate.executeInTransaction(kafkaOperations ->
+////                kafkaOperations.send("topic-1", "key", "sku增加1")
+////        );
+//        send.addCallback(new ListenableFutureCallback() {
+//            @Override
+//            public void onFailure(Throwable ex) {
+//                ex.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onSuccess(Object result) {
+//                System.out.println(result);
+//            }
+//        });
         Order order = new Order();
         order.setOrderId(System.currentTimeMillis());
         order.setUid(1);

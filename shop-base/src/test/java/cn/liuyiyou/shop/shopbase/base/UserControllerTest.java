@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.base;
+package cn.liuyiyou.shop.shopbase.base;
 
 import cn.liuyiyou.shop.base.vo.Prod;
 import com.alibaba.fastjson.JSONObject;

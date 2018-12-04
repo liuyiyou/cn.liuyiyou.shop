@@ -19,7 +19,7 @@ public class Response<T> {
 
     /* * 返回结果集
      */
-    private T result;
+    private T data;
     /**
      * 返回消息
      */
@@ -27,5 +27,5 @@ public class Response<T> {
     /**
      * 响应码
      */
-    private int code;
+    private int code = 0;
 }
