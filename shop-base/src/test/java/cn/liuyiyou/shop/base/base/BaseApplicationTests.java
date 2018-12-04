@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.shopbase.base;
+package cn.liuyiyou.shop.base.base;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

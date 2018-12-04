@@ -45,7 +45,7 @@ public class BrandController extends BaseController {
 
     @GetMapping("/getBrandInfos")
     public Response getBrandInfos(@RequestParam("brandId") Integer brandId) {
-        return Response.builder().result(brandService.getById(brandId)).build();
+        return Response.builder().data(brandService.getById(brandId)).build();
     }
 
     @GetMapping("/prods/{brandId}/{page}-{pageSize}")

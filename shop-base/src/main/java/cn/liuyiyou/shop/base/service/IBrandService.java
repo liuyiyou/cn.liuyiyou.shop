@@ -5,8 +5,6 @@ import cn.liuyiyou.shop.base.vo.Prod;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
-
 /**
  * <p>
  * 品牌定义表，这里会定义所有可供选择的品牌。

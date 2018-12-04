@@ -33,19 +33,19 @@ public class OrderController {
     @PostMapping("/addOrderNoTransaction")
     public Response addOrderNoTransaction(@RequestBody SubmitVo submitVo) {
         orderManager.addOrderNoTransaction(submitVo);
-        return Response.builder().result("success").build();
+        return Response.builder().data("success").build();
     }
 
     @PostMapping("/addOrderTransactionUseLocalMessage")
     public Response addOrderTransactionUseLocalMessage(@RequestBody SubmitVo submitVo) {
         orderManager.addOrderTransactionUseLocalMessage(submitVo);
-        return Response.builder().result("success").build();
+        return Response.builder().data("success").build();
     }
 
     @GetMapping("/list")
     public Response  list(@RequestParam(value = "reqBody") String reqBody){
         JSONObject json = JSONObject.parseObject(reqBody);
-        return Response.builder().result(orderManager.getMyOrder(json)).build();
+        return Response.builder().data(orderManager.getMyOrder(json)).build();
     }
 
 }

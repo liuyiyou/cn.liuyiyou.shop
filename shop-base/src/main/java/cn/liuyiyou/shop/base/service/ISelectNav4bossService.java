@@ -1,6 +1,5 @@
 package cn.liuyiyou.shop.base.service;
 
-import cn.liuyiyou.shop.base.entity.Nav4boss;
 import cn.liuyiyou.shop.base.entity.SelectNav4boss;
 import com.baomidou.mybatisplus.extension.service.IService;
 

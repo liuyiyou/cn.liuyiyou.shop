@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop.shopbase.base;
+package cn.liuyiyou.shop.base.base;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;

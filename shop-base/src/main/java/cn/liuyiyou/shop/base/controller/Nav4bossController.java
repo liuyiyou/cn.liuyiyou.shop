@@ -3,7 +3,6 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.service.INav4bossService;
 import cn.liuyiyou.shop.common.web.BaseController;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
