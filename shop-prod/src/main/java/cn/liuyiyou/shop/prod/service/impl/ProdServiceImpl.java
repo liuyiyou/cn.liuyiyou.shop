@@ -1,5 +1,7 @@
 package cn.liuyiyou.shop.prod.service.impl;
 
+import cn.liuyiyou.shop.base.entity.Country;
+import cn.liuyiyou.shop.base.service.CountryService;
 import cn.liuyiyou.shop.common.exception.BusiException;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Reference;
 
 /**
  * <p>
@@ -33,10 +35,10 @@ import java.util.Optional;
 @Service
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
-//    @Reference(version = "${dubbo.service.version}",
-//            application = "${dubbo.application.id}",
-//            url = "dubbo://localhost:12345")
-//    private CountryService countryService;
+    @Reference(version = "${dubbo.service.version}",
+            application = "${dubbo.application.id}",
+            url = "dubbo://localhost:12345")
+    private CountryService countryService;
 
     @Autowired
     private IProdSkuService prodSkuService;
@@ -45,15 +47,11 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
     public ProdVo getProdById(Long id) {
         Prod prod = this.getById(id);
         Optional.ofNullable(prod).orElseThrow(() -> new RuntimeException("商品不存在"));
-        if(prod==null){
-            throw new RuntimeException("xxxx");
-        }
         ProdVo prodVo = new ProdVo();
         BeanUtils.copyProperties(prod, prodVo);
 //        Country country = countryService.getCountryById(prod.getCountryId());
 //        prodVo.setCountry(country.getCountryNameCn());
         LambdaQueryWrapper<ProdSku> skuWrapper = new QueryWrapper<ProdSku>().lambda().select().eq(ProdSku::getProdId, id);
-
         List<ProdSkuVo> prodSkuVos = Lists.newArrayList();
         List<ProdSku> prodSkus = prodSkuService.list(skuWrapper);
         prodSkus.forEach(prodSku -> {

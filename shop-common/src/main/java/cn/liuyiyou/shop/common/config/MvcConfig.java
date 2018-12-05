@@ -36,7 +36,6 @@ public class MvcConfig implements WebMvcConfigurer {
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastConverter.setFastJsonConfig(fastJsonConfig);
         converters.add(fastConverter);
-        converters.add(fastConverter);
     }
 
     @Override
