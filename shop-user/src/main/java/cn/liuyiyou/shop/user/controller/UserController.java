@@ -55,12 +55,6 @@ public class UserController extends BaseController {
     }
 
 
-    @PostMapping("/login")
-    public Response login(@RequestBody ReqBody reqBody) {
-        LoginVo loginVo = JSONObject.parseObject(reqBody.getReqBody().toJSONString(), LoginVo.class);
-        return Response.builder().data(userService.login(loginVo)).build();
-    }
-
 
     @GetMapping("/get")
     public Response get(HttpServletRequest request) {

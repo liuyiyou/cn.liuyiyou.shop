@@ -1,165 +1,205 @@
-<!doctype html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>洋老板商城 - 乐享正品,购全球</title>
-<meta name="description" content="洋老板商城是一个销售海外商品的跨境购物平台，全球购的首选，100%原装正品,品质保证，产地直邮。">
-<meta name="Keywords" content="洋老板商城,洋老板,全球购">
-<script type="text/javascript" src="/js/flexible.js?__inline"></script><!--ignore-->
-<link href="/less/index.less" type="text/css" rel="stylesheet/less">
-<link href="/less/swiper.less" type="text/css" rel="stylesheet/less">
-<script src="/js/less.min.js"></script> <!--delete-->
-<!--<link href="/css/swiper.min.css" type="text/css" rel="stylesheet">-->
-<link rel="stylesheet" href="/css/iconfont.css">
+    <title>商城首页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+    <link rel="stylesheet" href="lib/weui.min.css">
+    <link rel="stylesheet" href="css/jquery-weui.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="index">
-    <header id="index-top">
-        <div class="nav clearfix">
-            <div class="nav-ba clearfix">
-                <div class="scan" id="scan" style="display: none;"></div>
-                <div class="search" id="search">
-                    <form action="">
-                        <input id="searchInput"  type="search" placeholder="发现更多全球好货" >
-                    </form>
-                </div>
-                <div class="message" id="message"><span id="message-num" style="display: none"></span></div>
+<body ontouchstart>
+<!--顶部搜索-->
+<header class='weui-header'>
+    <div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索您想要的商品" required>
+                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
             </div>
-        </div>
-    </header>
-	<section class="loginContentWrapper">
-		<div class="swiper-container swiper-container-h top-banner-list " id="bannerList"></div><!-- 顶部轮播图 -->
-        <div class="bannerbotdiv"><!-- 八个图标 -->
-            <div class="clearfix" id="bannerbotdiv">
-
-            </div>
-        </div>
-        <div class="super-info" id="superInfo">
-            <div class="super-icon"></div>
-            <div class="super-swiper" id="superSwiper">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-
-                    </div>
-                </div>
-            </div>
-        </div> <!-- 达人资讯 -->
-        <!--<div class="index-active" id="indexActiveOne">  &lt;!&ndash; 广告位置一 &ndash;&gt;-->
-
-        <!--</div>-->
-        <div class="middle-banner-list-border" id="middleBannerListBorder"><!-- 中间轮播图 -->
-            <div class="swiper-container swiper-container-h middle-banner-list" id="middleBannerList">
-
-            </div>
-        </div>
-        <!--<div class="stellar-delivery" id="stellarDelivery">&lt;!&ndash; 星品速递 &ndash;&gt;-->
-            <!--<div class="top">-->
-                <!--<h3>星品速递</h3>-->
-                <!--<p class="dec">明星同款 价格更亲民</p>-->
-            <!--</div>-->
-            <!--<div id="stellarDeliveryArticle">-->
-
-            <!--</div>-->
-            <!--<div class="go">更多<i class="arrow"></i></div>-->
-        <!--</div>-->
-        <!--<div class="quality-catcher" id="qualityCatcher">&lt;!&ndash; 品质捕手 &ndash;&gt;-->
-            <!--<div class="top">-->
-                <!--<h3>品质捕手</h3>-->
-                <!--<p class="dec">高颜值 好品质美物</p>-->
-            <!--</div>-->
-            <!--<div id="qualityCatcherArticle">-->
-
-            <!--</div>-->
-            <!--<div class="go">更多<i class="arrow"></i></div>-->
-        <!--</div>-->
-        <div class="global-world-wrap">
-            <!--<div class="global-world" id="globalWorld">&lt;!&ndash; 环球世界 &ndash;&gt;-->
-                <!--<h3>环球世界</h3>-->
-                <!--<div class="index-active" id="indexActiveTwo">  &lt;!&ndash; 广告位置二 &ndash;&gt;-->
-
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div id="nationalPavilion" class="national-pavilion">&lt;!&ndash; 国家馆 &ndash;&gt;-->
-                <!--<div class="swiper" id="nationalPavilionSwiper">-->
-                    <!--<div class="swiper-container">-->
-                        <!--<div class="swiper-wrapper"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="index-active" id="indexActiveThree">  &lt;!&ndash; 广告位置三 &ndash;&gt;-->
-
-            </div>
-            <div class="brand-house" id="brandHouse"> <!-- 品牌馆 -->
-                <div class="brands-hall">
-                    <div class="left">
-                        <p>品牌馆</p>
-                    </div>
-                    <div class="brands-swiper">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="navProdListWrapper"></div>
-	</section>
-	<div class="bottomnav iphoneX-fixed-b clearfix" id="partnerMenu">
-    	<a class="globalPurchaseBtn selected " href="/index.html">
-            <i class="icon iconfont">&#xe628;</i>
-            <div class="name">全球购</div>
-        </a>
-        <a class="activityListBtn" href="/classify.html">
-            <i class="icon iconfont"></i>
-            <div class="name">分类</div>
-        </a>
-        <a class="shopCartBtn" href="/cart.html">
-			<i class="icon iconfont">&#xe62a;</i>
-            <div class="name">购物车</div>
-            <p class="me-ri fs10" id="cart" style="display: none;">0</p>
-        </a>
-        <a class="userIndexBtn" href= "/user/index.html">
-            <i class="icon iconfont">&#xe62b;</i>
-            <div class="name">个人中心</div>
-        </a>
+            <label class="weui-search-bar__label" id="searchText"
+                   style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                <i class="weui-icon-search"></i>
+                <span>搜索您想要的商品</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
     </div>
-	<div class="bottomnav bottomnav5 clearfix iphoneX-fixed-b  dis-no" id="shopMenu">
-		<a class="globalPurchaseBtn selected " href="/index.html">
-            <i class="icon iconfont">&#xe628;</i>
-            <div class="name">全球购</div>
-        </a>
-        <a class="activityListBtn" href="/classify.html">
-            <i class="icon iconfont"></i>
-            <div class="name">分类</div>
-        </a>
-		 <a class="shopCartBtn" href="/busi/cart.html">
-            <i class="icon iconfont">&#xe62a;</i>
-            <div class="name">购物车</div>
-            <p class="cart-red-dot fs12 bgfff corf3 tac" style="display:none" id="cart1">0</p>
-        </a>
-        <a class="userIndexBtn" href="/index.html">
-            <i class="icon iconfont">&#xe62b;</i>
-            <div class="name">个人中心</div>
-        </a>
-       	<h1><em></em></h1>
-	</div>
-	<div class="the-light" style="display:none"></div>
-    <div class="return-top"><i class="icon iconfont">&#xe614;</i></div>
-	<div class="the-light"></div>
+</header>
+<!--主体-->
+<div class='weui-content'>
+    <!--顶部轮播-->
+    <div class="swiper-container swiper-banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><a href="pro_info.html"><img src="upload/ban1.jpg"/></a></div>
+            <div class="swiper-slide"><a href="pro_list.html"><img src="upload/ban2.jpg"/></a></div>
+            <div class="swiper-slide"><a href="pro_info.html"><img src="upload/ban3.jpg"/></a></div>
+            <div class="swiper-slide"><a href="pro_list.html"><img src="upload/ban4.jpg"/></a></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!--图标分类-->
+    <div class="weui-flex wy-iconlist-box">
+        <div class="weui-flex__item"><a href="pro_list.html" class="wy-links-iconlist">
+            <div class="img"><img src="images/icon-link1.png"></div>
+            <p>精选推荐</p></a></div>
+        <div class="weui-flex__item"><a href="pro_list.html" class="wy-links-iconlist">
+            <div class="img"><img src="images/icon-link2.png"></div>
+            <p>酒水专场</p></a></div>
+        <div class="weui-flex__item"><a href="all_orders.html" class="wy-links-iconlist">
+            <div class="img"><img src="images/icon-link3.png"></div>
+            <p>订单管理</p></a></div>
+        <div class="weui-flex__item"><a href="Settled_in.html" class="wy-links-iconlist">
+            <div class="img"><img src="images/icon-link4.png"></div>
+            <p>商家入驻</p></a></div>
+    </div>
+    <!--新闻切换-->
+    <div class="wy-ind-news">
+        <i class="news-icon-laba"></i>
+        <div class="swiper-container swiper-news">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a href="news_info.html">热烈祝贺伟义商城成功热烈祝贺伟义商城成功上线热烈祝贺伟义商城成功上线上线</a></div>
+                <div class="swiper-slide"><a href="news_info.html">蓝之蓝股份成公司上市</a></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <a href="news_list.html" class="newsmore"><i class="news-icon-more"></i></a>
+    </div>
+    <!--精选推荐-->
+    <div class="wy-Module">
+        <div class="wy-Module-tit"><span>精选推荐</span></div>
+        <div class="wy-Module-con">
+            <div class="swiper-container swiper-jingxuan" style="padding-top:34px;">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan1.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan2.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan3.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan4.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan5.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan1.jpg"/></a></div>
+                </div>
+                <div class="swiper-pagination jingxuan-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <!--酒水专场-->
+    <div class="wy-Module">
+        <div class="wy-Module-tit"><span>酒水推荐</span></div>
+        <div class="wy-Module-con">
+            <div class="swiper-container swiper-jiushui" style="padding-top:34px;">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan1.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan2.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan3.jpg"/></a></div>
+                    <div class="swiper-slide"><a href="pro_info.html"><img src="upload/jingxuan4.jpg"/></a></div>
+                </div>
+                <div class="swiper-pagination jingxuan-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <!--猜你喜欢-->
+    <div class="wy-Module">
+        <div class="wy-Module-tit-line"><span>猜你喜欢</span></div>
+        <div class="wy-Module-con">
+            <ul class="wy-pro-list clear">
+                <li>
+                    <a href="pro_info.html">
+                        <div class="proimg"><img src="upload/pro4.jpg"></div>
+                        <div class="protxt">
+                            <div class="name">洋河蓝色瓶装经典Q7浓香型白酒500ml52度高端纯粮食白酒2瓶装包邮</div>
+                            <div class="wy-pro-pri">¥<span>296.00</span></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="pro_info.html">
+                        <div class="proimg"><img src="upload/pro5.jpg"></div>
+                        <div class="protxt">
+                            <div class="name">洋河蓝色瓶装经典Q7浓香型白酒500ml52度高端纯粮食白酒2瓶装包邮</div>
+                            <div class="wy-pro-pri">¥<span>296.00</span></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="pro_info.html">
+                        <div class="proimg"><img src="upload/pro1.jpg"></div>
+                        <div class="protxt">
+                            <div class="name">洋河蓝色瓶装经典Q7浓香型白酒500ml52度高端纯粮食白酒2瓶装包邮</div>
+                            <div class="wy-pro-pri">¥<span>296.00</span></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="morelinks"><a href="pro_list.html">查看更多 >></a></div>
+        </div>
+    </div>
+</div>
+
+
+<!--底部导航-->
+<div class="foot-black"></div>
+<div class="weui-tabbar wy-foot-menu">
+    <a href="index.html" class="weui-tabbar__item weui-bar__item--on">
+        <div class="weui-tabbar__icon foot-menu-home"></div>
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a href="classify.html" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon foot-menu-list"></div>
+        <p class="weui-tabbar__label">分类</p>
+    </a>
+    <a href="shopcart.html" class="weui-tabbar__item">
+        <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+        <div class="weui-tabbar__icon foot-menu-cart"></div>
+        <p class="weui-tabbar__label">购物车</p>
+    </a>
+    <a href="mine.html" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon foot-menu-member"></div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+
+<script src="lib/jquery-2.1.4.js"></script>
+<script src="lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="js/jquery-weui.js"></script>
+<script src="js/swiper.js"></script>
+<script>
+    $(".swiper-banner").swiper({
+        loop: true,
+        autoplay: 3000
+    });
+    $(".swiper-news").swiper({
+        loop: true,
+        direction: 'vertical',
+        paginationHide: true,
+        autoplay: 30000
+    });
+    $(".swiper-jingxuan").swiper({
+        pagination: '.swiper-pagination',
+        loop: true,
+        paginationType: 'fraction',
+        slidesPerView: 3,
+        paginationClickable: true,
+        spaceBetween: 2
+    });
+    $(".swiper-jiushui").swiper({
+        pagination: '.swiper-pagination',
+        paginationType: 'fraction',
+        loop: true,
+        slidesPerView: 3,
+        slidesPerColumn: 2,
+        paginationClickable: true,
+        spaceBetween: 2
+    });
+</script>
 </body>
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="/js/swiper-4.2.6.min.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
-<script src="js/config.js"></script>
-<script>document.write("<script type='text/javascript' src=js/common.js?v=" + Date.now() + "'><\/script>");</script>
-<script src="/js/cart.js?__inline"></script>
-<script>document.write("<script type='text/javascript' src='/js/pluginNavProdList.js?v=" + Date.now() + "'><\/script>");</script>
-<script>document.write("<script type='text/javascript' src='/js/index.js?v=" + Date.now() + "'><\/script>");</script>
-<script src="/js/loginPlugin.js" ></script>
-<script src="/js/coupon.js"></script>
-<script src="/js/utils.js"></script>
 </html>

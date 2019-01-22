@@ -27,5 +27,7 @@ public class Response<T> {
     /**
      * 响应码
      */
-    private int code = 0;
+    private int code = 200;
+
+    private boolean success = true;
 }
