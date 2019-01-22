@@ -28,6 +28,20 @@ var setSessionStorage = function (key, value) {
     }
 };
 
+var getCookie = function (Name) {
+    var search = Name + "="
+    if (document.cookie.length > 0) {
+        offset = document.cookie.indexOf(search)
+        if (offset != -1) {
+            offset += search.length
+            end = document.cookie.indexOf(";", offset)
+            if (end == -1) end = document.cookie.length
+            return unescape(document.cookie.substring(offset, end))
+        }
+        else return ""
+    }
+}
+
 var setCookie = function (name, value) {
     var argv = setCookie.arguments;
     var argc = setCookie.arguments.length;
@@ -37,6 +51,12 @@ var setCookie = function (name, value) {
         LargeExpDate.setTime(LargeExpDate.getTime() + (expires * 1000 * 3600 * 24));
     }
     document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + LargeExpDate.toGMTString())) + "; path=/";
+}
+
+var deleteCookie = function (name) {
+    var expdate = new Date();
+    expdate.setTime(expdate.getTime() - (86400 * 1000 * 1));
+    setCookie(name, "", expdate);
 }
 
 /*****************************************************************
