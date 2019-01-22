@@ -4,38 +4,46 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.order.entity.Order">
-        <id column="order_id" property="orderId" />
-        <result column="uid" property="uid" />
-        <result column="create_time" property="createTime" />
-        <result column="total_price" property="totalPrice" />
-        <result column="consign_idno" property="consignIdno" />
-        <result column="consignee" property="consignee" />
-        <result column="consign_phone" property="consignPhone" />
-        <result column="consign_addr" property="consignAddr" />
-        <result column="status" property="status" />
-        <result column="return_status" property="returnStatus" />
-        <result column="return_time" property="returnTime" />
-        <result column="return_amount" property="returnAmount" />
-        <result column="send_status" property="sendStatus" />
-        <result column="cancel_reason" property="cancelReason" />
-        <result column="consign_country" property="consignCountry" />
-        <result column="consign_province" property="consignProvince" />
-        <result column="consign_city" property="consignCity" />
-        <result column="pay_type" property="payType" />
-        <result column="tranno" property="tranno" />
-        <result column="uaccount" property="uaccount" />
-        <result column="src" property="src" />
-        <result column="op_uid" property="opUid" />
-        <result column="pay_time" property="payTime" />
-        <result column="send_time" property="sendTime" />
-        <result column="distribute_time" property="distributeTime" />
-        <result column="done_time" property="doneTime" />
-        <result column="last_update_time" property="lastUpdateTime" />
+        <id column="order_id" property="orderId"/>
+        <result column="uid" property="uid"/>
+        <result column="create_time" property="createTime"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="consign_idno" property="consignIdno"/>
+        <result column="consignee" property="consignee"/>
+        <result column="consign_phone" property="consignPhone"/>
+        <result column="consign_addr" property="consignAddr"/>
+        <result column="status" property="status"/>
+        <result column="return_status" property="returnStatus"/>
+        <result column="return_time" property="returnTime"/>
+        <result column="return_amount" property="returnAmount"/>
+        <result column="send_status" property="sendStatus"/>
+        <result column="cancel_reason" property="cancelReason"/>
+        <result column="consign_country" property="consignCountry"/>
+        <result column="consign_province" property="consignProvince"/>
+        <result column="consign_city" property="consignCity"/>
+        <result column="pay_type" property="payType"/>
+        <result column="tranno" property="tranno"/>
+        <result column="uaccount" property="uaccount"/>
+        <result column="src" property="src"/>
+        <result column="op_uid" property="opUid"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="distribute_time" property="distributeTime"/>
+        <result column="done_time" property="doneTime"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         order_id, uid, create_time, total_price, consign_idno, consignee, consign_phone, consign_addr, status, return_status, return_time, return_amount, send_status, cancel_reason, consign_country, consign_province, consign_city, pay_type, tranno, uaccount, src, op_uid, pay_time, send_time, distribute_time, done_time, last_update_time
     </sql>
+
+
+    <select id="getOrderCountByStatus" resultType="cn.liuyiyou.shop.order.dto.OrderCountDto">
+        select status, count(1) as count
+        from order
+        where uid = #{uid}
+        group by status
+    </select>
 
 </mapper>

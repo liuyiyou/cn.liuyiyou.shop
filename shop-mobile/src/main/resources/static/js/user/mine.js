@@ -10,6 +10,8 @@ $(document).ready(function () {
         contentType: "application/json",
         success: function (data) {
             if (data.success) {
+                var data = data.data;
+                $("#nickname").text(data.nickname);
             }
         },
         error: function (data) {

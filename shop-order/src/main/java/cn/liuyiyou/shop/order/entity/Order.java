@@ -1,15 +1,15 @@
 package cn.liuyiyou.shop.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -393,33 +393,33 @@ public class Order extends Model<Order> {
     @Override
     public String toString() {
         return "Order{" +
-        ", orderId=" + orderId +
-        ", uid=" + uid +
-        ", createTime=" + createTime +
-        ", totalPrice=" + totalPrice +
-        ", consignIdno=" + consignIdno +
-        ", consignee=" + consignee +
-        ", consignPhone=" + consignPhone +
-        ", consignAddr=" + consignAddr +
-        ", status=" + status +
-        ", returnStatus=" + returnStatus +
-        ", returnTime=" + returnTime +
-        ", returnAmount=" + returnAmount +
-        ", sendStatus=" + sendStatus +
-        ", cancelReason=" + cancelReason +
-        ", consignCountry=" + consignCountry +
-        ", consignProvince=" + consignProvince +
-        ", consignCity=" + consignCity +
-        ", payType=" + payType +
-        ", tranno=" + tranno +
-        ", uaccount=" + uaccount +
-        ", src=" + src +
-        ", opUid=" + opUid +
-        ", payTime=" + payTime +
-        ", sendTime=" + sendTime +
-        ", distributeTime=" + distributeTime +
-        ", doneTime=" + doneTime +
-        ", lastUpdateTime=" + lastUpdateTime +
-        "}";
+                ", orderId=" + orderId +
+                ", uid=" + uid +
+                ", createTime=" + createTime +
+                ", totalPrice=" + totalPrice +
+                ", consignIdno=" + consignIdno +
+                ", consignee=" + consignee +
+                ", consignPhone=" + consignPhone +
+                ", consignAddr=" + consignAddr +
+                ", status=" + status +
+                ", returnStatus=" + returnStatus +
+                ", returnTime=" + returnTime +
+                ", returnAmount=" + returnAmount +
+                ", sendStatus=" + sendStatus +
+                ", cancelReason=" + cancelReason +
+                ", consignCountry=" + consignCountry +
+                ", consignProvince=" + consignProvince +
+                ", consignCity=" + consignCity +
+                ", payType=" + payType +
+                ", tranno=" + tranno +
+                ", uaccount=" + uaccount +
+                ", src=" + src +
+                ", opUid=" + opUid +
+                ", payTime=" + payTime +
+                ", sendTime=" + sendTime +
+                ", distributeTime=" + distributeTime +
+                ", doneTime=" + doneTime +
+                ", lastUpdateTime=" + lastUpdateTime +
+                "}";
     }
 }
