@@ -62,7 +62,7 @@ public class GeneratorServiceEntity {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         //strategy.setTablePrefix(new String[] { "SYS_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"user"}); // 需要生成的表
+        strategy.setInclude(new String[]{"user_delivery"}); // 需要生成的表
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setLogicDeleteFieldName("deleted");

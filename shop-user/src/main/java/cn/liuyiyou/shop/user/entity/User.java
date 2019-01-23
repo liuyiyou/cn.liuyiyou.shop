@@ -55,11 +55,6 @@ public class User implements Serializable {
     @TableField("create_time")
     private LocalDateTime createTime;
     /**
-     * 注册渠道：1 PC web, 2 Android app, 3 iOS app， 4 微信
-     */
-    @TableField("create_channel")
-    private Integer createChannel;
-    /**
      * 上一次登录时间
      */
     @TableField("last_time")
@@ -79,33 +74,6 @@ public class User implements Serializable {
      */
     private Integer status;
     /**
-     * 用户类型，1-C端用户；2-B端用户；3-都是
-     */
-    @TableField("user_type")
-    private Integer userType;
-    /**
-     * 用户注册邀请码
-     */
-    @TableField("inv_code")
-    private String invCode;
-    /**
-     * 新规则用户注册邀请码, 20180313后以此字段为准, 保留的invcode只是为了兼容以往分享出去的旧规则邀请码
-     */
-    @TableField("inv_code_new")
-    private String invCodeNew;
-    /**
-     * 推广来源：1-菜先鲜
-     */
-    private Integer src;
-    /**
-     * 营销渠道来源，对应ibalife_report.report_from
-     */
-    private Integer ditch;
-    /**
-     * 用户是否消费
-     */
-    private Boolean consume;
-    /**
      * 头像
      */
     private String headimg;
@@ -118,25 +86,10 @@ public class User implements Serializable {
      */
     private Integer gender;
     /**
-     * 活动类型，1--店主拉新
-     */
-    @TableField("act_type")
-    private Integer actType;
-    /**
-     * 注册至erp对应的customerId
-     */
-    @TableField("customer_id")
-    private String customerId;
-    /**
      * 最后更新时间
      */
     @TableField("last_update")
     private LocalDateTime lastUpdate;
-    /**
-     * 第三方渠道活动的渠道
-     */
-    @TableField("third_party_channel")
-    private Long thirdPartyChannel;
 
 
 }
