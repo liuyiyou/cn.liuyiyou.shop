@@ -1,7 +1,6 @@
 $(document).ready(function () {
     //加载地址列表
-   // loadAddress();
-    loadAddressTempl();
+    loadAddress();
     saveAddr();
 });
 
@@ -16,10 +15,6 @@ function saveAddr() {
     });
 }
 
-function loadAddressTempl() {
-
-}
-
 function loadAddress() {
     var url = USER_BASE_URL + "/user/delivery/list";
     $.ajax({
@@ -32,23 +27,22 @@ function loadAddress() {
         contentType: "application/json",
         success: function (data) {
             if (data.success) {
-                var data = data.data;
-                console.info(data);
-                var addrlist = '';
-                data.forEach(function (item, index) {
-                    addrlist += '<div class="weui-panel__bd">';
-                    addrlist += '<div class="weui-media-box weui-media-box_text address-list-box">';
-                    addrlist += '<a href="address_edit.html" class="address-edit"></a>';
-                    addrlist += '<h4 class="weui-media-box__title"><span>' + item.consignee + '</span><span>' + item.consignTel + '</span></h4>';
-                    var address = JSON.parse(item.consignAddr);
-                    addrlist += '<p class="weui-media-box__desc address-txt">' + address.prov + address.city + address.county + address.addr + '</p>';
-                    if (data.oversea == 1) {
-                        addrlist += '<span class="default-add">默认地址</span>';
+                var addrlist = new Array();
+                var address = {};
+                var addrList = data.data;
+                addrList.forEach(function (item, index) {
+                    if (item.oversea == 1) {
+                        address.default = true;
                     }
-                    addrlist += '</div>';
-                    addrlist += '</div>';
-                })
-                $("#addrlist").html(addrlist);
+                    address.consignee = item.consignee;
+                    address.consigneeTel = item.consignTel;
+                    var detail = JSON.parse(item.consignAddr);
+                    address.detail = detail.prov + detail.city + detail.county + detail.addr;
+                    addrlist.push(address);
+                });
+                console.info(addrlist);
+                var html = template("addrlist", {"addrlist": addrlist});
+                document.getElementById('address').innerHTML = html;
             }
         },
         error: function (data) {

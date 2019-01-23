@@ -19,22 +19,13 @@
     <div class="wy-header-title">地址管理</div>
 </header>
 <div class="weui-content">
-    <div class="weui-panel address-box">
-        <div class="weui-panel__bd">
-            <script id="tpl-addresslist" type="text/html">
-                <div class="weui-media-box weui-media-box_text address-list-box">
-                    <a href="address_edit.html" class="address-edit"></a>
-                    <h4 class="weui-media-box__title"><span>{{}}</span><span>{{}}</span></h4>
-                    <p class="weui-media-box__desc address-txt">{{}}</p>
-                </div>
-            </script>
-        </div>
-    </div>
-    <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="address_edit.html" id="showTooltips">添加收货地址</a>
+    <div class="weui-panel address-box" id="address">
     </div>
 </div>
-
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="address_edit.html" id="showTooltips">添加收货地址</a>
+</div>
+</div>
 <script src="lib/jquery-2.1.4.js"></script>
 <script src="lib/fastclick.js"></script>
 <script type="text/javascript" src="js/jquery.Spinner.js"></script>
@@ -48,5 +39,20 @@
 <script src="js/constant.js"></script>
 <script src="js/user/address.js?v=2"></script>
 <script src="lib/template-web.js"></script>
+<!--https://www.cnblogs.com/chrischan/p/6909706.html-->
+<script type="text/html" id="addrlist">
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text address-list-box">
+            <a href="address_edit.html" class="address-edit"></a>
+            {{each addrlist}}
+            <h4 class="weui-media-box__title"><span>{{$value.consignee}}</span><span>{{$value.consigneeTel}}</span></h4>
+            <p class="weui-media-box__desc address-txt">{{$value.detail}}</p>
+            {{if $value.default}}
+            <span class="default-add">默认地址</span>
+            {{/if}}
+            {{/each}}
+        </div>
+    </div>
+</script>
 </body>
 </html>

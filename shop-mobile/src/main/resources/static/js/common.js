@@ -1,3 +1,8 @@
+$.ready(function () {
+
+
+});
+
 function commonGoBack() {
     navigator.userAgent.indexOf("MSIE") >= 0 && navigator.userAgent.indexOf("Opera") < 0 ? "" === document.referrer ? gotoPageUrl("/") : historyGo() : (navigator.userAgent.indexOf("Firefox") >= 0 || navigator.userAgent.indexOf("Opera") >= 0 || navigator.userAgent.indexOf("Safari") >= 0 || navigator.userAgent.indexOf("Chrome") >= 0 || navigator.userAgent.indexOf("WebKit") >= 0) && "" === document.referrer ? (window.opener = null,
         gotoPageUrl("/")) : historyGo(),
