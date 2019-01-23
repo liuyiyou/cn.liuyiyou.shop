@@ -1,10 +1,15 @@
 package cn.liuyiyou.shop.user.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -12,16 +17,19 @@ import java.io.Serializable;
  * </p>
  *
  * @author liuyiyou.cn
- * @since 2018-11-12
+ * @since 2019-01-23
  */
-public class User extends Model<User> {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 会员ID由系统自动按注册时间顺序生成
      */
-    @TableId("uid")
+    @TableId(value = "uid", type = IdType.AUTO)
     private Integer uid;
     /**
      * 账号(电话号码)
@@ -131,239 +139,4 @@ public class User extends Model<User> {
     private Long thirdPartyChannel;
 
 
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getCreateChannel() {
-        return createChannel;
-    }
-
-    public void setCreateChannel(Integer createChannel) {
-        this.createChannel = createChannel;
-    }
-
-    public LocalDateTime getLastTime() {
-        return lastTime;
-    }
-
-    public void setLastTime(LocalDateTime lastTime) {
-        this.lastTime = lastTime;
-    }
-
-    public Integer getLastChannel() {
-        return lastChannel;
-    }
-
-    public void setLastChannel(Integer lastChannel) {
-        this.lastChannel = lastChannel;
-    }
-
-    public String getLastIp() {
-        return lastIp;
-    }
-
-    public void setLastIp(String lastIp) {
-        this.lastIp = lastIp;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-
-    public String getInvCode() {
-        return invCode;
-    }
-
-    public void setInvCode(String invCode) {
-        this.invCode = invCode;
-    }
-
-    public String getInvCodeNew() {
-        return invCodeNew;
-    }
-
-    public void setInvCodeNew(String invCodeNew) {
-        this.invCodeNew = invCodeNew;
-    }
-
-    public Integer getSrc() {
-        return src;
-    }
-
-    public void setSrc(Integer src) {
-        this.src = src;
-    }
-
-    public Integer getDitch() {
-        return ditch;
-    }
-
-    public void setDitch(Integer ditch) {
-        this.ditch = ditch;
-    }
-
-    public Boolean getConsume() {
-        return consume;
-    }
-
-    public void setConsume(Boolean consume) {
-        this.consume = consume;
-    }
-
-    public String getHeadimg() {
-        return headimg;
-    }
-
-    public void setHeadimg(String headimg) {
-        this.headimg = headimg;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    public Integer getActType() {
-        return actType;
-    }
-
-    public void setActType(Integer actType) {
-        this.actType = actType;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public Long getThirdPartyChannel() {
-        return thirdPartyChannel;
-    }
-
-    public void setThirdPartyChannel(Long thirdPartyChannel) {
-        this.thirdPartyChannel = thirdPartyChannel;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.uid;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-        ", uid=" + uid +
-        ", account=" + account +
-        ", realName=" + realName +
-        ", nickname=" + nickname +
-        ", passwd=" + passwd +
-        ", email=" + email +
-        ", createTime=" + createTime +
-        ", createChannel=" + createChannel +
-        ", lastTime=" + lastTime +
-        ", lastChannel=" + lastChannel +
-        ", lastIp=" + lastIp +
-        ", status=" + status +
-        ", userType=" + userType +
-        ", invCode=" + invCode +
-        ", invCodeNew=" + invCodeNew +
-        ", src=" + src +
-        ", ditch=" + ditch +
-        ", consume=" + consume +
-        ", headimg=" + headimg +
-        ", birthday=" + birthday +
-        ", gender=" + gender +
-        ", actType=" + actType +
-        ", customerId=" + customerId +
-        ", lastUpdate=" + lastUpdate +
-        ", thirdPartyChannel=" + thirdPartyChannel +
-        "}";
-    }
 }

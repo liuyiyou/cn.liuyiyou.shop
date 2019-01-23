@@ -10,14 +10,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author liuyiyou.cn
- * @since 2018-11-12
+ * @since 2019-01-23
  */
 public interface IUserService extends IService<User> {
 
-    /**
-     * 登陆返回token
-     * @param loginVo
-     * @return
-     */
     String login(LoginVo loginVo);
 }

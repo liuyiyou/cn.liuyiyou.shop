@@ -11,12 +11,13 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.baomidou.mybatisplus.annotation.IdType.AUTO;
 
 /**
  * @author: liuyiyou@yanglaoban.com
@@ -33,7 +34,8 @@ public class GeneratorServiceEntity {
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-user\\src\\main\\java");
         gc.setFileOverride(true);
-        gc.setActiveRecord(true);
+        gc.setActiveRecord(false);
+        gc.setIdType(AUTO);
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(true);// XML columList
@@ -42,7 +44,7 @@ public class GeneratorServiceEntity {
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         gc.setServiceName("I%sService");
-        gc.setServiceImplName("%sServiceImpl");
+        gc.setServiceImplName("%sService");
         gc.setControllerName("%sController");
         mpg.setGlobalConfig(gc);
 
@@ -60,14 +62,16 @@ public class GeneratorServiceEntity {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         //strategy.setTablePrefix(new String[] { "SYS_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"user_delivery"}); // 需要生成的表
+        strategy.setInclude(new String[]{"user"}); // 需要生成的表
+        strategy.setEntityLombokModel(true);
+        strategy.setRestControllerStyle(true);
+        strategy.setLogicDeleteFieldName("deleted");
         //strategy.setExclude(new String[]{"test"}); // 排除生成的表
         mpg.setStrategy(strategy);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("cn.liuyiyou.shop.user");
-        // pc.setModuleName("tbldept");//模块名称，单独生成模块时使用！！！！！！！！！！！
         pc.setController("controller");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
@@ -105,47 +109,4 @@ public class GeneratorServiceEntity {
         mpg.execute();
     }
 
-    @Test
-    public void generateCode() {
-        String packageName = "cn.liuyiyou.shop.prod";
-        boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "prod");
-    }
-
-    private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
-        GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/shop-prod";
-        DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setDbType(DbType.MYSQL)
-                .setUrl(dbUrl)
-                .setUsername("root")
-                .setPassword("123456")
-                .setDriverName("com.mysql.jdbc.Driver");
-        StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig
-                .setCapitalMode(true)
-                .setEntityLombokModel(true)
-                .setDbColumnUnderline(true)
-                .setNaming(NamingStrategy.underline_to_camel)
-                .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
-        config.setActiveRecord(false)
-                .setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-prod\\src\\main\\java")
-                .setFileOverride(true);
-        if (!serviceNameStartWithI) {
-            config.setServiceName("%sService");
-        }
-        config.setAuthor("liuyiyou@yanglaoban.com");
-        new AutoGenerator().setGlobalConfig(config)
-                .setDataSource(dataSourceConfig)
-                .setStrategy(strategyConfig)
-                .setPackageInfo(new PackageConfig()
-                                .setParent(packageName)
-//                                .setController("controller")
-                                .setEntity("entity")
-                ).execute();
-    }
-
-    private void generateByTables(String packageName, String... tableNames) {
-        generateByTables(true, packageName, tableNames);
-    }
 }

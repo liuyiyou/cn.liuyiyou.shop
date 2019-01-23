@@ -2,11 +2,14 @@ package cn.liuyiyou.shop.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -16,8 +19,11 @@ import java.io.Serializable;
  * @author liuyiyou.cn
  * @since 2019-01-23
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("user_delivery")
-public class UserDelivery extends Model<UserDelivery> {
+public class UserDelivery implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -77,122 +83,4 @@ public class UserDelivery extends Model<UserDelivery> {
     private Long consignId;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getConsignee() {
-        return consignee;
-    }
-
-    public void setConsignee(String consignee) {
-        this.consignee = consignee;
-    }
-
-    public String getConsignTel() {
-        return consignTel;
-    }
-
-    public void setConsignTel(String consignTel) {
-        this.consignTel = consignTel;
-    }
-
-    public String getConsignIdno() {
-        return consignIdno;
-    }
-
-    public void setConsignIdno(String consignIdno) {
-        this.consignIdno = consignIdno;
-    }
-
-    public Integer getConsignCounty() {
-        return consignCounty;
-    }
-
-    public void setConsignCounty(Integer consignCounty) {
-        this.consignCounty = consignCounty;
-    }
-
-    public Integer getConsignProvince() {
-        return consignProvince;
-    }
-
-    public void setConsignProvince(Integer consignProvince) {
-        this.consignProvince = consignProvince;
-    }
-
-    public Integer getConsignCity() {
-        return consignCity;
-    }
-
-    public void setConsignCity(Integer consignCity) {
-        this.consignCity = consignCity;
-    }
-
-    public Integer getOversea() {
-        return oversea;
-    }
-
-    public void setOversea(Integer oversea) {
-        this.oversea = oversea;
-    }
-
-    public String getConsignAddr() {
-        return consignAddr;
-    }
-
-    public void setConsignAddr(String consignAddr) {
-        this.consignAddr = consignAddr;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getConsignId() {
-        return consignId;
-    }
-
-    public void setConsignId(Long consignId) {
-        this.consignId = consignId;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDelivery{" +
-        ", id=" + id +
-        ", uid=" + uid +
-        ", consignee=" + consignee +
-        ", consignTel=" + consignTel +
-        ", consignIdno=" + consignIdno +
-        ", consignCounty=" + consignCounty +
-        ", consignProvince=" + consignProvince +
-        ", consignCity=" + consignCity +
-        ", oversea=" + oversea +
-        ", consignAddr=" + consignAddr +
-        ", createTime=" + createTime +
-        ", consignId=" + consignId +
-        "}";
-    }
 }

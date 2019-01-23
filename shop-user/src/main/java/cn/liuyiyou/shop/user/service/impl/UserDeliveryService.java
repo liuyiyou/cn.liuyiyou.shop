@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2019-01-23
  */
 @Service
-public class UserDeliveryServiceImpl extends ServiceImpl<UserDeliveryMapper, UserDelivery> implements IUserDeliveryService {
+public class UserDeliveryService extends ServiceImpl<UserDeliveryMapper, UserDelivery> implements IUserDeliveryService {
 
 }

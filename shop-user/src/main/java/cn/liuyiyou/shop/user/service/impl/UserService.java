@@ -19,14 +19,14 @@ import static org.apache.tomcat.util.codec.binary.Base64.decodeBase64;
 
 /**
  * <p>
- * 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author liuyiyou.cn
- * @since 2018-11-12
+ * @since 2019-01-23
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserService extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -52,6 +52,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         sb.append(new String(Base64.encodeBase64(timeStamp.getBytes())));
         return sb.toString();
     }
-
 
 }
