@@ -15,11 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static org.apache.tomcat.util.codec.binary.Base64.decodeBase64;
-
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author liuyiyou.cn
@@ -33,11 +31,8 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IUserS
 
     @Override
     public String login(LoginVo loginVo) {
-        LambdaQueryWrapper<User> skuWrapper = new QueryWrapper<User>()
-                .lambda()
-                .select()
-                .eq(User::getAccount, new String(decodeBase64(loginVo.getAccount().getBytes())));
-        User user = userMapper.selectOne(skuWrapper);
+        QueryWrapper<User> wrapper = new QueryWrapper<User>().eq("account", "15211062909");
+        User user = userMapper.selectOne(wrapper);
         Optional.ofNullable(user).orElseThrow(() -> new RuntimeException("账号或密码不正确"));
         return getLoginTrackId(user);
     }

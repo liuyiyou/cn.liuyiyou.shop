@@ -25,6 +25,14 @@ public interface IOrderService extends IService<Order> {
     OrderCountRespVo orderCount(int uid);
 
 
-    IPage<Order> orderPage(int uid);
+    /**
+     * 用户订单列表
+     *
+     * @param uid
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    IPage<Order> orderPage(int uid, int pageNum, int pageSize);
 
 }

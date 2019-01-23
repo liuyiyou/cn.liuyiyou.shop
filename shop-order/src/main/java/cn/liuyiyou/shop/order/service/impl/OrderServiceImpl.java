@@ -5,7 +5,9 @@ import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.mapper.OrderMapper;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private OrderMapper orderMapper;
 
     @Override
-    public IPage<Order> orderPage(int uid) {
-        return null;
+    public IPage<Order> orderPage(int uid,int pageNum,int pageSize) {
+        Page page = new Page(pageNum,pageSize);
+        IPage pageResult = this.page(page, new QueryWrapper<Order>().eq("uid", uid));
+        return pageResult;
     }
 
     @Override

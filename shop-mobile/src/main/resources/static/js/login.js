@@ -1,4 +1,4 @@
-$("#loginBtn").click(function () {
+$("#showTooltips").click(function () {
     var account = $("#account").val();
     var password = $("#password").val();
     var params = JSON.stringify({"account": account, "password": password});
@@ -10,7 +10,7 @@ $("#loginBtn").click(function () {
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
-            if(data.success){
+            if (data.success) {
                 setSessionStorage("trackId", data.data);
                 gotoPageUrl("/index.html");
             }

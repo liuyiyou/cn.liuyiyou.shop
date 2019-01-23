@@ -17,9 +17,6 @@ public class Response {
         return new Result<T>().setCode(ResultCode.SUCCESS).setMsg(SUCCESS_MSG).setSuccess(true);
     }
 
-    public static <T> Result<T> success(String msg) {
-        return new Result<T>().setCode(ResultCode.SUCCESS).setMsg(msg).setSuccess(true);
-    }
 
     public static <T> Result<T> success(T data) {
         return new Result<T>().setCode(ResultCode.SUCCESS).setMsg(SUCCESS_MSG).setSuccess(true).setData(data);

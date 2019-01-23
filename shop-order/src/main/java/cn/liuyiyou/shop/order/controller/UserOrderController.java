@@ -23,7 +23,7 @@ import static cn.liuyiyou.shop.common.web.BaseController.getUid;
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Slf4j
-@Api(description = "用户订单地址管理")
+@Api(description = "用户订单管理")
 @RestController
 @RequestMapping("/user/order")
 public class UserOrderController {
@@ -35,6 +35,15 @@ public class UserOrderController {
     @GetMapping("/count")
     public Result<OrderCountRespVo> orderCount(HttpServletRequest request) {
         Integer uid = getUid(request);
+        return Response.success(orderService.orderCount(uid));
+    }
+
+
+    @ApiOperation(value = "分页订单列表")
+    @GetMapping("/list")
+    public Result<OrderCountRespVo> list(HttpServletRequest request) {
+        Integer uid = getUid(request);
+        orderService.orderPage(uid, 1, 10);
         return Response.success(orderService.orderCount(uid));
     }
 }

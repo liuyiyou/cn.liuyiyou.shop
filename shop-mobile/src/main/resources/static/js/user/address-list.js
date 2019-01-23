@@ -1,24 +1,12 @@
 $(document).ready(function () {
     //加载地址列表
     loadAddress();
-    saveAddr();
 });
-
-function saveAddr() {
-    $("#saveAddress").bind('click', function () {
-        var deliverId = getQueryStr("id");
-        console.info(deliverId)
-        if (deliverId == 'undefined') {
-        } else {
-
-        }
-    });
-}
 
 function loadAddress() {
     var url = USER_BASE_URL + "/user/delivery/list";
     $.ajax({
-        type: "get",
+        type: "post",
         beforeSend: function (request) {
             request.setRequestHeader("trackId", getSessionStorage("trackId"));
         },
@@ -38,6 +26,8 @@ function loadAddress() {
                     address.consigneeTel = item.consignTel;
                     var detail = JSON.parse(item.consignAddr);
                     address.detail = detail.prov + detail.city + detail.county + detail.addr;
+                    address.id = item.id;
+                    address.uid = item.uid;
                     addrlist.push(address);
                 });
                 console.info(addrlist);

@@ -78,7 +78,7 @@ public class UserDeliveryController {
 
 
     @ApiOperation(value = "删除收货地址")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Result<Boolean> delete(@PathVariable("id") Long id, HttpServletRequest request) {
         Integer uid = getUid(request);
         UserDelivery userDelivery = userDeliveryService.getById(id);

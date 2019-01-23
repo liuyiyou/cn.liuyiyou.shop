@@ -37,14 +37,14 @@
 <script src="js/jquery-weui.js"></script>
 <script src="js/common.js?v=2"></script>
 <script src="js/constant.js"></script>
-<script src="js/user/address.js?v=2"></script>
+<script src="js/user/address-list.js"></script>
 <script src="lib/template-web.js"></script>
 <!--https://www.cnblogs.com/chrischan/p/6909706.html-->
 <script type="text/html" id="addrlist">
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_text address-list-box">
-            <a href="address_edit.html" class="address-edit"></a>
             {{each addrlist}}
+            <a href="address_edit.html?id={{$value.id}}" class="address-edit"></a>
             <h4 class="weui-media-box__title"><span>{{$value.consignee}}</span><span>{{$value.consigneeTel}}</span></h4>
             <p class="weui-media-box__desc address-txt">{{$value.detail}}</p>
             {{if $value.defaultAddr}}
