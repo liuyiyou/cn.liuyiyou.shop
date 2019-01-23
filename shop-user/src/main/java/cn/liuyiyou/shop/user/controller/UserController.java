@@ -53,7 +53,7 @@ public class UserController extends BaseController {
 
     @GetMapping("/get")
     public Result get(HttpServletRequest request) {
-        String uid = getUid(request);
+        Integer uid = getUid(request);
         Optional.ofNullable(uid).orElseThrow(() -> new RuntimeException("未登陆"));
         return Response.success(userService.getById(Integer.valueOf(uid)));
     }

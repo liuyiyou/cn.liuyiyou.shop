@@ -49,13 +49,15 @@ public class BaseController {
         jobj.put("message", msg);
         return jobj;
     }
-    public static String getUid(HttpServletRequest request) {
+
+    public static Integer getUid(HttpServletRequest request) {
         String trackId = request.getHeader("trackId");
         if (StringUtil.isNotEmptyString(trackId)) {
             String[] trackSplites = trackId.split(TRACK_ID_SPLIT_SIGN);
             if (trackSplites != null && trackSplites.length == 3) {
                 try {
-                    return new String(StringUtil.decodeBase64(trackSplites[1]), Charset.defaultCharset());
+                    String s = new String(StringUtil.decodeBase64(trackSplites[1]), Charset.defaultCharset());
+                    return Integer.valueOf(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
