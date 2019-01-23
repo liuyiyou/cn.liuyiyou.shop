@@ -1,17 +1,10 @@
 package cn.liuyiyou.shop.order.controller;
 
 
-import cn.liuyiyou.shop.common.resp.Response;
 import cn.liuyiyou.shop.order.busi.IOrderManager;
-import cn.liuyiyou.shop.order.vo.SubmitVo;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,23 +23,23 @@ public class OrderController {
     @Autowired
     private IOrderManager orderManager;
 
-    @PostMapping("/addOrderNoTransaction")
-    public Response addOrderNoTransaction(@RequestBody SubmitVo submitVo) {
-        orderManager.addOrderNoTransaction(submitVo);
-        return Response.builder().data("success").build();
-    }
-
-    @PostMapping("/addOrderTransactionUseLocalMessage")
-    public Response addOrderTransactionUseLocalMessage(@RequestBody SubmitVo submitVo) {
-        orderManager.addOrderTransactionUseLocalMessage(submitVo);
-        return Response.builder().data("success").build();
-    }
-
-    @GetMapping("/list")
-    public Response  list(@RequestParam(value = "reqBody") String reqBody){
-        JSONObject json = JSONObject.parseObject(reqBody);
-        return Response.builder().data(orderManager.getMyOrder(json)).build();
-    }
+//    @PostMapping("/addOrderNoTransaction")
+//    public Response addOrderNoTransaction(@RequestBody SubmitVo submitVo) {
+//        orderManager.addOrderNoTransaction(submitVo);
+//        return Response.builder().data("success").build();
+//    }
+//
+//    @PostMapping("/addOrderTransactionUseLocalMessage")
+//    public Response addOrderTransactionUseLocalMessage(@RequestBody SubmitVo submitVo) {
+//        orderManager.addOrderTransactionUseLocalMessage(submitVo);
+//        return Response.builder().data("success").build();
+//    }
+//
+//    @GetMapping("/list")
+//    public Response  list(@RequestParam(value = "reqBody") String reqBody){
+//        JSONObject json = JSONObject.parseObject(reqBody);
+//        return Response.builder().data(orderManager.getMyOrder(json)).build();
+//    }
 
 }
 

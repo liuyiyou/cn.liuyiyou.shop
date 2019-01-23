@@ -1,7 +1,8 @@
 package cn.liuyiyou.shop.prod.controller;
 
 
-import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.service.IProdService;
@@ -34,9 +35,9 @@ public class ProdController extends BaseController {
     private IProdService prodService;
 
     @GetMapping("{id}")
-    public Response getById(@PathVariable("id") Long id) {
+    public Result<ProdVo> getById(@PathVariable("id") Long id) {
         ProdVo prodvo = prodService.getProdById(id);
-        return Response.builder().data(prodvo).build();
+        return Response.success(prodvo);
     }
 
 

@@ -1,7 +1,8 @@
 package cn.liuyiyou.shop.user.controller;
 
 
-import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.user.entity.UserDelivery;
 import cn.liuyiyou.shop.user.service.IUserDeliveryService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -31,10 +32,10 @@ public class UserDeliveryController {
     private IUserDeliveryService userDeliveryService;
 
     @GetMapping("/list")
-    public Response list(HttpServletRequest request) {
+    public Result<List<UserDelivery>> list(HttpServletRequest request) {
         String uid = getUid(request);
         List<UserDelivery> userDeliveries = userDeliveryService.list(new QueryWrapper<UserDelivery>().eq("uid", uid));
-        return Response.builder().success(true).data(userDeliveries).build();
+        return Response.success(userDeliveries);
     }
 }
 

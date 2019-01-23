@@ -5,7 +5,8 @@ import cn.liuyiyou.shop.base.entity.Brand;
 import cn.liuyiyou.shop.base.service.IBrandService;
 import cn.liuyiyou.shop.base.vo.Prod;
 import cn.liuyiyou.shop.base.vo.SimpleProdVo;
-import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -44,8 +45,8 @@ public class BrandController extends BaseController {
     }
 
     @GetMapping("/getBrandInfos")
-    public Response getBrandInfos(@RequestParam("brandId") Integer brandId) {
-        return Response.builder().data(brandService.getById(brandId)).build();
+    public Result<Brand> getBrandInfos(@RequestParam("brandId") Integer brandId) {
+        return Response.success(brandService.getById(brandId));
     }
 
     @GetMapping("/prods/{brandId}/{page}-{pageSize}")

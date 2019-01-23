@@ -1,7 +1,8 @@
 package cn.liuyiyou.shop.user.controller;
 
 
-import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.user.entity.User;
 import cn.liuyiyou.shop.user.service.IUserService;
@@ -10,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,30 +43,29 @@ public class UserController extends BaseController {
     private RestTemplate restTemplate;
 
     @GetMapping("/prods")
-    public IPage<Prod> prods() {
+    public Result<Page<Prod>> prods() {
         String page = restTemplate.getForEntity("http://PROD-SERVICE/prod/list", String.class).getBody();
         Page<Prod> prodPage = JSONObject.parseObject(page, new TypeReference<Page<Prod>>() {
         });
-        return prodPage;
+        return Response.success(prodPage);
     }
 
 
     @GetMapping("/get")
-    public Response get(HttpServletRequest request) {
+    public Result get(HttpServletRequest request) {
         String uid = getUid(request);
         Optional.ofNullable(uid).orElseThrow(() -> new RuntimeException("未登陆"));
-        User user = userService.getById(Integer.valueOf(uid));
-        return Response.builder().data(user).success(true).build();
+        return Response.success(userService.getById(Integer.valueOf(uid)));
     }
 
 
     @GetMapping("/list")
-    public Response list() {
+    public Result<List<User>> list() {
         LambdaQueryWrapper<User> userWrap = new QueryWrapper<User>()
                 .lambda()
                 .select().last("1= 1 limit 10");
         List<User> list = userService.list(userWrap);
-        return Response.builder().data(list).success(true).build();
+        return Response.success(list);
     }
 }
 

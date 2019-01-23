@@ -1,14 +1,13 @@
 package cn.liuyiyou.shop.common.exception;
 
-import cn.liuyiyou.shop.common.resp.Code;
-
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/11/9
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2018/12/17
+ * @Copyright 2018 liuyiyou.cn Inc. All rights reserved
  */
 public class BusiException extends RuntimeException {
+
 
     public BusiException() {
     }
@@ -17,4 +16,15 @@ public class BusiException extends RuntimeException {
         super(message);
     }
 
+    public BusiException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BusiException(Throwable cause) {
+        super(cause);
+    }
+
+    public BusiException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

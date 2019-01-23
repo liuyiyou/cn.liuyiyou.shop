@@ -1,7 +1,9 @@
 package cn.liuyiyou.shop.order.controller;
 
-import cn.liuyiyou.shop.common.resp.Response;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.order.service.IOrderService;
+import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,8 @@ public class UserOrderController {
     private IOrderService orderService;
 
     @GetMapping("/count")
-    public Response orderCount(HttpServletRequest request) {
+    public Result<OrderCountRespVo> orderCount(HttpServletRequest request) {
         String uid = getUid(request);
-        return Response.builder().success(true).data(orderService.orderCount(Integer.valueOf(uid))).build();
+        return Response.success(orderService.orderCount(Integer.valueOf(uid)));
     }
 }
