@@ -22,10 +22,12 @@
     <div class="weui-media-box_appmsg">
       <div class="weui-media-box__hd proinfo-txt-l" style="width:20px;"><span class="promotion-label-tit"><img src="images/icon_nav_city.png" /></span></div>
       <div class="weui-media-box__bd">
-        <a href="address_list.html" class="weui-cell_access">
-          <h4 class="address-name"><span>杜杰</span><span>13854652512</span></h4>
-          <div class="address-txt">宿迁市洋河新区电商产业园105号</div>
-        </a>
+        <script id="tpl-user" type="text/html">
+          <a href="address_list.html" class="weui-cell_access">
+            <h4 class="address-name"><span>杜杰</span><span>13854652512</span></h4>
+            <div class="address-txt">宿迁市洋河新区电商产业园105号</div>
+          </a>
+        </script>
       </div>
       <div class="weui-media-box__hd proinfo-txt-l" style="width:16px;"><div class="weui-cell_access"><span class="weui-cell__ft"></span></div></div>
     </div>
@@ -61,7 +63,7 @@
           </div>
           <a class="weui-cell weui-cell_access" href="money.html">
             <div class="weui-cell__bd weui-cell_primary">
-              <p class="font-14"><span class="mg-r-10">可用蓝豆</span><span class="sitem-tip"><em class="num">1235</em>个</span></p>
+              <p class="font-14"><span class="mg-r-10">积分</span><span class="sitem-tip"><em class="num">1235</em>个</span></p>
             </div>
             <span class="weui-cell__ft"></span>
           </a>
@@ -94,7 +96,6 @@ $(function(){
 });
 </script>
 <script src="js/jquery-weui.js"></script>
-
-
+<script src="lib/template-web.js"></script>
 </body>
 </html>

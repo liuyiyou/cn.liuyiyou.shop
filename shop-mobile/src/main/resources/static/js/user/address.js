@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //加载地址列表
-    loadAddress();
-
+   // loadAddress();
+    loadAddressTempl();
     saveAddr();
 });
 
@@ -14,6 +14,10 @@ function saveAddr() {
 
         }
     });
+}
+
+function loadAddressTempl() {
+
 }
 
 function loadAddress() {
