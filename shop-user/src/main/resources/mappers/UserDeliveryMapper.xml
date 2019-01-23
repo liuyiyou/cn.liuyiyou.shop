@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liuyiyou.shop.user.mapper.UserDeliveryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.user.entity.UserDelivery">
+        <id column="id" property="id" />
+        <result column="uid" property="uid" />
+        <result column="consignee" property="consignee" />
+        <result column="consign_tel" property="consignTel" />
+        <result column="consign_idno" property="consignIdno" />
+        <result column="consign_county" property="consignCounty" />
+        <result column="consign_province" property="consignProvince" />
+        <result column="consign_city" property="consignCity" />
+        <result column="oversea" property="oversea" />
+        <result column="consign_addr" property="consignAddr" />
+        <result column="create_time" property="createTime" />
+        <result column="consign_id" property="consignId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, uid, consignee, consign_tel, consign_idno, consign_county, consign_province, consign_city, oversea, consign_addr, create_time, consign_id
+    </sql>
+
+</mapper>

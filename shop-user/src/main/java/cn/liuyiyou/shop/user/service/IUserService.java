@@ -14,5 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    /**
+     * 登陆返回token
+     * @param loginVo
+     * @return
+     */
     String login(LoginVo loginVo);
 }

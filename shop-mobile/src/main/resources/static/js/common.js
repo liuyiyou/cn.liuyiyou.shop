@@ -6,6 +6,16 @@ function commonGoBack() {
         }, 3e3)
 }
 
+function getQueryStr(name) {
+    var url = location.href;
+    var rs = new RegExp("(^|)" + name + "=([^\&]*)(\&|$)", "gi").exec(url),
+        tmp;
+    if (tmp = rs) {
+        return tmp[2];
+    }
+    return "";
+};
+
 function historyGo() {
     var e = document.referrer
         , t = e.indexOf("/oauth.html");
