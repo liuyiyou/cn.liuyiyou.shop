@@ -63,9 +63,9 @@ public class UserDelivery implements Serializable {
     @TableField("consign_city")
     private Integer consignCity;
     /**
-     * 是否海外收货人：1表示国内；2表示海外
+     * 是否是默认地址
      */
-    private Integer oversea;
+    private Boolean defaultAddr;
     /**
      * 收货人地址格式为{"addr":"奥体中心10区309室","city":"广州市","country":"天河区","prov":"广东省"}
      */

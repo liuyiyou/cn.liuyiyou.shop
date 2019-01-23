@@ -47,7 +47,7 @@
             {{each addrlist}}
             <h4 class="weui-media-box__title"><span>{{$value.consignee}}</span><span>{{$value.consigneeTel}}</span></h4>
             <p class="weui-media-box__desc address-txt">{{$value.detail}}</p>
-            {{if $value.default}}
+            {{if $value.defaultAddr}}
             <span class="default-add">默认地址</span>
             {{/if}}
             {{/each}}

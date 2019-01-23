@@ -31,8 +31,8 @@ function loadAddress() {
                 var address = {};
                 var addrList = data.data;
                 addrList.forEach(function (item, index) {
-                    if (item.oversea == 1) {
-                        address.default = true;
+                    if (item.defaultAddr == 1) {
+                        address.defaultAddr = true;
                     }
                     address.consignee = item.consignee;
                     address.consigneeTel = item.consignTel;
