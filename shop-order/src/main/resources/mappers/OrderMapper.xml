@@ -41,7 +41,7 @@
 
     <select id="getOrderCountByStatus" resultType="cn.liuyiyou.shop.order.dto.OrderCountDto">
         select status, count(1) as count
-        from order
+        from t_order
         where uid = #{uid}
         group by status
     </select>

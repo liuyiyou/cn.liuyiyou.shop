@@ -5,6 +5,8 @@ import cn.liuyiyou.shop.order.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  * C端用户产品订单表。 Mapper 接口
@@ -16,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderMapper extends BaseMapper<Order> {
 
-    OrderCountDto getOrderCountByStatus(int uid);
+    List<OrderCountDto> getOrderCountByStatus(int uid);
 }

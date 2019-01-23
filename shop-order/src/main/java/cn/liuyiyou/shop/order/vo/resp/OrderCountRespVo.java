@@ -16,6 +16,6 @@ public class OrderCountRespVo {
 
     private int needPay;
     private int needSend;
-    private int needCofrim;
+    private int needConfirm;
     private int needComment;
 }

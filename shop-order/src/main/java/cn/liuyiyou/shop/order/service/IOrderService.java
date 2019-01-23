@@ -2,6 +2,7 @@ package cn.liuyiyou.shop.order.service;
 
 import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -22,5 +23,8 @@ public interface IOrderService extends IService<Order> {
      * @return
      */
     OrderCountRespVo orderCount(int uid);
+
+
+    IPage<Order> orderPage(int uid);
 
 }
