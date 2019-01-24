@@ -33,8 +33,6 @@ public class HomePageProdController extends BaseController {
 
     @Autowired
     private IHomePageProdService homePageProdService;
-    @Autowired
-    private IProdService prodService;
 
     @RequestMapping(value = "/v2/selectednavs/prods", method = RequestMethod.GET)
     public IPage<HomePageProd> getSelectedNavProd(@RequestParam(value = "reqBody") String reqBody) {

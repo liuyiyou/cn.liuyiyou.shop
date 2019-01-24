@@ -44,8 +44,7 @@ public class ProdController extends BaseController {
     @GetMapping("list/{page}-{pageSize}")
     public IPage<Prod> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
         Page<Prod> pageQuery = new Page<>(page, pageSize);
-        LambdaQueryWrapper<Prod> wrapper = new QueryWrapper<Prod>().lambda().select();
-        IPage<Prod> prodIPage = prodService.page(pageQuery, wrapper);
+        IPage<Prod> prodIPage = prodService.page(pageQuery, new QueryWrapper<Prod>());
         return prodIPage;
     }
 

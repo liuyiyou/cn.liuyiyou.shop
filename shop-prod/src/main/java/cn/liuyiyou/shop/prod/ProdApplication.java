@@ -5,20 +5,19 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+//import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
 
 /**
  * 2.x版本不需要加上 @EnableDiscoveryClient
  */
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.prod.mapper")
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @RestController
 public class ProdApplication {
 
@@ -29,7 +28,7 @@ public class ProdApplication {
 //    private NacosConfigProperties nacosConfigProperties;
 
     @GetMapping("/test")
-    public String test(){
+    public String test() {
         String name = springProperties.getName();
         return name;
     }
@@ -40,7 +39,7 @@ public class ProdApplication {
 
 
     @Bean
-    @LoadBalanced
+//    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
@@ -100,7 +99,6 @@ public class ProdApplication {
 //    public ConsumerFactory<String, String> consumerFactory() {
 //        return new DefaultKafkaConsumerFactory(consumerConfigs(), new StringDeserializer(), new StringDeserializer());
 //    }
-
 
 
 }

@@ -1,7 +1,5 @@
 package cn.liuyiyou.shop.prod.vo;
 
-import cn.liuyiyou.shop.prod.entity.Prod;
-import cn.liuyiyou.shop.prod.entity.ProdSku;
 import lombok.Data;
 
 import java.util.List;
@@ -13,10 +11,13 @@ import java.util.List;
  * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
  */
 @Data
-public class ProdVo extends Prod {
-
+public class ProdVo {
+    private Long prodId;
+    private String prodName;
+    private Integer brandId;
+    private String brandName;
+    private Integer cataId;
     private String country;
-
-    List<ProdSkuVo> prodSkus;
+    private List<ProdSkuVo> prodSkus;
 
 }

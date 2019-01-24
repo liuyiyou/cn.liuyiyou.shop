@@ -3,13 +3,19 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.common.response.Response;
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -28,16 +34,23 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liuyiyou.cn
  * @since 2018-10-31
  */
+@Api(description = "用户管理相关接口")
 @RestController
 @RequestMapping("/category")
-public class CategoryController  extends BaseController {
+public class CategoryController extends BaseController {
 
     @Autowired
     private ICategoryService categoryService;
 
-    @GetMapping("/list/{page}-{pageSize}")
-    public IPage<Category> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
-        return categoryService.getCategoryByPage(page, pageSize);
+//    @GetMapping("/list/{page}-{pageSize}")
+//    public IPage<Category> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
+//        return categoryService.getCategoryByPage(page, pageSize);
+//    }
+
+    @ApiOperation(value = "获取一级类目")
+    @GetMapping("/list")
+    public Result<List<Category>> firtCatagoryList() {
+        return Response.success(categoryService.findListByLevel(1));
     }
 
 }

@@ -49,8 +49,6 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
         Optional.ofNullable(prod).orElseThrow(() -> new RuntimeException("商品不存在"));
         ProdVo prodVo = new ProdVo();
         BeanUtils.copyProperties(prod, prodVo);
-//        Country country = countryService.getCountryById(prod.getCountryId());
-//        prodVo.setCountry(country.getCountryNameCn());
         LambdaQueryWrapper<ProdSku> skuWrapper = new QueryWrapper<ProdSku>().lambda().select().eq(ProdSku::getProdId, id);
         List<ProdSkuVo> prodSkuVos = Lists.newArrayList();
         List<ProdSku> prodSkus = prodSkuService.list(skuWrapper);

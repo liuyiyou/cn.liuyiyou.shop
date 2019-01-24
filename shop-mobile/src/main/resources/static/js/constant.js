@@ -1,2 +1,3 @@
 USER_BASE_URL = "http://localhost:10001";
-ORDER_BASE_URL = "http://localhost:10002"
+ORDER_BASE_URL = "http://localhost:10002";
+BASE_BASE_URL = "http://localhost:10010";
