@@ -18,14 +18,22 @@
 <div class='weui-content'>
     <div class="weui-tab">
         <div class="weui-navbar" style="position:fixed; top:44px; left:0; right:0; height:44px; background:#fff;">
-            <a class="weui-navbar__item proinfo-tab-tit font-14 weui-bar__item--on" href="#tab1">全部</a>
-            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab2">待付款</a>
-            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab3">待发货</a>
-            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab4">待收货</a>
-            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab5">待评价</a>
+            <a class="weui-navbar__item proinfo-tab-tit font-14 weui-bar__item--on" href="#tab1" data-id="0">全部</a>
+            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab2" data-id="1">待付款</a>
+            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab3" data-id="2">待发货</a>
+            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab4" data-id="3">待收货</a>
+            <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab5" data-id="4">待评价</a>
         </div>
         <div class="weui-tab__bd proinfo-tab-con" style="padding-top:87px;">
             <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            </div>
+            <div id="tab2" class="weui-tab__bd-item">
+            </div>
+            <div id="tab3" class="weui-tab__bd-item">
+            </div>
+            <div id="tab4" class="weui-tab__bd-item">
+            </div>
+            <div id="tab5" class="weui-tab__bd-item">
             </div>
         </div>
     </div>
@@ -60,7 +68,8 @@
     {{each list}}
 
     <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd"><span><a href="order_info.html?id={{$value.orderId}}">单号：{{$value.orderId}}</span><span
+        <div class="weui-panel__hd"><span><a
+                href="order_info.html?id={{$value.orderId}}">单号：{{$value.orderId}}</span><span
                 class="ord-status-txt-ts fr">{{$value.statusName}}</a></span></div>
         {{each $value.prods}}
         <div class="weui-media-box__bd  pd-10">
@@ -68,12 +77,14 @@
                 <div class="weui-media-box__hd"><a href="pro_info.html">
                     <img class="weui-media-box__thumb" src="upload/pro3.jpg" alt=""></a></div>
                 <div class="weui-media-box__bd">
-                    <h1 class="weui-media-box__desc"><a href="pro_info.html" class="ord-pro-link">{{$value.prodName}}</a>
+                    <h1 class="weui-media-box__desc"><a href="pro_info.html"
+                                                        class="ord-pro-link">{{$value.prodName}}</a>
                     </h1>
                     <p class="weui-media-box__desc">规格：<span>红色</span>，<span>23</span></p>
                     <div class="clear mg-t-10">
                         <div class="wy-pro-pri fl">¥<em class="num font-15">{{$value.realPrice}}</em></div>
-                        <div class="pro-amount fr"><span class="font-13">数量×<em class="name">{{$value.prodNum}}</em></span>
+                        <div class="pro-amount fr"><span class="font-13">数量×<em
+                                class="name">{{$value.prodNum}}</em></span>
                         </div>
                     </div>
                 </div>
@@ -88,7 +99,7 @@
         <div class="weui-panel__ft">
             <div class="weui-cell weui-cell_access weui-cell_link oder-opt-btnbox">
                 {{if $value.status==1}}
-                 <div class="mg10-0"><a href="shopcart.html" class="ords-btn-com weui-btn_primary">支付</a></div>
+                <div class="mg10-0"><a href="shopcart.html" class="ords-btn-com weui-btn_primary">支付</a></div>
                 {{/if}}
                 {{if $value.status==3}}
                 <div class="mg10-0"><a href="shopcart.html" class="ords-btn-com weui-btn_primary">确认收货</a></div>

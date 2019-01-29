@@ -2,8 +2,10 @@ package cn.liuyiyou.shop.order.controller;
 
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
+import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -41,9 +43,9 @@ public class UserOrderController {
 
     @ApiOperation(value = "分页订单列表")
     @GetMapping("/list")
-    public Result<OrderCountRespVo> list(HttpServletRequest request) {
+    public Result<IPage<Order>> list(HttpServletRequest request) {
         Integer uid = getUid(request);
-        orderService.orderPage(uid, 1, 10);
-        return Response.success(orderService.orderCount(uid));
+        IPage<Order> orderIPage = orderService.orderPage(uid, 1, 10);
+        return Response.success(orderIPage);
     }
 }

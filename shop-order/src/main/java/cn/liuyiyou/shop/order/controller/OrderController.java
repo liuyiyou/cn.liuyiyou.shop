@@ -19,8 +19,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,7 +76,7 @@ public class OrderController {
         Page<Order> pageQuery = new Page<>(orderListReqVo.getPageNum(), orderListReqVo.getPageSize());
         LambdaQueryWrapper<Order> wrapper = new QueryWrapper<Order>().lambda().select()
                 .eq(Order::getUid, 1);
-        if (orderListReqVo.getStatus() != null) {
+        if (orderListReqVo.getStatus() != null && orderListReqVo.getStatus() != 0) {
             wrapper.eq(Order::getStatus, orderListReqVo.getStatus());
         }
         wrapper.orderByDesc(Order::getOrderId);
