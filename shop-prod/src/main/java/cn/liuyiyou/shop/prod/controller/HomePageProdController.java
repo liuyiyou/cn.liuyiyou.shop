@@ -4,7 +4,6 @@ package cn.liuyiyou.shop.prod.controller;
 import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.prod.entity.HomePageProd;
 import cn.liuyiyou.shop.prod.service.IHomePageProdService;
-import cn.liuyiyou.shop.prod.service.IProdService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

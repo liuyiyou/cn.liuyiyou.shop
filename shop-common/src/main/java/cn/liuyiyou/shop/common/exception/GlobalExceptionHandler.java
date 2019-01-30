@@ -87,5 +87,18 @@ public class GlobalExceptionHandler {
 
     }
 
+    /**
+     * 针对Assert抛出的异常需要给前端进行显示
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Result<String> illegalArgumentException(IllegalArgumentException e) {
+        log.debug("校验异常", e);
+        return Response.fail(e.getMessage());
+
+    }
+
 
 }

@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-">
     <link rel="stylesheet" href="lib/weui.min.css">
     <link rel="stylesheet" href="css/jquery-weui.css">
     <link rel="stylesheet" href="css/style.css">
@@ -26,56 +24,13 @@
             <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
                 <!--主图轮播-->
                 <div class="swiper-container swiper-zhutu">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="upload/zhutu01.jpg"/></div>
-                        <div class="swiper-slide"><img src="upload/zhutu02.jpg"/></div>
-                        <div class="swiper-slide"><img src="upload/zhutu03.jpg"/></div>
-                        <div class="swiper-slide"><img src="upload/zhutu04.jpg"/></div>
-                        <div class="swiper-slide"><img src="upload/zhutu05.jpg"/></div>
+                    <div class="swiper-wrapper" id="swiper">
                     </div>
                     <div class="swiper-pagination swiper-zhutu-pagination"></div>
                 </div>
                 <div class="wy-media-box-nomg weui-media-box_text">
-                    <h4 class="wy-media-box__title">俞兆林卫衣 男2017春新款运动休闲印花大码潮人卫衣卫裤加厚外套套装男</h4>
+                    <h4 class="wy-media-box__title" id="prodName"></h4>
                     <div class="wy-pro-pri mg-tb-5">¥<em class="num font-20">296.00</em></div>
-                    <p class="weui-media-box__desc">【2017春季全场2件8】春款薄绒休闲套头纯色印花连帽大码卫衣套装新款上新！！</p>
-                </div>
-                <div class="wy-media-box2 txtpd weui-media-box_text">
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">送至</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-message clear">
-                                <span class="promotion-item-text">江苏</span>
-                                <span class="promotion-item-text">宿迁</span>
-                                <span class="promotion-item-text">洋河新区</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">运费</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-message clear">
-                                <span class="promotion-item-text">免运费
-                                    <!--<div class="wy-pro-pri">¥<span class="num">11.00</span></div>--></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">商家</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-message clear">
-                                <span class="promotion-item-text">蓝之蓝股份有限公司</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">提示</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-message clear">
-                                <span class="promotion-item-text"><p class="txt-color-ml">支持7天无理由退换货</p></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item ">
@@ -139,35 +94,11 @@
         </div>
         <div class="modal-content">
             <div class="weui-msg" style="padding-top:0;">
-                <div class="wy-media-box2 weui-media-box_text" style="margin:0;">
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">尺码</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-sku clear">
-                                <ul>
-                                    <li><a href="javascript:;">25</a></li>
-                                    <li><a href="javascript:;">30</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="weui-media-box_appmsg">
-                        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">颜色</span></div>
-                        <div class="weui-media-box__bd">
-                            <div class="promotion-sku clear">
-                                <ul>
-                                    <li><a href="javascript:;">黑色</a></li>
-                                    <li><a href="javascript:;">红色</a></li>
-                                    <li><a href="javascript:;">白色</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="wy-media-box2 weui-media-box_text" style="margin:0;" id="sku_list">
                 </div>
                 <div class="weui-msg__opr-area">
                     <p class="weui-btn-area">
-                        <a href="order_info.html" class="weui-btn weui-btn_primary">立即购买</a>
-                        <a href="javascript:;" class="weui-btn weui-btn_default close-popup">不，我再看看</a>
+                        <a href="order_info.html" class="weui-btn weui-btn_primary">确定</a>
                     </p>
                 </div>
             </div>
@@ -175,8 +106,36 @@
     </div>
 </div>
 
+<script type="text/html" id="sku_list_template">
+    {{each list}}
+    <div class="weui-media-box_appmsg">
+        <div class="weui-media-box__hd proinfo-txt-l">
+            <span class="promotion-label-tit">{{$value.key}}</span>
+        </div>
+        <div class="weui-media-box__bd">
+            <div class="promotion-sku clear">
+                <ul>
+                    {{each $value.values}}
+                    <li><a href="javascript:;">{{$value}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    <div class="weui-media-box_appmsg">
+        <div class="weui-media-box__hd proinfo-txt-l"><span class="promotion-label-tit">数量</span></div>
+        <div class="weui-media-box__bd">
+            <div class="promotion-sku clear">
+                <div class="Spinner"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script src="lib/jquery-2.1.4.js"></script>
 <script src="lib/fastclick.js"></script>
+<script type="text/javascript" src="js/jquery.Spinner.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -184,19 +143,58 @@
 </script>
 <script src="js/jquery-weui.js"></script>
 <script src="js/swiper.js"></script>
-<script>
-    $(".swiper-zhutu").swiper({
-        loop: true,
-        paginationType: 'fraction',
-        autoplay: 5000
+
+<script src="js/common.js?v=2"></script>
+<script src="js/constant.js?v=2"></script>
+<script src="lib/template-web.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        getProd();
     });
-</script>
-<script>
-    $(function () {
-        $(".promotion-sku li").click(function () {
-            $(this).addClass("active").siblings("li").removeClass("active");
-        })
-    })
+
+    function getProd() {
+        var prodId = getQueryStr("id");
+        var url = PROD_BASE_URL + "/prod/" + prodId;
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data)
+                if (data.success) {
+                    var prod = data.data;
+                    $("#prodName").text(prod.prodName);
+                    prod.albums.forEach(function (item) {
+                        console.info(item);
+                        var picUrl = 'https://oss.yanglaoban.com/' + item;
+                        $("#swiper").append('<div class="swiper-slide"><img src="' + picUrl + '"/></div>');
+                    });
+
+                    var html = template("sku_list_template", {"list": prod.skuKeyListValue});
+                    document.getElementById('sku_list').innerHTML = html;
+
+
+                    $(".promotion-sku li").click(function () {
+                        $(this).addClass("active").siblings("li").removeClass("active");
+                    })
+
+
+                    $(".swiper-zhutu").swiper({
+                        loop: true,
+                        paginationType: 'fraction',
+                        autoplay: 5000
+                    });
+
+                    $(".Spinner").Spinner({value: 1, len: 3, max: 999});
+                }
+            },
+            error: function (data) {
+            }
+        });
+
+    }
 </script>
 <script>
     $(document).on("click", "#show-toast", function () {
@@ -260,6 +258,7 @@
                 aniHovertree();
             }, inter);
         }
+
         aniHovertree();
     }
 </script>

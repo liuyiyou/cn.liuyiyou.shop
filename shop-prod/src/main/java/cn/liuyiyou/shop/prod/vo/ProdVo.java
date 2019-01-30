@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Data
 public class ProdVo {
+    private List<String> albums;
     private Long prodId;
     private String prodName;
     private Integer brandId;
@@ -19,5 +20,8 @@ public class ProdVo {
     private Integer cataId;
     private String country;
     private List<ProdSkuVo> prodSkus;
+    List<SkuKeyListValueVo> skuKeyListValue;
+
+
 
 }

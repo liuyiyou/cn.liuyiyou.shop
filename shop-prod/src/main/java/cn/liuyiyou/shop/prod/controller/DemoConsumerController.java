@@ -1,10 +1,5 @@
 package cn.liuyiyou.shop.prod.controller;
 
-import cn.liuyiyou.shop.base.service.DemoService;
-//import com.alibaba.dubbo.config.annotation.Reference;
-import jdk.nashorn.internal.ir.annotations.Reference;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

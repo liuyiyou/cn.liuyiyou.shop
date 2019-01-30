@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration= cn.liuyiyou.shop.common.exception.GlobalExceptionHandler
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.liuyiyou.shop.common.exception.GlobalExceptionHandler

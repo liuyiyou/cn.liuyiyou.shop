@@ -56,7 +56,7 @@ public class UserDeliveryController {
 
 
     @ApiOperation(value = "编辑收货地址")
-    @PutMapping("/edit")
+    @PostMapping("/edit")
     public Result<Boolean> edit(@RequestBody UserDelivery userDelivery, HttpServletRequest request) {
         Integer uid = getUid(request);
         Assert.notNull(userDelivery.getId(), "编辑地址，ID不能为空");

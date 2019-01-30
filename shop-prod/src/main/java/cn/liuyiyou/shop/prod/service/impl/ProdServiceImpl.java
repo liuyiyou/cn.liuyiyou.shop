@@ -1,8 +1,5 @@
 package cn.liuyiyou.shop.prod.service.impl;
 
-import cn.liuyiyou.shop.base.entity.Country;
-import cn.liuyiyou.shop.base.service.CountryService;
-import cn.liuyiyou.shop.common.exception.BusiException;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.mapper.ProdMapper;
@@ -11,6 +8,9 @@ import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
 import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
+import cn.liuyiyou.shop.prod.vo.SkuKeyListValueVo;
+import cn.liuyiyou.shop.prod.vo.SkuKeyValueVo;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -19,10 +19,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
-import com.alibaba.dubbo.config.annotation.Reference;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -35,10 +36,10 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @Service
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
-    @Reference(version = "${dubbo.service.version}",
-            application = "${dubbo.application.id}",
-            url = "dubbo://localhost:12345")
-    private CountryService countryService;
+//    @Reference(version = "${dubbo.service.version}",
+//            application = "${dubbo.application.id}",
+//            url = "dubbo://localhost:12345")
+//    private CountryService countryService;
 
     @Autowired
     private IProdSkuService prodSkuService;
@@ -49,16 +50,29 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
         Optional.ofNullable(prod).orElseThrow(() -> new RuntimeException("商品不存在"));
         ProdVo prodVo = new ProdVo();
         BeanUtils.copyProperties(prod, prodVo);
+        prodVo.setAlbums(Arrays.asList(prod.getAlbum().split(",")));
         LambdaQueryWrapper<ProdSku> skuWrapper = new QueryWrapper<ProdSku>().lambda().select().eq(ProdSku::getProdId, id);
+        List<SkuKeyValueVo> skuKeyValueVoList = Lists.newArrayList();
         List<ProdSkuVo> prodSkuVos = Lists.newArrayList();
         List<ProdSku> prodSkus = prodSkuService.list(skuWrapper);
         prodSkus.forEach(prodSku -> {
             ProdSkuVo prodSkuVo = new ProdSkuVo();
             BeanUtils.copyProperties(prodSku, prodSkuVo);
             prodSkuVo.setSkuAttrDesc(SkuUtils.joinSkuJsonValName(prodSku.getSkuAttr()));
+            skuKeyValueVoList.addAll(SkuUtils.skuKeyValue(prodSku.getSkuAttr()));
             prodSkuVos.add(prodSkuVo);
         });
         prodVo.setProdSkus(prodSkuVos);
+
+        List<SkuKeyListValueVo> skuKeyListValueVos = Lists.newArrayList();
+        Map<String, List<SkuKeyValueVo>> map = skuKeyValueVoList.stream().collect(Collectors.groupingBy(SkuKeyValueVo::getKey));
+        map.forEach((k, v) -> {
+            SkuKeyListValueVo skuKeyListValueVo = new SkuKeyListValueVo();
+            skuKeyListValueVo.setKey(k);
+            skuKeyListValueVo.setValues(v.stream().map(SkuKeyValueVo::getValue).collect(Collectors.toList()));
+            skuKeyListValueVos.add(skuKeyListValueVo);
+        });
+        prodVo.setSkuKeyListValue(skuKeyListValueVos);
         return prodVo;
     }
 }

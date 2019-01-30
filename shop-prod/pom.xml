@@ -11,6 +11,8 @@
     <name>shop-prod</name>
     <description>商品中心</description>
 
+
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -25,6 +27,10 @@
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <lcn.last.version>4.2.0-SNAPSHOT</lcn.last.version>
         <nacos-config-spring-boot.version>0.2.0</nacos-config-spring-boot.version>
+        <nacos-discovery-spring-boot.version>0.2.1</nacos-discovery-spring-boot.version>
+        <dubbo.version>2.6.5</dubbo.version>
+        <spring-boot-dubbo-starter>0.2.1</spring-boot-dubbo-starter>
+        <spring-boot.version>2.0.6.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
@@ -59,11 +65,6 @@
             <version>3.0-RC</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>0.2.0</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -76,51 +77,110 @@
             <version>3.7</version>
         </dependency>
 
-        <dependency>
-            <groupId>cn.liuyiyou.shop</groupId>
-            <artifactId>shop-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>cn.liuyiyou.shop</groupId>-->
+        <!--<artifactId>shop-common</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>cn.liuyiyou.shop</groupId>
-            <artifactId>shop-order-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.liuyiyou.shop</groupId>
-            <artifactId>shop-base-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>cn.liuyiyou.shop</groupId>-->
+        <!--<artifactId>shop-order-api</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>cn.liuyiyou.shop</groupId>-->
+        <!--<artifactId>shop-base-api</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--nacos for spring-boot config and discover  start-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>nacos-config-spring-boot-starter</artifactId>
             <version>${nacos-config-spring-boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+            <version>${nacos-discovery-spring-boot.version}</version>
+        </dependency>
+        <!--nacos for spring-boot config and discover  end-->
+
+        <!-- Dubbo Spring Boot Starter -->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+
+        <!-- Swagger-ui Start -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-web</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.10</version>
+        </dependency>
+        <!-- Swagger-ui End -->
+
+
     </dependencies>
 
     <dependencyManagement>
-        <!--<dependencies>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.cloud</groupId>-->
-                <!--<artifactId>spring-cloud-dependencies</artifactId>-->
-                <!--<version>${spring-cloud.version}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.cloud</groupId>-->
-                <!--<artifactId>spring-cloud-alibaba-dependencies</artifactId>-->
-                <!--<version>0.2.0.RELEASE</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-        <!--</dependencies>-->
+        <dependencies>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Dubbo dependencies -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-dependencies-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <build>
@@ -131,6 +191,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
 </project>

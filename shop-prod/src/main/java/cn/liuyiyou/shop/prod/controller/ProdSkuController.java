@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sku")
-@CrossOrigin //其他前端使用 $.getJSON()调用接口的时候，method不是get而是option，加上该注解解决跨域问题
 public class ProdSkuController  extends BaseController {
 
     @Autowired

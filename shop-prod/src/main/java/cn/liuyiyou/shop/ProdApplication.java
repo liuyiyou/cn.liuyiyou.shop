@@ -1,11 +1,16 @@
-package cn.liuyiyou.shop.prod;
+package cn.liuyiyou.shop;
 
 import cn.liuyiyou.shop.prod.config.SpringProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.prod.mapper")
-//@EnableDiscoveryClient
 @RestController
 public class ProdApplication {
 
@@ -34,7 +38,20 @@ public class ProdApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ProdApplication.class, args);
+//        SpringApplication.run(ProdApplication.class, args)
+//                .addApplicationListener((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
+//            Environment environment = event.getEnvironment();
+//            int port = environment.getProperty("embedded.zookeeper.port", int.class);
+//            new EmbeddedZooKeeper(port, false).start();
+//        });
+        new SpringApplicationBuilder(ProdApplication.class)
+                .web(WebApplicationType.SERVLET)
+                .listeners((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
+                    Environment environment = event.getEnvironment();
+                    int port = environment.getProperty("embedded.zookeeper.port", int.class);
+                    new EmbeddedZooKeeper(port, false).start();
+                })
+                .run(args);
     }
 
 

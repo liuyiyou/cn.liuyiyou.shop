@@ -120,9 +120,11 @@
 <script type="text/html" id="first_category_list_template">
     {{each list}}
     {{if $index ==0}}
-    <li class="active"  data-id="{{$value.cataId}}">{{$value.cataName}}</li>
+    <li class="active" data-id="{{$value.cataId}}">{{$value.cataName}}</li>
     {{/if}}
+    {{if $index !=0}}
     <li>{{$value.cataName}}</li>
+    {{/if}}
     {{/each}}
 </script>
 </body>

@@ -39,6 +39,9 @@ function editAddt() {
     $("#saveAddress").click(function () {
         var params = new Object();
         params.consignee = $("#consignee").val();
+        params.id = $("#id").val();
+        params.consignTel = $("#consignTel").val();
+        params.detailAddr = $("#detail_addr").val();
         var url = USER_BASE_URL + "/user/delivery/edit";
         $.ajax({
             type: "post",
