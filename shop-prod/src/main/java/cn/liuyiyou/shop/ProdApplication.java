@@ -38,20 +38,16 @@ public class ProdApplication {
     }
 
     public static void main(String[] args) {
-//        SpringApplication.run(ProdApplication.class, args)
-//                .addApplicationListener((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
-//            Environment environment = event.getEnvironment();
-//            int port = environment.getProperty("embedded.zookeeper.port", int.class);
-//            new EmbeddedZooKeeper(port, false).start();
-//        });
-        new SpringApplicationBuilder(ProdApplication.class)
-                .web(WebApplicationType.SERVLET)
-                .listeners((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
-                    Environment environment = event.getEnvironment();
-                    int port = environment.getProperty("embedded.zookeeper.port", int.class);
-                    new EmbeddedZooKeeper(port, false).start();
-                })
-                .run(args);
+        SpringApplication.run(ProdApplication.class, args);
+//        new SpringApplicationBuilder(ProdApplication.class)
+//                .web(WebApplicationType.SERVLET)
+//                .listeners((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
+//                    Environment environment = event.getEnvironment();
+//                    int port = environment.getProperty("embedded.zookeeper.port", int.class);
+//                    //启动ZooKeeper
+//                    new EmbeddedZooKeeper(port, false).start();
+//                })
+//                .run(args);
     }
 
 

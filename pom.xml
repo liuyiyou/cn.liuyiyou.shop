@@ -10,13 +10,18 @@
     <packaging>pom</packaging>
 
 
+    <dependencies>
+
+    </dependencies>
+
+
     <modules>
         <module>shop-common</module>
         <module>shop-base</module>
         <module>shop-base-api</module>
         <module>shop-order</module>
-        <module>shop-order-api</module>
         <module>shop-prod</module>
+        <module>shop-prod-api</module>
         <module>shop-mobile</module>
         <module>shop-user</module>
     </modules>

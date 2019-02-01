@@ -1,6 +1,11 @@
 package cn.liuyiyou.shop.order;
 
+import cn.liuyiyou.shop.prod.service.DemoService;
+import com.alibaba.dubbo.common.logger.Logger;
+import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +24,17 @@ public class OrderApplication {
         SpringApplication.run(OrderApplication.class, args);
     }
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Reference(version = "${prod.service.version}")
+    private DemoService demoService;
+
+
+//    @Bean
+//    public ApplicationRunner runner() {
+//        System.out.println("aaaaLL::"+demoService);
+//        return args -> logger.info(demoService.sayHello("mercyblitz"));
+//    }
 
     @Bean
     public RestTemplate restTemplate() {

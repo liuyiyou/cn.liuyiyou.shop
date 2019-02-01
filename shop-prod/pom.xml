@@ -12,7 +12,6 @@
     <description>商品中心</description>
 
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -28,7 +27,7 @@
         <lcn.last.version>4.2.0-SNAPSHOT</lcn.last.version>
         <nacos-config-spring-boot.version>0.2.0</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>0.2.1</nacos-discovery-spring-boot.version>
-        <dubbo.version>2.6.5</dubbo.version>
+        <dubbo.version>2.6.2</dubbo.version>
         <spring-boot-dubbo-starter>0.2.1</spring-boot-dubbo-starter>
         <spring-boot.version>2.0.6.RELEASE</spring-boot.version>
     </properties>
@@ -83,28 +82,28 @@
         <!--<version>0.0.1-SNAPSHOT</version>-->
         <!--</dependency>-->
 
-        <!--<dependency>-->
-        <!--<groupId>cn.liuyiyou.shop</groupId>-->
-        <!--<artifactId>shop-order-api</artifactId>-->
-        <!--<version>0.0.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
         <!--<groupId>cn.liuyiyou.shop</groupId>-->
         <!--<artifactId>shop-base-api</artifactId>-->
         <!--<version>0.0.1-SNAPSHOT</version>-->
         <!--</dependency>-->
 
+        <dependency>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-prod-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!--nacos for spring-boot config and discover  start-->
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
-            <version>${nacos-config-spring-boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-discovery-spring-boot-starter</artifactId>
-            <version>${nacos-discovery-spring-boot.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.boot</groupId>-->
+            <!--<artifactId>nacos-config-spring-boot-starter</artifactId>-->
+            <!--<version>${nacos-config-spring-boot.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba.boot</groupId>-->
+            <!--<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+            <!--<version>${nacos-discovery-spring-boot.version}</version>-->
+        <!--</dependency>-->
         <!--nacos for spring-boot config and discover  end-->
 
         <!-- Dubbo Spring Boot Starter -->
@@ -126,7 +125,16 @@
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
+            <version>3.4.13</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+        </dependency>
+
+        <!-- Dubbo Spring Boot Starter -->
+
 
 
         <dependency>

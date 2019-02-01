@@ -1,5 +1,8 @@
 package cn.liuyiyou.shop.prod.controller;
 
+import cn.liuyiyou.shop.prod.service.DemoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,14 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoConsumerController {
 
-//    @Reference(version = "${demo.service.version}",
-//            application = "${dubbo.application.id}",
-//            url = "dubbo://localhost:12345")
-//    private DemoService demoService;
+    @Autowired
+    private DemoService demoService;
 
-//    @RequestMapping("/sayHello")
-//    public String sayHello(@RequestParam String name) {
-//        return demoService.sayHello(name);
-//    }
+    @RequestMapping("/sayHello")
+    public String sayHello() {
+        System.out.println("service::" + demoService);
+        return demoService.sayHello("liuyiyou");
+    }
 
 }
