@@ -1,12 +1,11 @@
 package cn.liuyiyou.shop.order.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,17 +20,16 @@ import java.util.List;
  * @since 2018-11-05
  */
 @TableName("t_order")
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class Order extends Model<Order> {
+@Data
+@Accessors(chain = true)
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 订单ID
      */
-    @TableId("order_id")
+    @TableId(value = "order_id", type = IdType.AUTO)
     private Long orderId;
     /**
      * 创建订单的用户ID
@@ -161,265 +159,4 @@ public class Order extends Model<Order> {
     @TableField(exist = false)
     private List<OrderProd> orderProds;
 
-    public List<OrderProd> getOrderProds() {
-        return orderProds;
-    }
-
-    public void setOrderProds(List<OrderProd> orderProds) {
-        this.orderProds = orderProds;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getConsignIdno() {
-        return consignIdno;
-    }
-
-    public void setConsignIdno(String consignIdno) {
-        this.consignIdno = consignIdno;
-    }
-
-    public String getConsignee() {
-        return consignee;
-    }
-
-    public void setConsignee(String consignee) {
-        this.consignee = consignee;
-    }
-
-    public String getConsignPhone() {
-        return consignPhone;
-    }
-
-    public void setConsignPhone(String consignPhone) {
-        this.consignPhone = consignPhone;
-    }
-
-    public String getConsignAddr() {
-        return consignAddr;
-    }
-
-    public void setConsignAddr(String consignAddr) {
-        this.consignAddr = consignAddr;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getReturnStatus() {
-        return returnStatus;
-    }
-
-    public void setReturnStatus(Integer returnStatus) {
-        this.returnStatus = returnStatus;
-    }
-
-    public LocalDateTime getReturnTime() {
-        return returnTime;
-    }
-
-    public void setReturnTime(LocalDateTime returnTime) {
-        this.returnTime = returnTime;
-    }
-
-    public Float getReturnAmount() {
-        return returnAmount;
-    }
-
-    public void setReturnAmount(Float returnAmount) {
-        this.returnAmount = returnAmount;
-    }
-
-    public Integer getSendStatus() {
-        return sendStatus;
-    }
-
-    public void setSendStatus(Integer sendStatus) {
-        this.sendStatus = sendStatus;
-    }
-
-    public String getCancelReason() {
-        return cancelReason;
-    }
-
-    public void setCancelReason(String cancelReason) {
-        this.cancelReason = cancelReason;
-    }
-
-    public Integer getConsignCountry() {
-        return consignCountry;
-    }
-
-    public void setConsignCountry(Integer consignCountry) {
-        this.consignCountry = consignCountry;
-    }
-
-    public Integer getConsignProvince() {
-        return consignProvince;
-    }
-
-    public void setConsignProvince(Integer consignProvince) {
-        this.consignProvince = consignProvince;
-    }
-
-    public Integer getConsignCity() {
-        return consignCity;
-    }
-
-    public void setConsignCity(Integer consignCity) {
-        this.consignCity = consignCity;
-    }
-
-    public Integer getPayType() {
-        return payType;
-    }
-
-    public void setPayType(Integer payType) {
-        this.payType = payType;
-    }
-
-    public String getTranno() {
-        return tranno;
-    }
-
-    public void setTranno(String tranno) {
-        this.tranno = tranno;
-    }
-
-    public String getUaccount() {
-        return uaccount;
-    }
-
-    public void setUaccount(String uaccount) {
-        this.uaccount = uaccount;
-    }
-
-    public Integer getSrc() {
-        return src;
-    }
-
-    public void setSrc(Integer src) {
-        this.src = src;
-    }
-
-    public Integer getOpUid() {
-        return opUid;
-    }
-
-    public void setOpUid(Integer opUid) {
-        this.opUid = opUid;
-    }
-
-    public LocalDateTime getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(LocalDateTime payTime) {
-        this.payTime = payTime;
-    }
-
-    public LocalDateTime getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(LocalDateTime sendTime) {
-        this.sendTime = sendTime;
-    }
-
-    public LocalDateTime getDistributeTime() {
-        return distributeTime;
-    }
-
-    public void setDistributeTime(LocalDateTime distributeTime) {
-        this.distributeTime = distributeTime;
-    }
-
-    public LocalDateTime getDoneTime() {
-        return doneTime;
-    }
-
-    public void setDoneTime(LocalDateTime doneTime) {
-        this.doneTime = doneTime;
-    }
-
-    public LocalDateTime getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.orderId;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                ", orderId=" + orderId +
-                ", uid=" + uid +
-                ", createTime=" + createTime +
-                ", totalPrice=" + totalPrice +
-                ", consignIdno=" + consignIdno +
-                ", consignee=" + consignee +
-                ", consignPhone=" + consignPhone +
-                ", consignAddr=" + consignAddr +
-                ", status=" + status +
-                ", returnStatus=" + returnStatus +
-                ", returnTime=" + returnTime +
-                ", returnAmount=" + returnAmount +
-                ", sendStatus=" + sendStatus +
-                ", cancelReason=" + cancelReason +
-                ", consignCountry=" + consignCountry +
-                ", consignProvince=" + consignProvince +
-                ", consignCity=" + consignCity +
-                ", payType=" + payType +
-                ", tranno=" + tranno +
-                ", uaccount=" + uaccount +
-                ", src=" + src +
-                ", opUid=" + opUid +
-                ", payTime=" + payTime +
-                ", sendTime=" + sendTime +
-                ", distributeTime=" + distributeTime +
-                ", doneTime=" + doneTime +
-                ", lastUpdateTime=" + lastUpdateTime +
-                "}";
-    }
 }

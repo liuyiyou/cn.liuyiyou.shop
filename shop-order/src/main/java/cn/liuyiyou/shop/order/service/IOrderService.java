@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.order.service;
 
 import cn.liuyiyou.shop.order.entity.Order;
+import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -40,4 +41,6 @@ public interface IOrderService extends IService<Order> {
     IPage<Order> orderPage(int uid, int pageNum, int pageSize);
 
     OrderInfoRespVo getOrderInfo(Long orderId);
+
+    boolean createOrder(OrderAddReqVo orderAddReqVo);
 }

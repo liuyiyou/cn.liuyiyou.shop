@@ -20,6 +20,5 @@ public class OrderInfoRespVo {
     private String address;
     private Integer status;
     private String statusName;
-    private String album;
     private List<OrderProdListRespVo> prods;
 }

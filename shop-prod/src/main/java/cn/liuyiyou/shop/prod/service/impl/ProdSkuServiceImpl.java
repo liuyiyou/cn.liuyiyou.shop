@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @since 2018-11-02
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${prod.service.version}")
 public class ProdSkuServiceImpl extends ServiceImpl<ProdSkuMapper, ProdSku> implements IProdSkuService {
 
 }

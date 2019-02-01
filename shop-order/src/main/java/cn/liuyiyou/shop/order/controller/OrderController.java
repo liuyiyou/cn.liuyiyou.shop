@@ -8,6 +8,7 @@ import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.entity.OrderProd;
 import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
+import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
@@ -78,6 +79,7 @@ public class OrderController {
                     .setProdId(orderProd.getProdId())
                     .setProdName(orderProd.getProdName())
                     .setProdNum(orderProd.getProdNum())
+                    .setAlbum(orderProd.getAlbum())
                     .setRealPrice(orderProd.getRealPrice())
                     .setSkuId(orderProd.getSkuId())).collect(toList());
             return new OrderListRespVo()
@@ -98,11 +100,10 @@ public class OrderController {
 
 
     @ApiOperation("订单提交")
-    @GetMapping("/add/{id}")
-    public Result add(@PathVariable("id") Long orderId) {
-        //createOrder
-        //createOrderProdSku
-        //frezzProdSku
+    @PostMapping("/add")
+    public Result add(@RequestBody OrderAddReqVo orderAddReqVo) {
+        orderService.createOrder(orderAddReqVo);
+
 
         return null;
     }

@@ -7,11 +7,15 @@ import cn.liuyiyou.shop.order.entity.OrderProd;
 import cn.liuyiyou.shop.order.mapper.OrderMapper;
 import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
+import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
+import cn.liuyiyou.shop.prod.entity.Prod;
+import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.service.DemoService;
 import cn.liuyiyou.shop.prod.service.IProdService;
+import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -22,6 +26,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -38,6 +43,7 @@ import static java.util.stream.Collectors.toList;
  */
 @Service
 @Slf4j
+@Transactional
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
 
@@ -52,6 +58,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Reference(version = "1.0.0")
     private IProdService prodService;
+
+    @Reference(version = "1.0.0")
+    private IProdSkuService prodSkuService;
 
 
     @Override
@@ -69,7 +78,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setProdId(orderProd.getProdId())
                 .setProdName(orderProd.getProdName())
                 .setProdNum(orderProd.getProdNum())
-                .setAlbum(prodService.getById(orderProd.getProdId()).getAlbum())
+                .setAlbum(orderProd.getAlbum())
                 .setRealPrice(orderProd.getRealPrice())
                 .setSkuId(orderProd.getSkuId())).collect(toList());
 
@@ -113,6 +122,43 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return vo;
     }
 
+    @Override
+    public boolean createOrder(OrderAddReqVo orderAddReqVo) {
+
+        //通过dubbo获取prod和prodSku
+        Prod prod = prodService.getById(orderAddReqVo.getProdId());
+        ProdSku prodSku = prodSkuService.getById(orderAddReqVo.getSkuId());
+
+
+        //冻结库存
+        prodSku.setFreez(prodSku.getFreez() + orderAddReqVo.getProdNum());
+        prodSkuService.updateById(prodSku);
+
+
+        //创建订单
+        Order order = new Order();
+        order.setStatus(1)
+                .setUid(1);
+        this.save(order);
+
+
+        //创建订单商品
+        OrderProd orderProd = new OrderProd();
+        orderProd.setProdId(orderAddReqVo.getProdId())
+                .setSkuId(orderAddReqVo.getSkuId())
+                .setUid(1)
+                .setOrderId(order.getOrderId())
+                .setProdName(prod.getProdName())
+                .setProdId(prod.getProdId())
+                .setSkuId(prodSku.getSkuId())
+                .setProdNum(orderAddReqVo.getProdNum())
+                .setProdAttr(prod.getSpuAttr())
+                .setAlbum(prod.getAlbum().split(",")[0]);
+        orderProdService.save(orderProd);
+
+        return true;
+
+    }
 
     private String getAddress(String consignAddr) {
         if (StringUtils.isEmpty(consignAddr)) {

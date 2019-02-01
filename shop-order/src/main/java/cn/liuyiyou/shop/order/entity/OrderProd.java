@@ -1,9 +1,11 @@
 package cn.liuyiyou.shop.order.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
@@ -15,7 +17,9 @@ import java.io.Serializable;
  * @since 2018-11-05
  */
 @TableName("order_prod")
-public class OrderProd extends Model<OrderProd> {
+@Data
+@Accessors(chain = true)
+public class OrderProd implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -92,150 +96,4 @@ public class OrderProd extends Model<OrderProd> {
     @TableField("comment_status")
     private Integer commentStatus;
 
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getProdId() {
-        return prodId;
-    }
-
-    public void setProdId(Long prodId) {
-        this.prodId = prodId;
-    }
-
-    public Long getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(Long skuId) {
-        this.skuId = skuId;
-    }
-
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getProdName() {
-        return prodName;
-    }
-
-    public void setProdName(String prodName) {
-        this.prodName = prodName;
-    }
-
-    public String getProdAttr() {
-        return prodAttr;
-    }
-
-    public void setProdAttr(String prodAttr) {
-        this.prodAttr = prodAttr;
-    }
-
-    public Float getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Float unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Integer getProdNum() {
-        return prodNum;
-    }
-
-    public void setProdNum(Integer prodNum) {
-        this.prodNum = prodNum;
-    }
-
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getCountyId() {
-        return countyId;
-    }
-
-    public void setCountyId(String countyId) {
-        this.countyId = countyId;
-    }
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
-    public Float getRealPrice() {
-        return realPrice;
-    }
-
-    public void setRealPrice(Float realPrice) {
-        this.realPrice = realPrice;
-    }
-
-    public Integer getRefundStatus() {
-        return refundStatus;
-    }
-
-    public void setRefundStatus(Integer refundStatus) {
-        this.refundStatus = refundStatus;
-    }
-
-    public Integer getCommentStatus() {
-        return commentStatus;
-    }
-
-    public void setCommentStatus(Integer commentStatus) {
-        this.commentStatus = commentStatus;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.orderId;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderProd{" +
-        ", orderId=" + orderId +
-        ", prodId=" + prodId +
-        ", skuId=" + skuId +
-        ", uid=" + uid +
-        ", prodName=" + prodName +
-        ", prodAttr=" + prodAttr +
-        ", unitPrice=" + unitPrice +
-        ", prodNum=" + prodNum +
-        ", totalPrice=" + totalPrice +
-        ", countyId=" + countyId +
-        ", barcode=" + barcode +
-        ", album=" + album +
-        ", realPrice=" + realPrice +
-        ", refundStatus=" + refundStatus +
-        ", commentStatus=" + commentStatus +
-        "}";
-    }
 }
