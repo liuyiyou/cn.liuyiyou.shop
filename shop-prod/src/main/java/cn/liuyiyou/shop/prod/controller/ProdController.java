@@ -5,8 +5,10 @@ import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.prod.entity.Prod;
+import cn.liuyiyou.shop.prod.service.DemoService;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -31,6 +33,8 @@ public class ProdController extends BaseController {
 
     @Autowired
     private IProdService prodService;
+
+
 
     @GetMapping("{id}")
     public Result<ProdVo> getById(@PathVariable("id") Long id) {

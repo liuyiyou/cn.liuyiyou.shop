@@ -15,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IProdService extends IService<Prod> {
 
     ProdVo getProdById(Long id);
+
+
+    String syaHello();
 }

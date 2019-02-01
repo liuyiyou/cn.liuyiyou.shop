@@ -5,7 +5,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Value;
 
 @Service(version = "${prod.service.version}")
-@org.springframework.stereotype.Service
 public class DefaultDemoService implements DemoService {
 
 

@@ -1,18 +1,32 @@
 package cn.liuyiyou.shop.order.service.impl;
 
+import cn.liuyiyou.shop.order.config.OrderStatusMap;
 import cn.liuyiyou.shop.order.dto.OrderCountDto;
 import cn.liuyiyou.shop.order.entity.Order;
+import cn.liuyiyou.shop.order.entity.OrderProd;
 import cn.liuyiyou.shop.order.mapper.OrderMapper;
+import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
+import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
+import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
+import cn.liuyiyou.shop.prod.service.DemoService;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>
@@ -25,12 +39,49 @@ import java.util.List;
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
+
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private IOrderProdService orderProdService;
+
+    @Reference(version = "1.0.0")
+    private DemoService demoService;
+
 
     @Override
-    public IPage<Order> orderPage(int uid,int pageNum,int pageSize) {
-        Page page = new Page(pageNum,pageSize);
+    public String sayHello() {
+        System.out.println("service::" + demoService);
+        String sayHello = demoService.sayHello("dubbo");
+        return sayHello;
+    }
+
+    @Override
+    public OrderInfoRespVo getOrderInfo(Long orderId) {
+        Order order = this.getById(orderId);
+        List<OrderProd> orderProds = orderProdService.list(new QueryWrapper<OrderProd>().eq("order_id", order.getOrderId()));
+        List<OrderProdListRespVo> orderProdListRespVos = orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
+                .setProdId(orderProd.getProdId())
+                .setProdName(orderProd.getProdName())
+                .setProdNum(orderProd.getProdNum())
+                .setRealPrice(orderProd.getRealPrice())
+                .setSkuId(orderProd.getSkuId())).collect(toList());
+
+
+        OrderInfoRespVo orderInfoRespVo = new OrderInfoRespVo()
+                .setOrderId(order.getOrderId())
+                .setAddress(getAddress(order.getConsignAddr()))
+                .setConsignee(order.getConsignee())
+                .setConsignPhone(order.getConsignPhone())
+                .setStatus(order.getStatus())
+                .setStatusName(OrderStatusMap.STATUS_MAP.get(order.getStatus()))
+                .setProds(orderProdListRespVos);
+        return orderInfoRespVo;
+    }
+
+    @Override
+    public IPage<Order> orderPage(int uid, int pageNum, int pageSize) {
+        Page page = new Page(pageNum, pageSize);
         IPage pageResult = this.page(page, new QueryWrapper<Order>().eq("uid", uid));
         return pageResult;
     }
@@ -55,4 +106,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         });
         return vo;
     }
+
+
+    private String getAddress(String consignAddr) {
+        if (StringUtils.isEmpty(consignAddr)) {
+            return "";
+        } else {
+            JSONObject addrObject = JSONArray.parseObject(consignAddr);
+            return addrObject.getString("prov") + addrObject.getString("city") + addrObject.getString("country") + addrObject.getString("addr");
+        }
+    }
+
 }

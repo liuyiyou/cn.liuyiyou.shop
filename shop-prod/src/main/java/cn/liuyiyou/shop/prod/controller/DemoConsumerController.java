@@ -1,6 +1,6 @@
 package cn.liuyiyou.shop.prod.controller;
 
-import cn.liuyiyou.shop.prod.service.DemoService;
+import cn.liuyiyou.shop.prod.service.IProdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoConsumerController {
 
     @Autowired
-    private DemoService demoService;
+    private IProdService prodService;
 
     @RequestMapping("/sayHello")
     public String sayHello() {
-        System.out.println("service::" + demoService);
-        return demoService.sayHello("liuyiyou");
+        return prodService.syaHello();
     }
 
 }

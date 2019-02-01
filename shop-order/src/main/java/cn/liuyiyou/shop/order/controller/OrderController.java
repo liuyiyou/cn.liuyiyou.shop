@@ -3,16 +3,14 @@ package cn.liuyiyou.shop.order.controller;
 
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
+import cn.liuyiyou.shop.order.config.OrderStatusMap;
 import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.entity.OrderProd;
 import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
-import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -20,7 +18,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -52,16 +47,6 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class OrderController {
 
-    private static Map<Integer, String> statusMap = new ConcurrentHashMap<>();
-
-    static {
-        statusMap.put(1, "待支付");
-        statusMap.put(2, "待发货");
-        statusMap.put(3, "待确认收货");
-        statusMap.put(4, "交易完成");
-        statusMap.put(5, "订单关闭");
-
-    }
 
     @Autowired
     private IOrderService orderService;
@@ -69,10 +54,15 @@ public class OrderController {
     private IOrderProdService orderProdService;
 
 
+    @GetMapping("/sayHello")
+    public String sayHello() {
+        return orderService.sayHello();
+    }
+
+
     @ApiOperation("订单列表")
     @PostMapping("/list")
     public Result list(@RequestBody @NotNull OrderListReqVo orderListReqVo) {
-        log.info("map大小::" + statusMap.size());
         Page<Order> pageQuery = new Page<>(orderListReqVo.getPageNum(), orderListReqVo.getPageSize());
         LambdaQueryWrapper<Order> wrapper = new QueryWrapper<Order>().lambda().select()
                 .eq(Order::getUid, 1);
@@ -93,7 +83,7 @@ public class OrderController {
             return new OrderListRespVo()
                     .setOrderId(order.getOrderId())
                     .setStatus(order.getStatus())
-                    .setStatusName(statusMap.get(order.getStatus()))
+                    .setStatusName(OrderStatusMap.STATUS_MAP.get(order.getStatus()))
                     .setProds(orderProdListRespVos);
         }).collect(Collectors.toList());
         result.setRecords(orderListRespVos);
@@ -103,27 +93,7 @@ public class OrderController {
     @ApiOperation("订单详情")
     @GetMapping("/{id}")
     public Result list(@PathVariable("id") Long orderId) {
-        Order order = orderService.getById(orderId);
-
-        List<OrderProd> orderProds = orderProdService.list(new QueryWrapper<OrderProd>().eq("order_id", order.getOrderId()));
-        List<OrderProdListRespVo> orderProdListRespVos = orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
-                .setProdId(orderProd.getProdId())
-                .setProdName(orderProd.getProdName())
-                .setProdNum(orderProd.getProdNum())
-                .setRealPrice(orderProd.getRealPrice())
-                .setSkuId(orderProd.getSkuId())).collect(toList());
-
-
-
-        OrderInfoRespVo orderInfoRespVo = new OrderInfoRespVo()
-                .setOrderId(order.getOrderId())
-                .setAddress(getAddress(order.getConsignAddr()))
-                .setConsignee(order.getConsignee())
-                .setConsignPhone(order.getConsignPhone())
-                .setStatus(order.getStatus())
-                .setStatusName(statusMap.get(order.getStatus()))
-                .setProds(orderProdListRespVos);
-        return Response.success().setData(orderInfoRespVo);
+        return Response.success(orderService.getOrderInfo(orderId));
     }
 
 
@@ -175,15 +145,6 @@ public class OrderController {
         return null;
     }
 
-
-    private String getAddress(String consignAddr) {
-        if (StringUtils.isEmpty(consignAddr)) {
-            return "";
-        } else {
-            JSONObject addrObject = JSONArray.parseObject(consignAddr);
-            return addrObject.getString("prov") + addrObject.getString("city") + addrObject.getString("country") + addrObject.getString("addr");
-        }
-    }
 
 }
 

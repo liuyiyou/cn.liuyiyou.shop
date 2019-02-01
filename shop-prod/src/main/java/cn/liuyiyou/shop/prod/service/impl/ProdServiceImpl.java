@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.prod.service.impl;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.mapper.ProdMapper;
+import cn.liuyiyou.shop.prod.service.DemoService;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
@@ -36,13 +37,22 @@ import java.util.stream.Collectors;
 @Service
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
-//    @Reference(version = "${dubbo.service.version}",
-//            application = "${dubbo.application.id}",
-//            url = "dubbo://localhost:12345")
-//    private CountryService countryService;
 
     @Autowired
     private IProdSkuService prodSkuService;
+
+//    @Reference(version = "1.0.0")
+//    private DemoService demoService;
+
+
+    @Override
+    public String syaHello() {
+//        System.out.println("service::" + demoService);
+       // return demoService.sayHello("liuyiyou");
+        return "";
+    }
+
+
 
     @Override
     public ProdVo getProdById(Long id) {
