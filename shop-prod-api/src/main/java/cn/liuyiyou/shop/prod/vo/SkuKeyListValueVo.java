@@ -2,6 +2,7 @@ package cn.liuyiyou.shop.prod.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /***
@@ -11,7 +12,7 @@ import java.util.List;
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Data
-public class SkuKeyListValueVo {
+public class SkuKeyListValueVo implements Serializable {
 
     private String key;
     private List<String> values;

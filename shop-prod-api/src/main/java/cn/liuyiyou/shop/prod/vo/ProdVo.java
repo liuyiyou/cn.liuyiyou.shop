@@ -2,6 +2,7 @@ package cn.liuyiyou.shop.prod.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
  */
 @Data
-public class ProdVo {
+public class ProdVo implements Serializable {
     private List<String> albums;
     private Long prodId;
     private String prodName;
@@ -21,7 +22,6 @@ public class ProdVo {
     private String country;
     private List<ProdSkuVo> prodSkus;
     List<SkuKeyListValueVo> skuKeyListValue;
-
 
 
 }

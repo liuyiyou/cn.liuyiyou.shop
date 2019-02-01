@@ -1,16 +1,11 @@
-package cn.liuyiyou.shop;
+package cn.liuyiyou.shop.prod;
 
 import cn.liuyiyou.shop.prod.config.SpringProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -38,16 +33,16 @@ public class ProdApplication {
     }
 
     public static void main(String[] args) {
-//        SpringApplication.run(ProdApplication.class, args);
-        new SpringApplicationBuilder(ProdApplication.class)
-                .web(WebApplicationType.SERVLET)
-                .listeners((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
-                    Environment environment = event.getEnvironment();
-                    int port = environment.getProperty("embedded.zookeeper.port", int.class);
-                    //启动ZooKeeper
-                    new EmbeddedZooKeeper(port, false).start();
-                })
-                .run(args);
+        SpringApplication.run(ProdApplication.class, args);
+//        new SpringApplicationBuilder(ProdApplication.class)
+//                .web(WebApplicationType.SERVLET)
+//                .listeners((ApplicationListener<ApplicationEnvironmentPreparedEvent>) event -> {
+//                    Environment environment = event.getEnvironment();
+//                    int port = environment.getProperty("embedded.zookeeper.port", int.class);
+//                    //启动ZooKeeper
+//                    new EmbeddedZooKeeper(port, false).start();
+//                })
+//                .run(args);
     }
 
 

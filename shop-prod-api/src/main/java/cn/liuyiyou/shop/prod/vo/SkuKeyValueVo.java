@@ -3,6 +3,8 @@ package cn.liuyiyou.shop.prod.vo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /***
  *
  * @author: liuyiyou.cn
@@ -11,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class SkuKeyValueVo {
+public class SkuKeyValueVo implements Serializable {
 
     private String key;
 

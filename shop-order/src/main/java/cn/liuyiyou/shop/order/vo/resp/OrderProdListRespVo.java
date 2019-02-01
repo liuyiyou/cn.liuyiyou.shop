@@ -18,4 +18,5 @@ public class OrderProdListRespVo {
     private String prodName;
     private Integer prodNum;
     private Float realPrice;
+    private String album;
 }

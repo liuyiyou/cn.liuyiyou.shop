@@ -4,7 +4,7 @@ import cn.liuyiyou.shop.prod.entity.ProdSku;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author: liuyiyou@yanglaoban.com
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class ProdSkuVo extends ProdSku {
+public class ProdSkuVo extends ProdSku implements Serializable {
 
     String skuAttrDesc;
 

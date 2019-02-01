@@ -11,6 +11,7 @@ import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
 import cn.liuyiyou.shop.prod.service.DemoService;
+import cn.liuyiyou.shop.prod.service.IProdService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -18,13 +19,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.stream.Collectors.toList;
 
@@ -37,6 +37,7 @@ import static java.util.stream.Collectors.toList;
  * @since 2018-11-05
  */
 @Service
+@Slf4j
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
 
@@ -47,6 +48,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Reference(version = "1.0.0")
     private DemoService demoService;
+
+
+    @Reference(version = "1.0.0")
+    private IProdService prodService;
 
 
     @Override
@@ -64,6 +69,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setProdId(orderProd.getProdId())
                 .setProdName(orderProd.getProdName())
                 .setProdNum(orderProd.getProdNum())
+                .setAlbum(prodService.getById(orderProd.getProdId()).getAlbum())
                 .setRealPrice(orderProd.getRealPrice())
                 .setSkuId(orderProd.getSkuId())).collect(toList());
 

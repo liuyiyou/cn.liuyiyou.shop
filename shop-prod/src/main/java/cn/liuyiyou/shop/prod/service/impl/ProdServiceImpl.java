@@ -3,7 +3,6 @@ package cn.liuyiyou.shop.prod.service.impl;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.mapper.ProdMapper;
-import cn.liuyiyou.shop.prod.service.DemoService;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
@@ -11,7 +10,6 @@ import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyListValueVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyValueVo;
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,23 +33,12 @@ import java.util.stream.Collectors;
  * @since 2018-10-30
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${prod.service.version}")
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
 
     @Autowired
     private IProdSkuService prodSkuService;
-
-//    @Reference(version = "1.0.0")
-//    private DemoService demoService;
-
-
-    @Override
-    public String syaHello() {
-//        System.out.println("service::" + demoService);
-       // return demoService.sayHello("liuyiyou");
-        return "";
-    }
-
 
 
     @Override

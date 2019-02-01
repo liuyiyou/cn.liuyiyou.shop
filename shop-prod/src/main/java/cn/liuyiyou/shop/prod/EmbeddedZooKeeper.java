@@ -1,4 +1,4 @@
-package cn.liuyiyou.shop;
+package cn.liuyiyou.shop.prod;
 
 import org.apache.zookeeper.server.ServerConfig;
 import org.apache.zookeeper.server.ZooKeeperServerMain;
