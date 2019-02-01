@@ -132,14 +132,24 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //冻结库存
         prodSku.setFreez(prodSku.getFreez() + orderAddReqVo.getProdNum());
-        prodSkuService.updateById(prodSku);
+        boolean freezSkuResult = prodSkuService.updateById(prodSku);
+        if (freezSkuResult) {
+            log.info("冻结库存成功，skuId为::" + prodSku.getSkuId());
+        } else {
+            log.info("冻结库存失败，skuId为::" + prodSku.getSkuId());
+        }
 
 
         //创建订单
         Order order = new Order();
         order.setStatus(1)
                 .setUid(1);
-        this.save(order);
+        boolean saveOrderResult = this.save(order);
+        if (saveOrderResult) {
+            log.info("创建订单成功，订单id为::" + order.getOrderId());
+        } else {
+            log.info("创建订单失败");
+        }
 
 
         //创建订单商品
@@ -154,8 +164,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setProdNum(orderAddReqVo.getProdNum())
                 .setProdAttr(prod.getSpuAttr())
                 .setAlbum(prod.getAlbum().split(",")[0]);
-        orderProdService.save(orderProd);
-
+        boolean saveOrderProd = orderProdService.save(orderProd);
+        if (saveOrderProd) {
+            log.info("创建订单商品成功，id为::" + orderProd.getOrderId());
+        } else {
+            log.info("创建订单商品失败");
+        }
         return true;
 
     }
