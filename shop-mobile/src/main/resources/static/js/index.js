@@ -2,8 +2,6 @@ $(document).ready(function () {
 
     //首页banner
     banner();
-
-
     //品牌精选
     brand();
 });
@@ -50,9 +48,13 @@ function brand() {
                 var data = data.data;
                 var html = '';
                 data.forEach(function (item) {
-                    html += '<div class="swiper-slide"><a href="pro_list.html?brandId=' + item.brandId + '">' +
+                    html += '<div class="swiper-slide">' +
+                        '<a href="pro_list.html?brandId=' + item.brandId + '">' +
                         '<img src="' + OSS_URL + item.brandIcon + '"/></a></div>'
+
+                    console.info("aaaaaa"+html);
                 });
+
                 $('#brand_list').html(html);
                 $(".swiper-jiushui").swiper({
                     pagination: '.swiper-pagination',
