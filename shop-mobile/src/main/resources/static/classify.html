@@ -35,25 +35,35 @@
         </header>
     </div>
     <aside>
-        <div class="menu-left scrollbar-none" id="sidebar">
-            <ul id="first_category_list">
-            </ul>
-        </div>
+
     </aside>
+
+</div>
+<script type="text/html" id="first_category_list_template">
+    <div class="menu-left scrollbar-none" id="sidebar">
+        <ul>
+            {{each list}}
+            {{if $index ==0}}
+            <li class="active" data-id="{{$value.cataId}}">{{$value.cataName}}</li>
+            {{/if}}
+            {{if $index !=0}}
+            <li data-id="{{$value.cataId}}">{{$value.cataName}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
     <section class="menu-right padding-all j-content">
         <h5>酒水食品</h5>
-        <ul>
+        <ul id="secondCategory">
             <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
             <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-        </ul>
-        <h5>酒水食品</h5>
-        <ul>
+            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
+            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
             <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
             <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
         </ul>
     </section>
-</div>
-
+</script>
 <div class="weui-tabbar wy-foot-menu">
     <a href="index.html" class="weui-tabbar__item">
         <div class="weui-tabbar__icon foot-menu-home"></div>
@@ -92,7 +102,7 @@
     });
 
     function loadFirstCategoryList() {
-        var url = BASE_BASE_URL + "/category/list";
+        var url = BASE_BASE_URL + "/category/listTree";
         $.ajax({
             type: "get",
             url: url,
@@ -117,15 +127,6 @@
         });
     }
 </script>
-<script type="text/html" id="first_category_list_template">
-    {{each list}}
-    {{if $index ==0}}
-    <li class="active" data-id="{{$value.cataId}}">{{$value.cataName}}</li>
-    {{/if}}
-    {{if $index !=0}}
-    <li>{{$value.cataName}}</li>
-    {{/if}}
-    {{/each}}
-</script>
+
 </body>
 </html>

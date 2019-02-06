@@ -3,7 +3,6 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.entity.Brand;
 import cn.liuyiyou.shop.base.service.IBrandService;
-import cn.liuyiyou.shop.base.vo.Prod;
 import cn.liuyiyou.shop.base.vo.SimpleProdVo;
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
@@ -39,6 +38,14 @@ public class BrandController extends BaseController {
     @Autowired
     private IBrandService brandService;
 
+
+    @GetMapping("/list")
+    public Result<List<Brand>> list() {
+        List<Brand> brands = brandService.getBrandByPage(1, 20).getRecords();
+        return Response.success(brands);
+    }
+
+
     @GetMapping("/list/{page}-{pageSize}")
     public IPage<Brand> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
         return brandService.getBrandByPage(page, pageSize);
@@ -49,25 +56,6 @@ public class BrandController extends BaseController {
         return Response.success(brandService.getById(brandId));
     }
 
-    @GetMapping("/prods/{brandId}/{page}-{pageSize}")
-    public IPage<SimpleProdVo> prods(@PathVariable("brandId") int brandId, @PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
-        IPage<Prod> prods = brandService.getProdsPageByBrandId(brandId, page, pageSize);
-        Page<SimpleProdVo> simpleProdVoPage = new Page<>();
-        List<SimpleProdVo> simpleProdVos = new ArrayList<>();
-        prods.getRecords().forEach(prod -> {
-            SimpleProdVo simpleProdVo = new SimpleProdVo();
-            simpleProdVo.setPic(prod.getAlbum().split(",")[0]);
-            simpleProdVo.setProdId(prod.getProdId());
-            simpleProdVo.setProdName(prod.getProdName());
-            simpleProdVo.setProdPrice(Float.valueOf(String.valueOf(Math.random() * 100)));
-            simpleProdVo.setReferPrice(Float.valueOf(String.valueOf(Math.random() * 120)));
-            simpleProdVos.add(simpleProdVo);
-        });
-        simpleProdVoPage.setRecords(simpleProdVos);
-        simpleProdVoPage.setTotal(prods.getTotal());
-        simpleProdVoPage.setCurrent(prods.getCurrent());
-        simpleProdVoPage.setSize(prods.getSize());
-        return simpleProdVoPage;
-    }
+
 }
 

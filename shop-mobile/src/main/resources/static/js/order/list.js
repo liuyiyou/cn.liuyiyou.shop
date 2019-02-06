@@ -1,8 +1,8 @@
 $(document).ready(function () {
     //加载地址列表
+
+
     loadOrders(0,'tab1');
-
-
 
     $(function(){
         $('.weui-navbar__item').on('click', function () {

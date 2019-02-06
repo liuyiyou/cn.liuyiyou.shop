@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.base.vo.CategorySimpleVo;
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
@@ -42,10 +43,17 @@ public class CategoryController extends BaseController {
     @Autowired
     private ICategoryService categoryService;
 
-//    @GetMapping("/list/{page}-{pageSize}")
-//    public IPage<Category> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
-//        return categoryService.getCategoryByPage(page, pageSize);
-//    }
+    @GetMapping("/list/{page}-{pageSize}")
+    public IPage<Category> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
+        return categoryService.getCategoryByPage(page, pageSize);
+    }
+
+
+    @ApiOperation(value = "从一级类目往下获取")
+    @GetMapping("/listTree")
+    public Result<List<CategorySimpleVo>> getCategoryTree() {
+        return Response.success(categoryService.getCategoryTree());
+    }
 
     @ApiOperation(value = "获取一级类目")
     @GetMapping("/list")

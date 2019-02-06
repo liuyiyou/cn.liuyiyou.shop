@@ -1,7 +1,6 @@
 package cn.liuyiyou.shop.base.service;
 
 import cn.liuyiyou.shop.base.entity.Banner;
-import cn.liuyiyou.shop.base.vo.BannerVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -14,5 +13,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBannerService extends IService<Banner> {
 
-    BannerVo loadBanners4HomePage();
 }

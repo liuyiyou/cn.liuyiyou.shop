@@ -30,14 +30,12 @@
                 </div>
                 <div class="wy-media-box-nomg weui-media-box_text">
                     <h4 class="wy-media-box__title" id="prodName"></h4>
-                    <div class="wy-pro-pri mg-tb-5">¥<em class="num font-20">296.00</em></div>
+                    <div class="wy-pro-pri mg-tb-5">¥<em class="num font-20" id="price"></em></div>
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item ">
                 <div class="pro-detail">
-                    <img src="upload/xq1.jpg"/><img src="upload/xq2.jpg"/><img src="upload/xq3.jpg"/><img
-                        src="upload/xq4.jpg"/><img src="upload/xq5.jpg"/><img src="upload/xq6.jpg"/><img
-                        src="upload/xq7.jpg"/><img src="upload/xq8.jpg"/><img src="upload/xq9.jpg"/>
+
                 </div>
             </div>
         </div>
@@ -52,7 +50,7 @@
         <p class="weui-tabbar__label">收藏</p>
     </a>
     <a href="shopcart.html" class="promotion-foot-menu-items">
-        <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+        <span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;"></span>
         <div class="weui-tabbar__icon promotion-foot-menu-cart"></div>
         <p class="weui-tabbar__label">购物车</p>
     </a>
@@ -98,7 +96,7 @@
                 </div>
                 <div class="weui-msg__opr-area">
                     <p class="weui-btn-area">
-                        <a href="order_info.html" class="weui-btn weui-btn_primary">确定</a>
+                        <a id="buynow" class="weui-btn weui-btn_primary">确定</a>
                     </p>
                 </div>
             </div>
@@ -151,6 +149,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         getProd();
+
+        $("#buynow").click(function () {
+            buynow();
+        });
     });
 
     function getProd() {
@@ -167,10 +169,11 @@
                     var prod = data.data;
                     $("#prodName").text(prod.prodName);
                     prod.albums.forEach(function (item) {
-                        console.info(item);
                         var picUrl = 'https://oss.yanglaoban.com/' + item;
                         $("#swiper").append('<div class="swiper-slide"><img src="' + picUrl + '"/></div>');
                     });
+
+                    $("#price").text(prod.prodSkus[0].price);
 
                     var html = template("sku_list_template", {"list": prod.skuKeyListValue});
                     document.getElementById('sku_list').innerHTML = html;
@@ -195,6 +198,37 @@
         });
 
     }
+
+
+    /**
+     * 立即购买
+     */
+    function buynow() {
+        var url = ORDER_BASE_URL + "/order/add";
+        var params = {};
+        params.prodId = 210101063;
+        params.skuId = 21010106301;
+        params.prodNum = 1;
+        console.info(params);
+        $.ajax({
+            type: "post",
+            url: url,
+            data: JSON.stringify(params),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data)
+                if (data.success) {
+                    console.info(data);
+                    window.location.href = "/order_info.html?id=" + data.data;
+                }
+            },
+            error: function (data) {
+            }
+        });
+
+    }
+
 </script>
 <script>
     $(document).on("click", "#show-toast", function () {

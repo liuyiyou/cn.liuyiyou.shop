@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>shop-base</name>
-    <description>Demo project for Spring Boot</description>
+    <description>基础服务</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -64,7 +64,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.0-RC</version>
+            <version>3.0.6</version>
         </dependency>
 
         <dependency>

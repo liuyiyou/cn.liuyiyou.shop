@@ -3,14 +3,18 @@ package cn.liuyiyou.shop.base.service.impl;
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.mapper.CategoryMapper;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.base.vo.CategorySimpleVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -43,6 +47,31 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<Category> findListByLevel(int categoryTyep) {
         List<Category> list = this.list(new QueryWrapper<Category>().eq("cata_type", categoryTyep).orderByDesc(true, "cata_weight"));
+        return list;
+    }
+
+    @Override
+    public List<CategorySimpleVo> getCategoryTree() {
+        List<CategorySimpleVo> categorySimpleVos = Lists.newArrayList();
+        List<Category> firstCategories = findListByLevel(1);
+        firstCategories.forEach(category -> {
+            CategorySimpleVo categorySimpleVo = new CategorySimpleVo();
+            BeanUtils.copyProperties(category, categorySimpleVo);
+            List<Category> childrenCategory = findListByCataParentId(category.getCataId());
+            List<CategorySimpleVo> children = childrenCategory.stream().map(e -> {
+                CategorySimpleVo childCategorySimpleVo = new CategorySimpleVo();
+                BeanUtils.copyProperties(e, childCategorySimpleVo);
+                return childCategorySimpleVo;
+            }).collect(Collectors.toList());
+            categorySimpleVo.setChildren(children);
+            categorySimpleVos.add(categorySimpleVo);
+        });
+        return categorySimpleVos;
+    }
+
+    @Override
+    public List<Category> findListByCataParentId(Integer cataParentId) {
+        List<Category> list = this.list(new QueryWrapper<Category>().eq("cata_parent_id", cataParentId).orderByDesc(true, "cata_weight"));
         return list;
     }
 }

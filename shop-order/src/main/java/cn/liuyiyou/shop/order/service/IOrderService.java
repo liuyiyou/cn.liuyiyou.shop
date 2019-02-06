@@ -42,5 +42,5 @@ public interface IOrderService extends IService<Order> {
 
     OrderInfoRespVo getOrderInfo(Long orderId);
 
-    boolean createOrder(OrderAddReqVo orderAddReqVo);
+    Long createOrder(OrderAddReqVo orderAddReqVo);
 }

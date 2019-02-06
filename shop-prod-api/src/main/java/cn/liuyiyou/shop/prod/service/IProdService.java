@@ -1,7 +1,10 @@
 package cn.liuyiyou.shop.prod.service;
 
 import cn.liuyiyou.shop.prod.entity.Prod;
+import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
+import cn.liuyiyou.shop.prod.vo.ProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /***
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IProdService extends IService<Prod> {
 
     ProdVo getProdById(Long id);
+
+
+    IPage<ProdListRespVo> prodPage(ProdListReqVo prodListReqVo);
 }

@@ -30,30 +30,5 @@ import static java.util.stream.Collectors.groupingBy;
 @Service
 public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
 
-    @Autowired
-    private IConfigService configService;
 
-    @Override
-    public BannerVo loadBanners4HomePage() {
-        LambdaQueryWrapper<Banner> bannerQueryWrapper = new QueryWrapper<Banner>().lambda().select().eq(Banner::getType, 1);
-        Map<String, List<Banner>> stringListMap = dealWithBannerList(this.list(bannerQueryWrapper));
-        List<BannerIcon> bannerIcons = getBannerIcons();
-        BannerVo vo = new BannerVo();
-        vo.setFirstBannerList(stringListMap.get("1"))
-                .setFirstBannerIconList(bannerIcons)
-                .setSecondBannerList(stringListMap.get("2"));
-        return vo;
-    }
-
-    public List<BannerIcon> getBannerIcons() {
-        List<BannerIcon> bannerIcons = parseArray(configService.getById(10087).getConfigValue(), BannerIcon.class);
-        return bannerIcons;
-    }
-
-
-    private Map<String, List<Banner>> dealWithBannerList(List<Banner> banners) {
-        return returnEmptyListIfNull(banners)
-                .stream()
-                .collect(groupingBy(baseBanner -> baseBanner.getPosition().toString()));
-    }
 }

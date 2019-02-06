@@ -101,11 +101,8 @@ public class OrderController {
 
     @ApiOperation("订单提交")
     @PostMapping("/add")
-    public Result add(@RequestBody OrderAddReqVo orderAddReqVo) {
-        orderService.createOrder(orderAddReqVo);
-
-
-        return null;
+    public Result<Long> add(@RequestBody OrderAddReqVo orderAddReqVo) {
+        return Response.success(orderService.createOrder(orderAddReqVo));
     }
 
 

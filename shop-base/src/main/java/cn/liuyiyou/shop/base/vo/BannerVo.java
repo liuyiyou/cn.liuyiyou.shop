@@ -1,40 +1,17 @@
 package cn.liuyiyou.shop.base.vo;
 
-import cn.liuyiyou.shop.base.entity.Banner;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  */
-public class BannerVo {
-    private List<Banner> firstBannerList;
-    private List<BannerIcon> firstBannerIconList;
-    private List<Banner> secondBannerList;
+@Data
+@Accessors(chain = true)
+public class BannerVo implements Serializable {
 
-    public List<Banner> getFirstBannerList() {
-        return firstBannerList;
-    }
+    private String pic;
+    private String url;
 
-    public BannerVo setFirstBannerList(List<Banner> firstBannerList) {
-        this.firstBannerList = firstBannerList;
-        return this;
-    }
-
-    public List<BannerIcon> getFirstBannerIconList() {
-        return firstBannerIconList;
-    }
-
-    public BannerVo setFirstBannerIconList(List<BannerIcon> firstBannerIconList) {
-        this.firstBannerIconList = firstBannerIconList;
-        return this;
-    }
-
-    public List<Banner> getSecondBannerList() {
-        return secondBannerList;
-    }
-
-    public BannerVo setSecondBannerList(List<Banner> secondBannerList) {
-        this.secondBannerList = secondBannerList;
-        return this;
-    }
 }

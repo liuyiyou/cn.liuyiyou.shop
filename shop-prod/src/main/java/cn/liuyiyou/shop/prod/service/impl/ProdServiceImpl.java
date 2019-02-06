@@ -6,12 +6,16 @@ import cn.liuyiyou.shop.prod.mapper.ProdMapper;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
+import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
+import cn.liuyiyou.shop.prod.vo.ProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyListValueVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyValueVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +44,29 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
     @Autowired
     private IProdSkuService prodSkuService;
 
+
+    @Override
+    public IPage<ProdListRespVo> prodPage(ProdListReqVo prodListReqVo) {
+        Page<Prod> pageQuery = new Page<>(prodListReqVo.getPage(), prodListReqVo.getPageSize());
+        QueryWrapper<Prod> prodQueryWrapper = new QueryWrapper<>();
+        if (prodListReqVo.getBrandId() != null) {
+            prodQueryWrapper.eq("brand_id", prodListReqVo.getBrandId());
+        }
+        IPage<Prod> prodIPage = this.page(pageQuery, prodQueryWrapper);
+        IPage<ProdListRespVo> prodListRespVoIPage = new Page<>(prodIPage.getCurrent(), prodIPage.getSize(), prodIPage.getTotal());
+        List<ProdListRespVo> listRespVos = prodIPage.getRecords().stream().map(prod -> {
+            ProdListRespVo prodListRespVo = new ProdListRespVo();
+            prodListRespVo.setAlbum(prod.getAlbum().split(",")[0])
+                    .setCommentNum(Math.round(1000))
+                    .setPrice(Math.round(10000) * 1.1F)
+                    .setProdId(prod.getProdId())
+                    .setProdName(prod.getProdName());
+
+            return prodListRespVo;
+        }).collect(Collectors.toList());
+        prodListRespVoIPage.setRecords(listRespVos);
+        return prodListRespVoIPage;
+    }
 
     @Override
     public ProdVo getProdById(Long id) {

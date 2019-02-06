@@ -123,7 +123,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public boolean createOrder(OrderAddReqVo orderAddReqVo) {
+    public Long createOrder(OrderAddReqVo orderAddReqVo) {
 
         //通过dubbo获取prod和prodSku
         Prod prod = prodService.getById(orderAddReqVo.getProdId());
@@ -144,6 +144,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = new Order();
         order.setStatus(1)
                 .setUid(1);
+
         boolean saveOrderResult = this.save(order);
         if (saveOrderResult) {
             log.info("创建订单成功，订单id为::" + order.getOrderId());
@@ -170,7 +171,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         } else {
             log.info("创建订单商品失败");
         }
-        return true;
+        return order.getOrderId();
 
     }
 
