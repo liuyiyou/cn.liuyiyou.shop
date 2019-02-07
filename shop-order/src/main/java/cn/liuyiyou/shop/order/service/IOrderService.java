@@ -2,9 +2,12 @@ package cn.liuyiyou.shop.order.service;
 
 import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
+import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
+import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -43,4 +46,6 @@ public interface IOrderService extends IService<Order> {
     OrderInfoRespVo getOrderInfo(Long orderId);
 
     Long createOrder(OrderAddReqVo orderAddReqVo);
+
+    Page<OrderListRespVo> getOrderList(OrderListReqVo orderListReqVo);
 }

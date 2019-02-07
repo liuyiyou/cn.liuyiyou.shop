@@ -15,7 +15,7 @@ public class ProdListReqVo {
 
     private Integer page;
     private Integer pageSize;
-    private Integer cateId;
+    private Integer cataId;
     private String orderBy;
     private Long brandId;
 

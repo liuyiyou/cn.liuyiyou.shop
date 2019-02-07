@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.order.service.impl;
 
+import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.order.config.OrderStatusMap;
 import cn.liuyiyou.shop.order.dto.OrderCountDto;
 import cn.liuyiyou.shop.order.entity.Order;
@@ -8,28 +9,36 @@ import cn.liuyiyou.shop.order.mapper.OrderMapper;
 import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
+import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
+import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderProdListRespVo;
+import cn.liuyiyou.shop.order.vo.resp.UserDeliveryVo;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.service.DemoService;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -52,6 +61,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Autowired
     private IOrderProdService orderProdService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Reference(version = "1.0.0")
     private DemoService demoService;
 
@@ -68,6 +80,36 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         System.out.println("service::" + demoService);
         String sayHello = demoService.sayHello("dubbo");
         return sayHello;
+    }
+
+    @Override
+    public Page<OrderListRespVo> getOrderList(OrderListReqVo orderListReqVo) {
+        Page<Order> pageQuery = new Page<>(orderListReqVo.getPageNum(), orderListReqVo.getPageSize());
+        LambdaQueryWrapper<Order> wrapper = new QueryWrapper<Order>().lambda().select()
+                .eq(Order::getUid, 1);
+        if (orderListReqVo.getStatus() != null && orderListReqVo.getStatus() != 0) {
+            wrapper.eq(Order::getStatus, orderListReqVo.getStatus());
+        }
+        wrapper.orderByDesc(Order::getOrderId);
+        IPage<Order> orderIPage = this.page(pageQuery, wrapper);
+        Page<OrderListRespVo> result = new Page<>(orderIPage.getCurrent(), orderIPage.getSize(), orderIPage.getTotal());
+        List<OrderListRespVo> orderListRespVos = orderIPage.getRecords().stream().map(order -> {
+            List<OrderProd> orderProds = orderProdService.list(new QueryWrapper<OrderProd>().eq("order_id", order.getOrderId()));
+            List<OrderProdListRespVo> orderProdListRespVos = orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
+                    .setProdId(orderProd.getProdId())
+                    .setProdName(orderProd.getProdName())
+                    .setProdNum(orderProd.getProdNum())
+                    .setAlbum(orderProd.getAlbum())
+                    .setRealPrice(orderProd.getRealPrice())
+                    .setSkuId(orderProd.getSkuId())).collect(toList());
+            return new OrderListRespVo()
+                    .setOrderId(order.getOrderId())
+                    .setStatus(order.getStatus())
+                    .setStatusName(OrderStatusMap.STATUS_MAP.get(order.getStatus()))
+                    .setProds(orderProdListRespVos);
+        }).collect(Collectors.toList());
+        result.setRecords(orderListRespVos);
+        return result;
     }
 
     @Override
@@ -130,6 +172,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         ProdSku prodSku = prodSkuService.getById(orderAddReqVo.getSkuId());
 
 
+        //通过Ribbon获取用户地址信息
+        UserDeliveryVo userDeliveryVo = new UserDeliveryVo();
+        Result<UserDeliveryVo> body = restTemplate.getForEntity("http://USER-SERVICE/user/delivery", Result.class).getBody();
+        if (body.isSuccess()) {
+            userDeliveryVo = JSON.parseObject(JSON.toJSONString(body.getData()), UserDeliveryVo.class);
+        }
+        log.info("收获地址：：" + userDeliveryVo);
+
+
         //冻结库存
         prodSku.setFreez(prodSku.getFreez() + orderAddReqVo.getProdNum());
         boolean freezSkuResult = prodSkuService.updateById(prodSku);
@@ -144,6 +195,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = new Order();
         order.setStatus(1)
                 .setUid(1);
+        BeanUtils.copyProperties(userDeliveryVo,order);
 
         boolean saveOrderResult = this.save(order);
         if (saveOrderResult) {

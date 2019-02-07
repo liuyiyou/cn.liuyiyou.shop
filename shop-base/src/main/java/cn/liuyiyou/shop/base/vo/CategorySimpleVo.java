@@ -16,6 +16,8 @@ import java.util.List;
 @Accessors(chain = true)
 public class CategorySimpleVo implements Serializable {
 
+    private String parentCataName;
+
     private Integer cataId;
 
     private String cataName;

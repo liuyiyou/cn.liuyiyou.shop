@@ -35,41 +35,39 @@
         </header>
     </div>
     <aside>
-
+        <div class="menu-left scrollbar-none" id="sidebar">
+            <ul id="first_category_list">
+            </ul>
+        </div>
+        <section class="menu-right padding-all j-content" id="second_category_list">
+        </section>
     </aside>
 
 </div>
 <script type="text/html" id="first_category_list_template">
-    <div class="menu-left scrollbar-none" id="sidebar">
-        <ul>
-            {{each list}}
-            {{if $index ==0}}
-            <li class="active" data-id="{{$value.cataId}}">{{$value.cataName}}</li>
-            {{/if}}
-            {{if $index !=0}}
-            <li data-id="{{$value.cataId}}">{{$value.cataName}}</li>
-            {{/if}}
-            {{/each}}
-        </ul>
-    </div>
-    <section class="menu-right padding-all j-content">
-        <h5>酒水食品</h5>
-        <ul id="secondCategory">
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-            <li class="w-3"><a href="pro_list.html"></a> <img src="upload/pro3.jpg"><span>酒水食品</span></li>
-        </ul>
-    </section>
+    {{each list}}
+    {{if $index ==0}}
+    <li class="active" data-id="{{$value.cataId}}">{{$value.cataName}}</li>
+    {{/if}}
+    {{if $index !=0}}
+    <li data-id="{{$value.cataId}}">{{$value.cataName}}</li>
+    {{/if}}
+    {{/each}}
+</script>
+<script type="text/html" id="second_category_list_template">
+    <h5>xxxxxx</h5>
+    <ul>
+        {{each list}}
+        <li class="w-3"><a href="pro_list.html?cataId={{$value.cataId}}"></a> <img src="upload/pro3.jpg"><span>{{$value.cataName}}</span></li>
+        {{/each}}
+    </ul>
 </script>
 <div class="weui-tabbar wy-foot-menu">
     <a href="index.html" class="weui-tabbar__item">
         <div class="weui-tabbar__icon foot-menu-home"></div>
         <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="classify.html" class="weui-tabbar__item">
+    <a href="classify.html" class="weui-tabbar__item weui-bar__item--on">
         <div class="weui-tabbar__icon foot-menu-list"></div>
         <p class="weui-tabbar__label">分类</p>
     </a>
@@ -78,7 +76,7 @@
         <div class="weui-tabbar__icon foot-menu-cart"></div>
         <p class="weui-tabbar__label">购物车</p>
     </a>
-    <a href="mine.html" class="weui-tabbar__item weui-bar__item--on">
+    <a href="mine.html" class="weui-tabbar__item">
         <div class="weui-tabbar__icon foot-menu-member"></div>
         <p class="weui-tabbar__label">我的</p>
     </a>
@@ -114,11 +112,17 @@
                     var html = template("first_category_list_template", {"list": data});
                     document.getElementById('first_category_list').innerHTML = html;
 
+
+                    var secondCategory = template("second_category_list_template", {"list": data[0].children});
+                    document.getElementById('second_category_list').innerHTML = secondCategory;
+
                     //这里才能绑定
                     $('#sidebar ul li').click(function () {
                         $(this).addClass('active').siblings('li').removeClass('active');
                         var index = $(this).index();
                         $('.j-content').eq(index).show().siblings('.j-content').hide();
+                        var secondCategory = template("second_category_list_template", {"list": data[index].children});
+                        document.getElementById('second_category_list').innerHTML = secondCategory;
                     })
                 }
             },

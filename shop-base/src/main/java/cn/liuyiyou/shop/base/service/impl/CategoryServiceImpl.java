@@ -61,6 +61,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             List<CategorySimpleVo> children = childrenCategory.stream().map(e -> {
                 CategorySimpleVo childCategorySimpleVo = new CategorySimpleVo();
                 BeanUtils.copyProperties(e, childCategorySimpleVo);
+                childCategorySimpleVo.setParentCataName(e.getCataName());
                 return childCategorySimpleVo;
             }).collect(Collectors.toList());
             categorySimpleVo.setChildren(children);

@@ -54,6 +54,18 @@ public class UserDeliveryController {
         return Response.success(userDelivery);
     }
 
+    @ApiOperation(value = "根据UId获取默认收货地址")
+    @GetMapping("")
+    public Result<UserDelivery> getByUid(HttpServletRequest request) {
+        Integer uid = getUid(request);
+        if (uid == null) {
+            uid = 1;
+        }
+        UserDelivery userDelivery = userDeliveryService.getById(2);
+//        Assert.isTrue(userDelivery.getUid().equals(uid), "只允许编辑自己的收获地址");
+        return Response.success(userDelivery);
+    }
+
 
     @ApiOperation(value = "编辑收货地址")
     @PostMapping("/edit")

@@ -52,6 +52,9 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
         if (prodListReqVo.getBrandId() != null) {
             prodQueryWrapper.eq("brand_id", prodListReqVo.getBrandId());
         }
+        if (prodListReqVo.getCataId() != null) {
+            prodQueryWrapper.likeRight("cata_id", prodListReqVo.getCataId());
+        }
         IPage<Prod> prodIPage = this.page(pageQuery, prodQueryWrapper);
         IPage<ProdListRespVo> prodListRespVoIPage = new Page<>(prodIPage.getCurrent(), prodIPage.getSize(), prodIPage.getTotal());
         List<ProdListRespVo> listRespVos = prodIPage.getRecords().stream().map(prod -> {

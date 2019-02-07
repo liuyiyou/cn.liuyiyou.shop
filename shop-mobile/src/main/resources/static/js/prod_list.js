@@ -5,11 +5,13 @@ $(document).ready(function () {
 
 function prodList() {
     var brandId = getQueryStr("brandId");
+    var cataId = getQueryStr("cataId");
     var url = PROD_BASE_URL + "/prod/list";
     var params = {};
     params.page = 1;
     params.pageSize = 10;
     params.brandId = brandId;
+    params.cataId = cataId;
     $.ajax({
         type: "post",
         url: url,

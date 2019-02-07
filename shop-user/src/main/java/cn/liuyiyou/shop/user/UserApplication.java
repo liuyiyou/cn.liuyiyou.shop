@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.user;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import java.util.List;
 @MapperScan("cn.liuyiyou.shop.user.mapper")
 @RestController
 @EnableSwagger2
+@EnableDiscoveryClient
 public class UserApplication {
 
     public static void main(String[] args) {

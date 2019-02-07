@@ -1,6 +1,6 @@
 package cn.liuyiyou.shop.order.controller;
 
-import cn.liuyiyou.shop.order.vo.Prod;
+import cn.liuyiyou.shop.prod.entity.Prod;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;

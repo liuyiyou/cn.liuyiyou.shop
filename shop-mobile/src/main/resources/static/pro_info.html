@@ -29,13 +29,15 @@
                     <div class="swiper-pagination swiper-zhutu-pagination"></div>
                 </div>
                 <div class="wy-media-box-nomg weui-media-box_text">
+                    <div style="display:none;" id="prodId"></div>
+                    <div style="display:none;" id="signleSku"></div>
+                    <div style="display:none;" id="skuId"></div>
                     <h4 class="wy-media-box__title" id="prodName"></h4>
                     <div class="wy-pro-pri mg-tb-5">¥<em class="num font-20" id="price"></em></div>
                 </div>
             </div>
             <div id="tab2" class="weui-tab__bd-item ">
                 <div class="pro-detail">
-
                 </div>
             </div>
         </div>
@@ -168,16 +170,21 @@
                 if (data.success) {
                     var prod = data.data;
                     $("#prodName").text(prod.prodName);
+                    $("#prodId").text(prod.prodId)
                     prod.albums.forEach(function (item) {
-                        var picUrl = 'https://oss.yanglaoban.com/' + item;
+                        var picUrl = OSS_URL + item;
                         $("#swiper").append('<div class="swiper-slide"><img src="' + picUrl + '"/></div>');
                     });
 
                     $("#price").text(prod.prodSkus[0].price);
 
+                    if (prod.skuKeyListValue.length == 0) {
+                        $("#signleSku").text(true);
+                        $("#skuId").text(prod.prodSkus[0].skuId);
+                    }
+
                     var html = template("sku_list_template", {"list": prod.skuKeyListValue});
                     document.getElementById('sku_list').innerHTML = html;
-
 
                     $(".promotion-sku li").click(function () {
                         $(this).addClass("active").siblings("li").removeClass("active");
@@ -206,9 +213,14 @@
     function buynow() {
         var url = ORDER_BASE_URL + "/order/add";
         var params = {};
-        params.prodId = 210101063;
-        params.skuId = 21010106301;
-        params.prodNum = 1;
+        params.prodId = $("#prodId").text();
+        if ($("#signleSku").text() == true) {
+            params.skuId = $("#skuId").text();
+        } else {
+            params.skuId = 21010106301;
+        }
+
+        params.prodNum = $(".Amount").val();
         console.info(params);
         $.ajax({
             type: "post",
@@ -219,7 +231,6 @@
             success: function (data) {
                 console.info(data)
                 if (data.success) {
-                    console.info(data);
                     window.location.href = "/order_info.html?id=" + data.data;
                 }
             },

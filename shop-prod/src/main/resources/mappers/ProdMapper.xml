@@ -19,14 +19,12 @@
         <result column="album" property="album" />
         <result column="brief" property="brief" />
         <result column="descp" property="descp" />
-        <result column="create_suid" property="createSuid" />
-        <result column="update_logs" property="updateLogs" />
         <result column="last_update" property="lastUpdate" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        prod_id, prod_name, key_words, brand_id, brand_name, country_id, cata_id, cata_desc, spu_attr, create_time, status, status_time, album, brief, descp, create_suid, update_logs, last_update
+        prod_id, prod_name, key_words, brand_id, brand_name, country_id, cata_id, cata_desc, spu_attr, create_time, status, status_time, album, brief, descp, last_update
     </sql>
 
 </mapper>

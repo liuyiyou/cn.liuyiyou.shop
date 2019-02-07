@@ -20,8 +20,6 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class Prod implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * 产品标识
      */
@@ -115,16 +113,7 @@ public class Prod implements Serializable {
      * 产品描述(静态化) 基本上都是图片
      */
     private String descp;
-    /**
-     * 创建人的ID
-     */
-    @TableField("create_suid")
-    private Long createSuid;
-    /**
-     * 修改记录，JSON格式[{suid,datetime}]
-     */
-    @TableField("update_logs")
-    private String updateLogs;
+
     /**
      * 最后一次修改的UNIX时间戳，用于排序，静态页面版本控制。
      */
