@@ -10,6 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
+ */
 @ConditionalOnClass({MybatisSqlSessionTemplate.class})
 @Configuration
 public class MybatisPlusConfig {

@@ -48,4 +48,16 @@ public interface IOrderService extends IService<Order> {
     Long createOrder(OrderAddReqVo orderAddReqVo);
 
     Page<OrderListRespVo> getOrderList(OrderListReqVo orderListReqVo);
+
+    /**
+     * 取消订单
+     *
+     * @param orderId
+     * @return
+     */
+    Boolean cancelOrder(Long orderId);
+
+    Boolean payOrder(Long orderId);
+
+    Boolean confrimOrder(Long orderId);
 }

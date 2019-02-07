@@ -3,11 +3,11 @@ package cn.liuyiyou.shop.common.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/11/28
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 public class DateUtil {
 

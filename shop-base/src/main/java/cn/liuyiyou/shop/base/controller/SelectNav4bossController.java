@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <p>
- * 移动端导航推荐表（首页导航栏中选取导航） 前端控制器
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-13
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @RestController
 @RequestMapping("/selectNav4boss")

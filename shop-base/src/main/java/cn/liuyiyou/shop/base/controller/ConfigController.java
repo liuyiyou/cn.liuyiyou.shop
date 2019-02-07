@@ -5,17 +5,11 @@ import cn.liuyiyou.shop.common.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * <p>
- * 属性值定义表，为枚举型的属性定义一些可选范围的值。
-
-在实例化的时候，需要将值拷贝到 产品实例记录。在这里不存在的值，在维护产品的时候不需要添加到这里。
-
- 前端控制器
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-12
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Controller
 @RequestMapping("/config")

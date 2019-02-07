@@ -2,20 +2,21 @@ package cn.liuyiyou.shop.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * <p>
- * 国家（商品原产地）定义表
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-02
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
-public class Country extends Model<Country> {
+@Data
+@Accessors(chain = true)
+public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -60,86 +61,4 @@ public class Country extends Model<Country> {
     private LocalDate lastUpdate;
 
 
-    public String getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }
-
-    public String getCountryFirstChar() {
-        return countryFirstChar;
-    }
-
-    public void setCountryFirstChar(String countryFirstChar) {
-        this.countryFirstChar = countryFirstChar;
-    }
-
-    public String getCountryNameCn() {
-        return countryNameCn;
-    }
-
-    public void setCountryNameCn(String countryNameCn) {
-        this.countryNameCn = countryNameCn;
-    }
-
-    public String getCountryNameEn() {
-        return countryNameEn;
-    }
-
-    public void setCountryNameEn(String countryNameEn) {
-        this.countryNameEn = countryNameEn;
-    }
-
-    public String getCountryIcon() {
-        return countryIcon;
-    }
-
-    public void setCountryIcon(String countryIcon) {
-        this.countryIcon = countryIcon;
-    }
-
-    public Boolean getState() {
-        return state;
-    }
-
-    public void setState(Boolean state) {
-        this.state = state;
-    }
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDate getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDate lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.countryId;
-    }
-
-    @Override
-    public String toString() {
-        return "Country{" +
-        ", countryId=" + countryId +
-        ", countryFirstChar=" + countryFirstChar +
-        ", countryNameCn=" + countryNameCn +
-        ", countryNameEn=" + countryNameEn +
-        ", countryIcon=" + countryIcon +
-        ", state=" + state +
-        ", createDate=" + createDate +
-        ", lastUpdate=" + lastUpdate +
-        "}";
-    }
 }

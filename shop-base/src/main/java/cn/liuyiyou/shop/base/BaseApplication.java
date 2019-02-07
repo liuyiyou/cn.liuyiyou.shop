@@ -7,8 +7,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * 2.x版本不需要加上 @EnableDiscoveryClient
+
+/***
+ *2.x版本不需要加上 @EnableDiscoveryClient
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.base.mapper")
@@ -21,7 +25,7 @@ public class BaseApplication {
 
     @Bean
     @LoadBalanced
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }

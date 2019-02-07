@@ -15,10 +15,11 @@ import java.util.function.BiConsumer;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
-/**
- * 集合处理工具类，
- * @author Administrator
+/***
  *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Slf4j
 public class CollUtil {

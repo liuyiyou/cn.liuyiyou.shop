@@ -21,7 +21,7 @@ import static cn.liuyiyou.shop.common.web.BaseController.getUid;
 /***
  *
  * @author: liuyiyou.cn
- * @date: 2019/1/23
+ * @date: 2019/2/7
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Slf4j

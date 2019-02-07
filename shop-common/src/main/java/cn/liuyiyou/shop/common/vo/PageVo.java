@@ -8,12 +8,11 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * 表格查询通用参数
+/***
  *
  * @author: liuyiyou.cn
- * @date: 2018/12/20
- * @version: V1.0
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Data
 @ApiModel("分页查询统一字段")

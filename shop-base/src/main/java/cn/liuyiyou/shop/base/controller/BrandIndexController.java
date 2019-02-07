@@ -3,12 +3,11 @@ package cn.liuyiyou.shop.base.controller;
 import cn.liuyiyou.shop.common.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/10/31
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Controller
 public class BrandIndexController extends BaseController {

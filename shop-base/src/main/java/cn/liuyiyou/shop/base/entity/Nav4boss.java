@@ -4,23 +4,20 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * <p>
+/***
  *
- * </p>
- *
- * @author liuyiyou.cn
- * @since 2018-11-13
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @TableName("nav4boss")
-public class Nav4boss extends Model<Nav4boss> {
+public class Nav4boss implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,9 +26,9 @@ public class Nav4boss extends Model<Nav4boss> {
     public static final int NAV_STATUS_UNUSED = 0;
 
     //导航类别：1-一级导航，2-二级导航，3-三级导航
-    public static final Integer NAV_LEVEL_TOP =  1;
-    public static final Integer NAV_LEVEL_SEC =  2;
-    public static final Integer NAV_LEVEL_THI =  3;
+    public static final Integer NAV_LEVEL_TOP = 1;
+    public static final Integer NAV_LEVEL_SEC = 2;
+    public static final Integer NAV_LEVEL_THI = 3;
 
     //类型：1-微信端,2-pc端
     public static final Byte TYPE_WEBCHAT = (byte) 1;
@@ -178,11 +175,11 @@ public class Nav4boss extends Model<Nav4boss> {
     private Integer height;
 
     @TableField(exist = false)
-    private  Integer cataId;//二级类目
+    private Integer cataId;//二级类目
     @TableField(exist = false)
-    private  JSONObject parameters;
+    private JSONObject parameters;
     @TableField(exist = false)
-    private  List<Nav4boss> childNavList;
+    private List<Nav4boss> childNavList;
 
 
     public List<Nav4boss> getChildNavList() {
@@ -441,10 +438,6 @@ public class Nav4boss extends Model<Nav4boss> {
         this.height = height;
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.navId;
-    }
 
     @Override
     public String toString() {

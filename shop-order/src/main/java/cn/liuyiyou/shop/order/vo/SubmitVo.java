@@ -1,19 +1,17 @@
 package cn.liuyiyou.shop.order.vo;
 
-import cn.liuyiyou.shop.order.entity.Order;
-import cn.liuyiyou.shop.order.entity.OrderProd;
 import lombok.Data;
 
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/11/2
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Data
 public class SubmitVo {
 
-//    private Order order;
+    //    private Order order;
 //    private OrderProd orderProd;
     private Long prodId;
     private Long skuId;

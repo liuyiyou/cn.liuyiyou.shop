@@ -5,6 +5,7 @@ import cn.liuyiyou.shop.order.config.OrderStatusMap;
 import cn.liuyiyou.shop.order.dto.OrderCountDto;
 import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.entity.OrderProd;
+import cn.liuyiyou.shop.order.enums.OrderStatusEnum;
 import cn.liuyiyou.shop.order.mapper.OrderMapper;
 import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
@@ -195,7 +196,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = new Order();
         order.setStatus(1)
                 .setUid(1);
-        BeanUtils.copyProperties(userDeliveryVo,order);
+        BeanUtils.copyProperties(userDeliveryVo, order);
 
         boolean saveOrderResult = this.save(order);
         if (saveOrderResult) {
@@ -225,6 +226,63 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
         return order.getOrderId();
 
+    }
+
+
+    @Override
+    public Boolean cancelOrder(Long orderId) {
+        //修改订单状态
+        Order order = this.getById(orderId);
+        order.setStatus(OrderStatusEnum.CANCEL.getCode());
+        this.updateById(order);
+
+
+        //库存回滚
+        List<OrderProd> orderProds = orderProdService.getByOrderId(orderId);
+        orderProds.forEach(orderProd -> {
+            ProdSku prodSku = prodSkuService.getById(orderProd.getSkuId());
+            prodSku.setFreez(prodSku.getFreez() - orderProd.getProdNum());
+            prodSku.setStore(prodSku.getStore() + orderProd.getProdNum());
+            prodSkuService.updateById(prodSku);
+
+        });
+        return true;
+    }
+
+
+    @Override
+    public Boolean payOrder(Long orderId) {
+        //updateOrderStatus
+        Order order = this.getById(orderId);
+        order.setStatus(OrderStatusEnum.NEED_SEND.getCode());
+        this.updateById(order);
+
+        //已售库存增加
+        List<OrderProd> orderProds = orderProdService.getByOrderId(orderId);
+        orderProds.forEach(orderProd -> {
+            ProdSku prodSku = prodSkuService.getById(orderProd.getSkuId());
+            prodSku.setFreez(prodSku.getFreez() - orderProd.getProdNum());
+            prodSku.setSaled(prodSku.getSaled() + orderProd.getProdNum());
+            prodSkuService.updateById(prodSku);
+
+        });
+
+        //callThirdPay
+
+        return true;
+
+    }
+
+    @Override
+    public Boolean confrimOrder(Long orderId) {
+        //updateOrderStatus
+        Order order = this.getById(orderId);
+        order.setStatus(OrderStatusEnum.SUCCESS.getCode());
+        this.updateById(order);
+
+        //userAddScore
+
+        return true;
     }
 
     private String getAddress(String consignAddr) {

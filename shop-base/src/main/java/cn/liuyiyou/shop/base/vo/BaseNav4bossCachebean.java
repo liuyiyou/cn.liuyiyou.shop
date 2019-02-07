@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 首页导航缓存
- * @author caoyifeng
+/***
  *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 public class BaseNav4bossCachebean implements Serializable {
 

@@ -18,11 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/7/23
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 public class GeneratorServiceEntity {
 

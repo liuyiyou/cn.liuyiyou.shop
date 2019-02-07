@@ -7,17 +7,11 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- * 属性值定义表，为枚举型的属性定义一些可选范围的值。
-
-在实例化的时候，需要将值拷贝到 产品实例记录。在这里不存在的值，在维护产品的时候不需要添加到这里。
-
-
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-12
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 public class Config extends Model<Config> {
 

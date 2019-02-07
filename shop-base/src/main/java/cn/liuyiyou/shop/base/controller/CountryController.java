@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <p>
- * 国家（商品原产地）定义表 前端控制器
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-02
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @RestController
 @RequestMapping("/country")

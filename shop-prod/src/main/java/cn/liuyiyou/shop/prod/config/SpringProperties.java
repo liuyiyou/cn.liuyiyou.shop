@@ -5,11 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 //import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/11/29
- * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+/***
+ *
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Configuration
 public class SpringProperties  {

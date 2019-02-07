@@ -3,19 +3,9 @@ package cn.liuyiyou.shop.base.service.impl;
 import cn.liuyiyou.shop.base.entity.Banner;
 import cn.liuyiyou.shop.base.mapper.BannerMapper;
 import cn.liuyiyou.shop.base.service.IBannerService;
-import cn.liuyiyou.shop.base.service.IConfigService;
-import cn.liuyiyou.shop.base.vo.BannerIcon;
-import cn.liuyiyou.shop.base.vo.BannerVo;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-
-import static cn.liuyiyou.shop.common.utils.CollUtil.returnEmptyListIfNull;
 import static com.alibaba.fastjson.JSON.parseArray;
 import static java.util.stream.Collectors.groupingBy;
 

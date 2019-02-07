@@ -3,7 +3,6 @@ package cn.liuyiyou.shop.order.controller;
 
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
-import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
@@ -13,24 +12,21 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * <p>
- * C端用户产品订单表。 前端控制器
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-05
+ * 订单相关处理
+ * @author: liuyiyou.cn
+ * @date: 2019/2/8
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @RestController
 @CrossOrigin
@@ -39,25 +35,8 @@ import javax.validation.constraints.NotNull;
 public class OrderController {
 
     @Autowired
-    private RestTemplate restTemplate;
-
-
-    @Autowired
     private IOrderService orderService;
-    @Autowired
-    private IOrderProdService orderProdService;
 
-
-    @GetMapping("/sayHello")
-    public String sayHello() {
-        return orderService.sayHello();
-    }
-
-    @GetMapping("/testRibbo")
-    public String test() {
-        String body = restTemplate.getForEntity("http://USER-SERVICE/user/delivery", String.class).getBody();
-        return body;
-    }
 
     @ApiOperation("订单列表")
     @PostMapping("/list")
@@ -84,40 +63,19 @@ public class OrderController {
     @ApiOperation("取消")
     @GetMapping("/cancel/{id}")
     public Result cancel(@PathVariable("id") Long orderId) {
-        //closeOrder
-        //returnProdSku
-        return null;
+        return Response.success(orderService.cancelOrder(orderId));
     }
 
     @ApiOperation("订单支付")
     @GetMapping("/pay/{id}")
     public Result pay(@PathVariable("id") Long orderId) {
-        //updateOrderStatus
-        //prodSkuAddSaled
-        //callThirdPay
-        return null;
+        return Response.success(orderService.payOrder(orderId));
     }
 
     @ApiOperation("确认收货")
     @GetMapping("/confirm/{id}")
     public Result confirm(@PathVariable("id") Long orderId) {
-        //updateOrderStatus
-        //userAddScore
-        //prodSkuAddSaled
-        //
-        return null;
+        return Response.success(orderService.confrimOrder(orderId));
     }
-
-    @ApiOperation("订单删除")
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable("id") Long orderId) {
-        //validator only allowed  delete closed order
-        //logicsDelete
-        //prodSkuAddSaled
-        //callThirdPay
-        return null;
-    }
-
-
 }
 

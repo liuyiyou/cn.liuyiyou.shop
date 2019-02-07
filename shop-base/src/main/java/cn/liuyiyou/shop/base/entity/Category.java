@@ -8,22 +8,11 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * <p>
- * 类目定义表。
- * 支持三级继承类目：
- * cata_type=1：一级类目
- * cata_type=2：二级类目
- * cata_type=3：三级类目
- * <p>
- * 目录ID规则
- * 一级目录： 2位 （10-99）
- * 二级目录： 3位 （100-999）
- * 三级目录：4位  （1000-9999）
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-10-31
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Data
 @Accessors(chain = true)

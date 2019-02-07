@@ -8,13 +8,11 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- * 首页banner配置表
- * </p>
+/***
  *
- * @author liuyiyou.cn
- * @since 2018-11-12
+ * @author: liuyiyou.cn
+ * @date: 2019/2/7
+ * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @Data
 @Accessors(chain = true)
