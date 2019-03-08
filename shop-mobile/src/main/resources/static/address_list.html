@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-">
     <link rel="stylesheet" href="lib/weui.min.css">
     <link rel="stylesheet" href="css/jquery-weui.css">
     <link rel="stylesheet" href="css/style.css">
@@ -37,16 +35,15 @@
 <script src="js/jquery-weui.js"></script>
 <script src="js/common.js?v=2"></script>
 <script src="js/constant.js"></script>
-<script src="js/user/address-list.js"></script>
+<script src="js/user/address-list.js?v=1"></script>
 <script src="lib/template-web.js"></script>
-<!--https://www.cnblogs.com/chrischan/p/6909706.html-->
 <script type="text/html" id="addrlist">
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_text address-list-box">
             {{each addrlist}}
-            <a href="address_edit.html?id={{$value.id}}" class="address-edit"></a>
             <h4 class="weui-media-box__title"><span>{{$value.consignee}}</span><span>{{$value.consigneeTel}}</span></h4>
             <p class="weui-media-box__desc address-txt">{{$value.detail}}</p>
+            <a href="address_edit.html?id={{$value.id}}" class="address-edit"></a>
             {{if $value.defaultAddr}}
             <span class="default-add">默认地址</span>
             {{/if}}

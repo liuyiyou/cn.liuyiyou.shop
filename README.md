@@ -11,7 +11,8 @@
 2. mybatis-plus
 3. dubbo-springboot
 4. eureka
-5. ribbon
+5. zuul
+6. ribbon
 
 
 ## 前端

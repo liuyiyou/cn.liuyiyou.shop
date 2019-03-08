@@ -2,6 +2,9 @@ $(document).ready(function () {
     beforeEdit();
 
     editAddt();
+
+
+    deleteAddress();
 });
 
 function beforeEdit() {
@@ -20,10 +23,11 @@ function beforeEdit() {
                 if (data.success) {
                     var data = data.data;
                     var detail = JSON.parse(data.consignAddr);
+                    $("#id").val(data.id);
                     $("#consignee").val(data.consignee);
                     $("#consignTel").val(data.consignTel);
                     $("#detail_addr").val(detail.addr);
-                    if(data.defaultAddr){
+                    if (data.defaultAddr) {
                         $("#default_addr").attr("checked", true);
                     }
                 }
@@ -65,4 +69,33 @@ function editAddt() {
             }
         });
     });
+}
+
+
+function deleteAddress() {
+
+    $("#deleteAddress").click(function () {
+        var params = new Object();
+        var url = USER_BASE_URL + "/user/delivery/" + $("#id").val();
+        $.ajax({
+            type: "delete",
+            beforeSend: function (request) {
+                request.setRequestHeader("trackId", getSessionStorage("trackId"));
+            },
+            data: JSON.stringify(params),
+            url: url,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                if (data.success) {
+                    $.toast("删除成功");
+                    window.location.href="/address_list.html";
+                }
+            },
+            error: function () {
+                $.toast("删除失败");
+            }
+        });
+    });
+
 }

@@ -2,6 +2,8 @@ package cn.liuyiyou.shop.user.vo;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /***
  *
  * @author: liuyiyou.cn
@@ -10,6 +12,9 @@ import lombok.Data;
  */
 @Data
 public class LoginVo {
+
+    @NotNull(message = "用户名不能为空")
     String account;
+    @NotNull(message = "用户密码不能为空")
     String password;
 }

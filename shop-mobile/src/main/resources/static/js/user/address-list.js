@@ -16,9 +16,10 @@ function loadAddress() {
         success: function (data) {
             if (data.success) {
                 var addrlist = new Array();
-                var address = {};
+
                 var addrList = data.data;
-                addrList.forEach(function (item, index) {
+                addrList.forEach(function (item) {
+                    var address = {};
                     if (item.defaultAddr == 1) {
                         address.defaultAddr = true;
                     }

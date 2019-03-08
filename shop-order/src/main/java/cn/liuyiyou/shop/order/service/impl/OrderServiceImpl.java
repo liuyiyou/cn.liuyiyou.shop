@@ -149,18 +149,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         List<OrderCountDto> orderCountDtos = orderMapper.getOrderCountByStatus(uid);
         OrderCountRespVo vo = new OrderCountRespVo();
         orderCountDtos.forEach(orderCountDto -> {
-            if (orderCountDto.getStatus() == 1) {
-                vo.setNeedPay(orderCountDto.getCount());
+            switch (orderCountDto.getStatus()) {
+                case 1:
+                    vo.setNeedPay(orderCountDto.getCount());
+                    break;
+                case 2:
+                    vo.setNeedSend(orderCountDto.getCount());
+                    break;
+                case 3:
+                    vo.setNeedConfirm(orderCountDto.getCount());
+                    break;
+                case 4:
+                    vo.setNeedComment(orderCountDto.getCount());
+                    break;
             }
-            if (orderCountDto.getStatus() == 2) {
-                vo.setNeedSend(orderCountDto.getCount());
-            }
-            if (orderCountDto.getStatus() == 3) {
-                vo.setNeedConfirm(orderCountDto.getCount());
-            }
-            if (orderCountDto.getStatus() == 4) {
-                vo.setNeedComment(orderCountDto.getCount());
-            }
+
         });
         return vo;
     }
