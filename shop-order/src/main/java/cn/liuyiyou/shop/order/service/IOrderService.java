@@ -3,6 +3,8 @@ package cn.liuyiyou.shop.order.service;
 import cn.liuyiyou.shop.order.entity.Order;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
+import cn.liuyiyou.shop.order.vo.resp.AdminOrderInfoRespVo;
+import cn.liuyiyou.shop.order.vo.resp.AdminOrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
@@ -45,9 +47,13 @@ public interface IOrderService extends IService<Order> {
 
     OrderInfoRespVo getOrderInfo(Long orderId);
 
+    AdminOrderInfoRespVo getAdminOrderInfo(Long orderId);
+
     Long createOrder(OrderAddReqVo orderAddReqVo);
 
     Page<OrderListRespVo> getOrderList(OrderListReqVo orderListReqVo);
+
+    Page<AdminOrderListRespVo> getAdminOrderList(OrderListReqVo orderListReqVo);
 
     /**
      * 取消订单

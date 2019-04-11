@@ -6,6 +6,7 @@ import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.service.IProdService;
+import cn.liuyiyou.shop.prod.vo.AdminProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
 import cn.liuyiyou.shop.prod.vo.ProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
@@ -52,6 +53,12 @@ public class ProdController extends BaseController {
     public Result<IPage<ProdListRespVo>> list(@RequestBody ProdListReqVo prodListReqVo) {
         IPage<ProdListRespVo> prodListRespVoIPage = prodService.prodPage(prodListReqVo);
         return Response.success(prodListRespVoIPage);
+    }
+
+    @PostMapping("/admin-list")
+    public Result<IPage<AdminProdListRespVo>> adminList(@RequestBody ProdListReqVo prodListReqVo) {
+        IPage<AdminProdListRespVo> adminProdListRespVoIPage = prodService.adminProdPage(prodListReqVo);
+        return Response.success(adminProdListRespVoIPage);
     }
 
 

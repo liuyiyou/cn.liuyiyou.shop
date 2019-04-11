@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.prod.service;
 
 import cn.liuyiyou.shop.prod.entity.Prod;
+import cn.liuyiyou.shop.prod.vo.AdminProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
 import cn.liuyiyou.shop.prod.vo.ProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
@@ -19,4 +20,6 @@ public interface IProdService extends IService<Prod> {
 
 
     IPage<ProdListRespVo> prodPage(ProdListReqVo prodListReqVo);
+
+    IPage<AdminProdListRespVo> adminProdPage(ProdListReqVo prodListReqVo);
 }

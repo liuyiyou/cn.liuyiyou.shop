@@ -3,7 +3,7 @@ package cn.liuyiyou.shop.base.service.impl;
 import cn.liuyiyou.shop.base.entity.Brand;
 import cn.liuyiyou.shop.base.mapper.BrandMapper;
 import cn.liuyiyou.shop.base.service.IBrandService;
-import com.alibaba.fastjson.JSONObject;
+import cn.liuyiyou.shop.common.vo.PageVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 /**
  * <p>
@@ -34,8 +32,8 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     private RestTemplate restTemplate;
 
     @Override
-    public IPage<Brand> getBrandByPage(int page, int pageSize) {
-        Page<Brand> pageQuery = new Page<>(page, pageSize);
+    public IPage<Brand> getBrandByPage(PageVo pageVo) {
+        Page<Brand> pageQuery = new Page<>(pageVo.getPageNum(), pageVo.getPageSize());
         LambdaQueryWrapper<Brand> queryWrapper = new QueryWrapper<Brand>().lambda().select();
         return this.page(pageQuery, queryWrapper);
     }

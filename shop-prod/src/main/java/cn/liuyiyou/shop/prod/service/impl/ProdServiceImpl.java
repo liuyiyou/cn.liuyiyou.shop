@@ -6,6 +6,7 @@ import cn.liuyiyou.shop.prod.mapper.ProdMapper;
 import cn.liuyiyou.shop.prod.service.IProdService;
 import cn.liuyiyou.shop.prod.service.IProdSkuService;
 import cn.liuyiyou.shop.prod.utils.SkuUtils;
+import cn.liuyiyou.shop.prod.vo.AdminProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
 import cn.liuyiyou.shop.prod.vo.ProdListRespVo;
 import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
@@ -47,7 +48,7 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
 
     @Override
     public IPage<ProdListRespVo> prodPage(ProdListReqVo prodListReqVo) {
-        Page<Prod> pageQuery = new Page<>(prodListReqVo.getPage(), prodListReqVo.getPageSize());
+        Page<Prod> pageQuery = new Page<>(prodListReqVo.getPageNum(), prodListReqVo.getPageSize());
         QueryWrapper<Prod> prodQueryWrapper = new QueryWrapper<>();
         if (prodListReqVo.getBrandId() != null) {
             prodQueryWrapper.eq("brand_id", prodListReqVo.getBrandId());
@@ -65,6 +66,29 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
                     .setProdId(prod.getProdId())
                     .setProdName(prod.getProdName());
 
+            return prodListRespVo;
+        }).collect(Collectors.toList());
+        prodListRespVoIPage.setRecords(listRespVos);
+        return prodListRespVoIPage;
+    }
+
+
+    @Override
+    public IPage<AdminProdListRespVo> adminProdPage(ProdListReqVo prodListReqVo) {
+        Page<Prod> pageQuery = new Page<>(prodListReqVo.getPageNum(), prodListReqVo.getPageSize());
+        QueryWrapper<Prod> prodQueryWrapper = new QueryWrapper<>();
+        if (prodListReqVo.getBrandId() != null) {
+            prodQueryWrapper.eq("brand_id", prodListReqVo.getBrandId());
+        }
+        if (prodListReqVo.getCataId() != null) {
+            prodQueryWrapper.likeRight("cata_id", prodListReqVo.getCataId());
+        }
+        IPage<Prod> prodIPage = this.page(pageQuery, prodQueryWrapper);
+        IPage<AdminProdListRespVo> prodListRespVoIPage = new Page<>(prodIPage.getCurrent(), prodIPage.getSize(), prodIPage.getTotal());
+        List<AdminProdListRespVo> listRespVos = prodIPage.getRecords().stream().map(prod -> {
+            AdminProdListRespVo prodListRespVo = new AdminProdListRespVo();
+            BeanUtils.copyProperties(prod,prodListRespVo);
+            prodListRespVo.setAlbum(prod.getAlbum().split(",")[0]);
             return prodListRespVo;
         }).collect(Collectors.toList());
         prodListRespVoIPage.setRecords(listRespVos);

@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.order.service.impl;
 
 import cn.liuyiyou.shop.common.response.Result;
+import cn.liuyiyou.shop.order.config.OrderPayTypeMap;
 import cn.liuyiyou.shop.order.config.OrderStatusMap;
 import cn.liuyiyou.shop.order.dto.OrderCountDto;
 import cn.liuyiyou.shop.order.entity.Order;
@@ -11,6 +12,8 @@ import cn.liuyiyou.shop.order.service.IOrderProdService;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
+import cn.liuyiyou.shop.order.vo.resp.AdminOrderInfoRespVo;
+import cn.liuyiyou.shop.order.vo.resp.AdminOrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderCountRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderInfoRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
@@ -95,14 +98,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         IPage<Order> orderIPage = this.page(pageQuery, wrapper);
         Page<OrderListRespVo> result = new Page<>(orderIPage.getCurrent(), orderIPage.getSize(), orderIPage.getTotal());
         List<OrderListRespVo> orderListRespVos = orderIPage.getRecords().stream().map(order -> {
-            List<OrderProd> orderProds = orderProdService.list(new QueryWrapper<OrderProd>().eq("order_id", order.getOrderId()));
-            List<OrderProdListRespVo> orderProdListRespVos = orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
-                    .setProdId(orderProd.getProdId())
-                    .setProdName(orderProd.getProdName())
-                    .setProdNum(orderProd.getProdNum())
-                    .setAlbum(orderProd.getAlbum())
-                    .setRealPrice(orderProd.getRealPrice())
-                    .setSkuId(orderProd.getSkuId())).collect(toList());
+            List<OrderProdListRespVo> orderProdListRespVos = getOrderProdListRespVos(order);
             return new OrderListRespVo()
                     .setOrderId(order.getOrderId())
                     .setStatus(order.getStatus())
@@ -114,16 +110,50 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public OrderInfoRespVo getOrderInfo(Long orderId) {
-        Order order = this.getById(orderId);
+    public Page<AdminOrderListRespVo> getAdminOrderList(OrderListReqVo orderListReqVo) {
+        Page<Order> pageQuery = new Page<>(orderListReqVo.getPageNum(), orderListReqVo.getPageSize());
+        LambdaQueryWrapper<Order> wrapper = new QueryWrapper<Order>().lambda().select();
+        if (orderListReqVo.getStatus() != null && orderListReqVo.getStatus() != 0) {
+            wrapper.eq(Order::getStatus, orderListReqVo.getStatus());
+        }
+        if (orderListReqVo.getOrderId() != null) {
+            wrapper.eq(Order::getOrderId, orderListReqVo.getOrderId());
+        }
+        wrapper.orderByDesc(Order::getOrderId);
+        IPage<Order> orderIPage = this.page(pageQuery, wrapper);
+        Page<AdminOrderListRespVo> result = new Page<>(orderIPage.getCurrent(), orderIPage.getSize(), orderIPage.getTotal());
+        List<AdminOrderListRespVo> orderListRespVos = orderIPage.getRecords().stream().map(order -> {
+            List<OrderProdListRespVo> orderProdListRespVos = getOrderProdListRespVos(order);
+            return new AdminOrderListRespVo()
+                    .setOrderId(order.getOrderId())
+                    .setConsignee(order.getConsignee())
+                    .setCreateTime(order.getCreateTime())
+                    .setTotalPrice(order.getTotalPrice())
+                    .setStatus(order.getStatus())
+                    .setPayType(order.getPayType())
+                    .setPayTypeName(OrderPayTypeMap.STATUS_MAP.get(order.getPayType() == null ? -1 : order.getPayType()))
+                    .setStatusName(OrderStatusMap.STATUS_MAP.get(order.getStatus()))
+                    .setProds(orderProdListRespVos);
+        }).collect(Collectors.toList());
+        result.setRecords(orderListRespVos);
+        return result;
+    }
+
+    private List<OrderProdListRespVo> getOrderProdListRespVos(Order order) {
         List<OrderProd> orderProds = orderProdService.list(new QueryWrapper<OrderProd>().eq("order_id", order.getOrderId()));
-        List<OrderProdListRespVo> orderProdListRespVos = orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
+        return orderProds.stream().map(orderProd -> new OrderProdListRespVo().setOrderId(orderProd.getOrderId())
                 .setProdId(orderProd.getProdId())
                 .setProdName(orderProd.getProdName())
                 .setProdNum(orderProd.getProdNum())
                 .setAlbum(orderProd.getAlbum())
                 .setRealPrice(orderProd.getRealPrice())
                 .setSkuId(orderProd.getSkuId())).collect(toList());
+    }
+
+    @Override
+    public OrderInfoRespVo getOrderInfo(Long orderId) {
+        Order order = this.getById(orderId);
+        List<OrderProdListRespVo> orderProdListRespVos = getOrderProdListRespVos(order);
 
 
         OrderInfoRespVo orderInfoRespVo = new OrderInfoRespVo()
@@ -134,6 +164,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setStatus(order.getStatus())
                 .setStatusName(OrderStatusMap.STATUS_MAP.get(order.getStatus()))
                 .setProds(orderProdListRespVos);
+        return orderInfoRespVo;
+    }
+
+    @Override
+    public AdminOrderInfoRespVo getAdminOrderInfo(Long orderId) {
+        Order order = this.getById(orderId);
+        List<OrderProdListRespVo> orderProdListRespVos = getOrderProdListRespVos(order);
+
+        AdminOrderInfoRespVo orderInfoRespVo = new AdminOrderInfoRespVo();
+        BeanUtils.copyProperties(order, orderInfoRespVo);
+        orderInfoRespVo.setProds(orderProdListRespVos);
         return orderInfoRespVo;
     }
 
@@ -295,6 +336,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             JSONObject addrObject = JSONArray.parseObject(consignAddr);
             return addrObject.getString("prov") + addrObject.getString("city") + addrObject.getString("country") + addrObject.getString("addr");
         }
+    }
+
+
+    public static void main(String[] args) {
+        String s = OrderPayTypeMap.STATUS_MAP.get(null);
+        System.out.println(s);
     }
 
 }

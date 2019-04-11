@@ -57,6 +57,12 @@
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- Swagger-ui End -->
     </dependencies>
 

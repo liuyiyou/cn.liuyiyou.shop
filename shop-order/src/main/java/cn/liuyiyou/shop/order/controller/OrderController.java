@@ -6,6 +6,7 @@ import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.order.service.IOrderService;
 import cn.liuyiyou.shop.order.vo.req.OrderAddReqVo;
 import cn.liuyiyou.shop.order.vo.req.OrderListReqVo;
+import cn.liuyiyou.shop.order.vo.resp.AdminOrderListRespVo;
 import cn.liuyiyou.shop.order.vo.resp.OrderListRespVo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
@@ -38,10 +39,17 @@ public class OrderController {
     private IOrderService orderService;
 
 
-    @ApiOperation("订单列表")
+    @ApiOperation("订单列表-前端展示")
     @PostMapping("/list")
     public Result list(@RequestBody @NotNull OrderListReqVo orderListReqVo) {
         Page<OrderListRespVo> result = orderService.getOrderList(orderListReqVo);
+        return Response.success().setData(result);
+    }
+
+    @ApiOperation("订单列表-前端展示")
+    @PostMapping("/admin-list")
+    public Result adminList(@RequestBody @NotNull OrderListReqVo orderListReqVo) {
+        Page<AdminOrderListRespVo> result = orderService.getAdminOrderList(orderListReqVo);
         return Response.success().setData(result);
     }
 
@@ -50,6 +58,12 @@ public class OrderController {
     @GetMapping("/{id}")
     public Result list(@PathVariable("id") Long orderId) {
         return Response.success(orderService.getOrderInfo(orderId));
+    }
+
+    @ApiOperation("订单详情")
+    @GetMapping("/admin/{id}")
+    public Result adminDetail(@PathVariable("id") Long orderId) {
+        return Response.success(orderService.getAdminOrderInfo(orderId));
     }
 
 

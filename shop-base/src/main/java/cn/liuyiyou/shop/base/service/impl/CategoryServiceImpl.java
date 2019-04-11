@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.service.impl;
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.mapper.CategoryMapper;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.base.vo.CascaderVo;
 import cn.liuyiyou.shop.base.vo.CategorySimpleVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -52,22 +53,62 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public List<CategorySimpleVo> getCategoryTree() {
-        List<CategorySimpleVo> categorySimpleVos = Lists.newArrayList();
+        List<CategorySimpleVo> firstVoList = Lists.newArrayList();
         List<Category> firstCategories = findListByLevel(1);
         firstCategories.forEach(category -> {
-            CategorySimpleVo categorySimpleVo = new CategorySimpleVo();
-            BeanUtils.copyProperties(category, categorySimpleVo);
-            List<Category> childrenCategory = findListByCataParentId(category.getCataId());
-            List<CategorySimpleVo> children = childrenCategory.stream().map(e -> {
-                CategorySimpleVo childCategorySimpleVo = new CategorySimpleVo();
-                BeanUtils.copyProperties(e, childCategorySimpleVo);
-                childCategorySimpleVo.setParentCataName(e.getCataName());
-                return childCategorySimpleVo;
+            CategorySimpleVo firstVo = new CategorySimpleVo();
+            BeanUtils.copyProperties(category, firstVo);
+            List<Category> secondCategories = findListByCataParentId(category.getCataId());
+            List<CategorySimpleVo> secondVos = secondCategories.stream().map(e -> {
+                CategorySimpleVo secondVo = new CategorySimpleVo();
+                BeanUtils.copyProperties(e, secondVo);
+                secondVo.setParentCataName(e.getCataName());
+                List<Category> thirdeCategories = findListByCataParentId(e.getCataId());
+                List<CategorySimpleVo> thirdVoList = thirdeCategories.stream().map(e2 -> {
+                    CategorySimpleVo thirdVo = new CategorySimpleVo();
+                    BeanUtils.copyProperties(e, thirdVo);
+                    thirdVo.setParentCataName(e2.getCataName());
+                    return thirdVo;
+                }).collect(Collectors.toList());
+                secondVo.setChildren(thirdVoList);
+                return secondVo;
             }).collect(Collectors.toList());
-            categorySimpleVo.setChildren(children);
-            categorySimpleVos.add(categorySimpleVo);
+            firstVo.setChildren(secondVos);
+            firstVoList.add(firstVo);
         });
-        return categorySimpleVos;
+        return firstVoList;
+    }
+
+
+    @Override
+    public List<CascaderVo> getCascaderVo() {
+        List<CascaderVo> firstVoList = Lists.newArrayList();
+        List<Category> firstCategories = findListByLevel(1);
+        firstCategories.forEach(category -> {
+            CascaderVo firstVo = new CascaderVo();
+            firstVo.setLabel(category.getCataName());
+            firstVo.setValue(category.getCataId());
+            List<Category> secondCategories = findListByCataParentId(category.getCataId());
+            List<CascaderVo> secondVos = secondCategories.stream().map(e -> {
+                CascaderVo secondVo = new CascaderVo();
+                secondVo.setValue(e.getCataId());
+                secondVo.setLabel(e.getCataName());
+
+                List<Category> thirdeCategories = findListByCataParentId(e.getCataId());
+                List<CascaderVo> thirdVoList = thirdeCategories.stream().map(e2 -> {
+                    CascaderVo thirdVo = new CascaderVo();
+                    thirdVo.setLabel(e2.getCataName());
+                    thirdVo.setValue(e2.getCataId());
+                    thirdVo.setChildren(null);
+                    return thirdVo;
+                }).collect(Collectors.toList());
+                secondVo.setChildren(thirdVoList);
+                return secondVo;
+            }).collect(Collectors.toList());
+            firstVo.setChildren(secondVos);
+            firstVoList.add(firstVo);
+        });
+        return firstVoList;
     }
 
     @Override

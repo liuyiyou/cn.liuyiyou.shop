@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.base.service;
 
 import cn.liuyiyou.shop.base.entity.Brand;
+import cn.liuyiyou.shop.common.vo.PageVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBrandService extends IService<Brand> {
 
-    IPage<Brand> getBrandByPage(int page, int pageSize);
+    IPage<Brand> getBrandByPage(PageVo pageVo);
 
 }

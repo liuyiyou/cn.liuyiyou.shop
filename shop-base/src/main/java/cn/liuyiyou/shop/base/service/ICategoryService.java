@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.base.service;
 
 import cn.liuyiyou.shop.base.entity.Category;
+import cn.liuyiyou.shop.base.vo.CascaderVo;
 import cn.liuyiyou.shop.base.vo.CategorySimpleVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -31,6 +32,8 @@ public interface ICategoryService extends IService<Category> {
     List<Category> findListByLevel(int level);
 
     List<CategorySimpleVo> getCategoryTree();
+
+    List<CascaderVo> getCascaderVo();
 
     List<Category> findListByCataParentId(Integer cataParentId);
 }

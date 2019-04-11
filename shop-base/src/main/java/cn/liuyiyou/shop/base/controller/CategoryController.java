@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.controller;
 
 import cn.liuyiyou.shop.base.entity.Category;
 import cn.liuyiyou.shop.base.service.ICategoryService;
+import cn.liuyiyou.shop.base.vo.CascaderVo;
 import cn.liuyiyou.shop.base.vo.CategorySimpleVo;
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
@@ -42,6 +43,12 @@ public class CategoryController extends BaseController {
     @GetMapping("/listTree")
     public Result<List<CategorySimpleVo>> getCategoryTree() {
         return Response.success(categoryService.getCategoryTree());
+    }
+
+    @ApiOperation(value = "从一级类目往下获取")
+    @GetMapping("/tree")
+    public Result<List<CascaderVo>> getCategoryAdminTree() {
+        return Response.success(categoryService.getCascaderVo());
     }
 
     @ApiOperation(value = "获取一级类目")

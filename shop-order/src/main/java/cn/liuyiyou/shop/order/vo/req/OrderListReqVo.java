@@ -15,5 +15,7 @@ import lombok.experimental.Accessors;
 public class OrderListReqVo extends PageVo {
 
     private Integer status;
+    private Long orderId;
+    private String consingee;
 
 }
