@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,19 +21,68 @@ import java.util.Map;
 import static com.baomidou.mybatisplus.annotation.IdType.AUTO;
 
 /**
- * @author: liuyiyou@yanglaoban.com
- * @date: 2018/7/23
+ * @author: liuyiyou
+ * @date: 2018/11/5
  * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+ * @Copyright: 2018 liuyiyou.cn Inc. All rights reserved.
  */
-public class GeneratorServiceEntity {
+public class MyBatisPlusGenerator {
 
 
-    public static void main(String[] args) throws InterruptedException {
+    @Test
+    public void shopBaseGenerator() {
+        String outPutDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-base/src/main/java";
+        String xmlOutPurDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-base/src/main/resources/mappers/";
+        String dbName = "shop-base";
+        String[] tableName = new String[]{"category_attribute"};
+        String basePackageName = "cn.liuyiyou.shop.base";
+        generator(outPutDir, xmlOutPurDir, dbName, tableName, basePackageName);
+
+    }
+
+
+    @Test
+    public void shopUserGenerator() {
+        String outPutDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-user/src/main/java";
+        String xmlOutPurDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-user/src/main/resources/mappers/";
+        String dbName = "shop-user";
+        String[] tableName = new String[]{"category_attribute"};
+        String basePackageName = "cn.liuyiyou.shop.user";
+        generator(outPutDir, xmlOutPurDir, dbName, tableName, basePackageName);
+
+    }
+
+
+    @Test
+    public void shopOrderGenerator() {
+        String outPutDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-order/src/main/java";
+        String xmlOutPurDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-order/src/main/resources/mappers/";
+        String dbName = "shop-order";
+        String[] tableName = new String[]{"category_attribute"};
+        String basePackageName = "cn.liuyiyou.shop.order";
+        generator(outPutDir, xmlOutPurDir, dbName, tableName, basePackageName);
+
+    }
+
+    @Test
+    public void shopProdGenerator() {
+        String outPutDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-prod/src/main/java";
+        String xmlOutPurDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-prod/src/main/resources/mappers/";
+        String dbName = "shop-prod";
+        String[] tableName = new String[]{"category_attribute"};
+        String basePackageName = "cn.liuyiyou.shop.prod";
+        generator(outPutDir, xmlOutPurDir, dbName, tableName, basePackageName);
+
+    }
+
+
+    public static void generator(String outPutDir, String outXmlPutDir, String dbName, String[] tableName, String basePackageName) {
+
+
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("F:\\github\\cn.liuyiyou.shop\\shop-user\\src\\main\\java");
+        gc.setOutputDir(outPutDir);
         gc.setFileOverride(true);
         gc.setActiveRecord(false);
         gc.setIdType(AUTO);
@@ -52,7 +102,7 @@ public class GeneratorServiceEntity {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://localhost:3306/shop-user");
+        dsc.setUrl("jdbc:mysql://localhost:3306/" + dbName);
         dsc.setUsername("root");
         dsc.setPassword("123456");
         mpg.setDataSource(dsc);
@@ -62,7 +112,7 @@ public class GeneratorServiceEntity {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         //strategy.setTablePrefix(new String[] { "SYS_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"user_delivery"}); // 需要生成的表
+        strategy.setInclude(tableName); // 需要生成的表
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setLogicDeleteFieldName("deleted");
@@ -71,7 +121,7 @@ public class GeneratorServiceEntity {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("cn.liuyiyou.shop.user");
+        pc.setParent(basePackageName);
         pc.setController("controller");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
@@ -83,7 +133,7 @@ public class GeneratorServiceEntity {
         InjectionConfig cfg = new InjectionConfig() {
             @Override
             public void initMap() {
-                Map<String, Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<>();
                 map.put("abc", this.getConfig().getGlobalConfig().getAuthor() + "-rb");
                 this.setMap(map);
             }
@@ -94,7 +144,7 @@ public class GeneratorServiceEntity {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return "F:\\github\\cn.liuyiyou.shop\\shop-user\\src\\main\\resources" + "/mappers/" + tableInfo.getEntityName() + "Mapper.xml";
+                return outXmlPutDir + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -104,9 +154,9 @@ public class GeneratorServiceEntity {
         TemplateConfig tc = new TemplateConfig();
         tc.setXml(null);
         mpg.setTemplate(tc);
-
         // 执行生成
         mpg.execute();
     }
+
 
 }

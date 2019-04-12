@@ -3,7 +3,7 @@
 //import cn.liuyiyou.shop.order.vo.Prod;
 //import com.alibaba.fastjson.JSONObject;
 //import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-//import org.junit.Test;
+//import org.junit.MyBatisPlusGenerator;
 //import org.springframework.web.client.RestTemplate;
 //
 //import java.util.List;
@@ -15,7 +15,7 @@
 // * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
 // */
 //public class UserControllerTest extends UserApplicationTests {
-//    @Test
+//    @MyBatisPlusGenerator
 //    public void test(){
 //        RestTemplate restTemplate=new RestTemplate();
 //        //不能用 http://PROD-SERVICE/prod/list
