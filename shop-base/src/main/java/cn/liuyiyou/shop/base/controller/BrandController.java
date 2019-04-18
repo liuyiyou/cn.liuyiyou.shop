@@ -28,7 +28,6 @@ import javax.validation.constraints.NotNull;
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/brand")
 public class BrandController extends BaseController {
 

@@ -38,7 +38,7 @@ public class CategoryAttributeService extends ServiceImpl<CategoryAttributeMappe
         List<CategoryAttribute> categoryAttribute = this.list(new LambdaQueryWrapper<CategoryAttribute>().eq(CategoryAttribute::getCataId, categoryId));
         List<Integer> attributeIds = categoryAttribute.stream().map(CategoryAttribute::getAttrId).collect(Collectors.toList());
         List<Attribute> attributes = attributeService.list(new LambdaQueryWrapper<Attribute>().in(Attribute::getAttrId, attributeIds));
-        for(Attribute attribute: attributes){
+        for (Attribute attribute : attributes) {
             String[] attributeValueIds = attribute.getValIds().split(",");
         }
         return null;

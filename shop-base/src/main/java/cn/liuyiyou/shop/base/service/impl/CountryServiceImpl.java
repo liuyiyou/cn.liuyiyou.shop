@@ -7,10 +7,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>
  * 国家（商品原产地）定义表 服务实现类
- * </p>
- *
  * @author liuyiyou.cn
  * @since 2018-11-02
  */

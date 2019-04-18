@@ -23,10 +23,9 @@ import java.util.stream.Collectors;
  * @date: 2019/2/7
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
-@Api("Banner")
+@Api(description = "Banner相关接口")
 @RestController
 @RequestMapping("/banner")
-@CrossOrigin
 public class BannerController extends BaseController {
 
 

@@ -42,6 +42,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -68,8 +69,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Autowired
     private RestTemplate restTemplate;
 
-    @Reference(version = "1.0.0")
-    private DemoService demoService;
 
 
     @Reference(version = "1.0.0")
@@ -79,12 +78,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private IProdSkuService prodSkuService;
 
 
-    @Override
-    public String sayHello() {
-        System.out.println("service::" + demoService);
-        String sayHello = demoService.sayHello("dubbo");
-        return sayHello;
-    }
 
     @Override
     public Page<OrderListRespVo> getOrderList(OrderListReqVo orderListReqVo) {
@@ -213,9 +206,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public Long createOrder(OrderAddReqVo orderAddReqVo) {
 
         //通过dubbo获取prod和prodSku
-        Prod prod = prodService.getById(orderAddReqVo.getProdId());
-        ProdSku prodSku = prodSkuService.getById(orderAddReqVo.getSkuId());
 
+        ProdSku prodSku = prodSkuService.getById(orderAddReqVo.getSkuId());
+        Prod prod = prodService.getById(prodSku.getProdId());
 
         //通过Ribbon获取用户地址信息
         UserDeliveryVo userDeliveryVo = new UserDeliveryVo();
@@ -252,7 +245,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //创建订单商品
         OrderProd orderProd = new OrderProd();
-        orderProd.setProdId(orderAddReqVo.getProdId())
+        orderProd.setProdId(prod.getProdId())
                 .setSkuId(orderAddReqVo.getSkuId())
                 .setUid(1)
                 .setOrderId(order.getOrderId())

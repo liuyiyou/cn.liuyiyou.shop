@@ -1,6 +1,7 @@
 package cn.liuyiyou.shop.base.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-04-12
  */
 @RestController
+@Api(description = "属性值相关接口")
 @RequestMapping("/attributeValue")
 public class AttributeValueController {
 

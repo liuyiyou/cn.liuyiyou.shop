@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 //import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
 
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.prod.mapper")
 @RestController
+@EnableSwagger2
 public class ProdApplication {
 
     @Autowired

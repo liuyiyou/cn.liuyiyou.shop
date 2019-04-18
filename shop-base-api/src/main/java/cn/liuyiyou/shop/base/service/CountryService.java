@@ -10,6 +10,6 @@ import cn.liuyiyou.shop.base.entity.Country;
  */
 public interface CountryService {
 
-    Country  getCountryById(String countryId);
+    Country getCountryById(String countryId);
 
 }

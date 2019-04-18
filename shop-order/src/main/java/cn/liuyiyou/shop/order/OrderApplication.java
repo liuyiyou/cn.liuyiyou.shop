@@ -1,10 +1,10 @@
 package cn.liuyiyou.shop.order;
 
 import cn.liuyiyou.shop.prod.service.DemoService;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Reference;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -20,13 +20,13 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 2.x版本不需要加上 @EnableDiscoveryClient
- */
+@Slf4j
+@EnableSwagger2
 @SpringBootApplication
 @MapperScan("cn.liuyiyou.shop.order.mapper")
 @EnableTransactionManagement
@@ -36,16 +36,14 @@ public class OrderApplication {
         SpringApplication.run(OrderApplication.class, args);
     }
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     @Reference(version = "${prod.service.version}")
     private DemoService demoService;
 
 
 //    @Bean
 //    public ApplicationRunner runner() {
-//        System.out.println("aaaaLL::"+demoService);
-//        return args -> logger.info(demoService.sayHello("mercyblitz"));
+//        System.out.println("demoService::" + demoService);
+//        return args -> log.info(demoService.sayHello("liuyiyou"));
 //    }
 
     @Bean

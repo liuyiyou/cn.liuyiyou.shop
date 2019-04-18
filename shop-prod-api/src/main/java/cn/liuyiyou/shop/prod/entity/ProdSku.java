@@ -4,18 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- * 商品基本信息表
- * </p>
- *
- * @author liuyiyou.cn
- * @since 2018-11-02
- */
+@Data
+@Accessors(chain = true)
 @TableName("prod_sku")
 public class ProdSku extends Model<ProdSku> {
 
@@ -111,155 +107,5 @@ public class ProdSku extends Model<ProdSku> {
     private Integer lastUpdate;
 
 
-    public Long getSkuId() {
-        return skuId;
-    }
 
-    public void setSkuId(Long skuId) {
-        this.skuId = skuId;
-    }
-
-    public String getSkuName() {
-        return skuName;
-    }
-
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
-    }
-
-    public Long getProdId() {
-        return prodId;
-    }
-
-    public void setProdId(Long prodId) {
-        this.prodId = prodId;
-    }
-
-    public String getSkuAttr() {
-        return skuAttr;
-    }
-
-    public void setSkuAttr(String skuAttr) {
-        this.skuAttr = skuAttr;
-    }
-
-    public String getSkuCode() {
-        return skuCode;
-    }
-
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public Float getReferPrice() {
-        return referPrice;
-    }
-
-    public void setReferPrice(Float referPrice) {
-        this.referPrice = referPrice;
-    }
-
-    public String getSkuPic() {
-        return skuPic;
-    }
-
-    public void setSkuPic(String skuPic) {
-        this.skuPic = skuPic;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getStatusTime() {
-        return statusTime;
-    }
-
-    public void setStatusTime(LocalDateTime statusTime) {
-        this.statusTime = statusTime;
-    }
-
-    public Long getCreateSuid() {
-        return createSuid;
-    }
-
-    public void setCreateSuid(Long createSuid) {
-        this.createSuid = createSuid;
-    }
-
-    public Integer getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Integer lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public Integer getStore() {
-        return store;
-    }
-
-    public void setStore(Integer store) {
-        this.store = store;
-    }
-
-    public Integer getSaled() {
-        return saled;
-    }
-
-    public void setSaled(Integer saled) {
-        this.saled = saled;
-    }
-
-    public Integer getFreez() {
-        return freez;
-    }
-
-    public void setFreez(Integer freez) {
-        this.freez = freez;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.skuId;
-    }
-
-    @Override
-    public String toString() {
-        return "ProdSku{" +
-        ", skuId=" + skuId +
-        ", skuName=" + skuName +
-        ", prodId=" + prodId +
-        ", skuAttr=" + skuAttr +
-        ", skuCode=" + skuCode +
-        ", price=" + price +
-        ", referPrice=" + referPrice +
-        ", skuPic=" + skuPic +
-        ", status=" + status +
-        ", createTime=" + createTime +
-        ", statusTime=" + statusTime +
-        ", createSuid=" + createSuid +
-        ", lastUpdate=" + lastUpdate +
-        "}";
-    }
 }

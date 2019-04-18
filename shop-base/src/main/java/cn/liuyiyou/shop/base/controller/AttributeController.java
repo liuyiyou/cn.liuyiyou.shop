@@ -10,6 +10,7 @@ import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.vo.PageVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
  * @author liuyiyou.cn
  * @since 2019-04-12
  */
+@Api(description = "属性相关接口")
 @RestController
 @RequestMapping("/attribute")
 public class AttributeController {

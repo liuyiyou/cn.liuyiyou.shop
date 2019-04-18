@@ -15,7 +15,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class OrderAddReqVo implements Serializable {
 
-    private Long prodId;
     private Long skuId;
     private Integer prodNum;
 

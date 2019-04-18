@@ -23,9 +23,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IOrderService extends IService<Order> {
 
 
-    String sayHello();
-
-
     /**
      * 用户各个状态下的订单数量
      *

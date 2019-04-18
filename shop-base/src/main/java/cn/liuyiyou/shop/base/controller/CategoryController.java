@@ -26,7 +26,7 @@ import java.util.List;
  * @date: 2019/2/7
  * @Copyright 2019 liuyiyou.cn Inc. All rights reserved
  */
-@Api(description = "用户管理相关接口")
+@Api(description = "类目相关接口")
 @RestController
 @RequestMapping("/category")
 public class CategoryController extends BaseController {

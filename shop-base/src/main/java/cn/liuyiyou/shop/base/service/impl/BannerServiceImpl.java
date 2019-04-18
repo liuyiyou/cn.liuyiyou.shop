@@ -3,6 +3,7 @@ package cn.liuyiyou.shop.base.service.impl;
 import cn.liuyiyou.shop.base.entity.Banner;
 import cn.liuyiyou.shop.base.mapper.BannerMapper;
 import cn.liuyiyou.shop.base.service.IBannerService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

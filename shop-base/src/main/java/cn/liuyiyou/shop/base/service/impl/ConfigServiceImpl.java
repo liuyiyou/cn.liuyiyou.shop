@@ -2,7 +2,7 @@ package cn.liuyiyou.shop.base.service.impl;
 
 import cn.liuyiyou.shop.base.entity.Config;
 import cn.liuyiyou.shop.base.mapper.ConfigMapper;
-import cn.liuyiyou.shop.base.service.IConfigService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,6 @@ import org.springframework.stereotype.Service;
  * @since 2018-11-12
  */
 @Service
-public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> implements IConfigService {
+public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> implements IService<Config> {
 
 }
