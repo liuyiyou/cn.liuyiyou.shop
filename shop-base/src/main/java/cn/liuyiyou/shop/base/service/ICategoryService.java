@@ -36,4 +36,6 @@ public interface ICategoryService extends IService<Category> {
     List<CascaderVo> getCascaderVo();
 
     List<Category> findListByCataParentId(Integer cataParentId);
+
+    IPage<Category> getCategoryByParentId(int id, int pageNum, int parentId);
 }

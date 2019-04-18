@@ -39,6 +39,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
 
     @Override
+    public IPage<Category> getCategoryByParentId(int parentId, int pageNum, int pageSize) {
+        Page<Category> pageQuery = new Page<>(pageNum, pageSize);
+        LambdaQueryWrapper<Category> queryWrapper = new QueryWrapper<Category>().lambda().select();
+        queryWrapper.eq(Category::getCataParentId, parentId);
+        return this.page(pageQuery, queryWrapper);
+    }
+
+    @Override
     public IPage<Category> getCategoryByPage(int page, int pageSize) {
         Page<Category> pageQuery = new Page<>(page, pageSize);
         LambdaQueryWrapper<Category> queryWrapper = new QueryWrapper<Category>().lambda().select();

@@ -58,7 +58,7 @@ public class BrandController extends BaseController {
 
 //    @GetMapping("/list/{page}-{pageSize}")
 //    public IPage<Brand> list(@PathVariable("page") int page, @PathVariable("pageSize") int pageSize) {
-//        return brandService.getBrandByPage(page, pageSize);
+//        return brandService.getAttributeByPage(page, pageSize);
 //    }
 
     @GetMapping("/getBrandInfos")

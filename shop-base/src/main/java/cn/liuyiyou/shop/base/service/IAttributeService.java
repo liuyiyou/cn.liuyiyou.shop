@@ -1,6 +1,8 @@
 package cn.liuyiyou.shop.base.service;
 
 import cn.liuyiyou.shop.base.entity.Attribute;
+import cn.liuyiyou.shop.common.vo.PageVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -26,4 +28,5 @@ attr_clazz = 3 是为限制组合属性，是比较复杂的组合属性，由�
  */
 public interface IAttributeService extends IService<Attribute> {
 
+    IPage<Attribute> getAttributeByPage(PageVo pageVo);
 }
