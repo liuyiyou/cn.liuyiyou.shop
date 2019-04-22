@@ -26,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 @Slf4j
+@com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements IBrandService {
 
     @Autowired

@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
  * @since 2018-10-31
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements ICategoryService {
 
 

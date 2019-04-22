@@ -19,6 +19,7 @@ import static java.util.stream.Collectors.groupingBy;
  * @since 2018-11-12
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner> implements IBannerService {
 
 

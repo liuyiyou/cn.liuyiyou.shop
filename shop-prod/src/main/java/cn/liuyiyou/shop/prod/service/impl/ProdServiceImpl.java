@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.prod.service.impl;
 
+import cn.liuyiyou.shop.base.service.IBrandService;
 import cn.liuyiyou.shop.prod.entity.Prod;
 import cn.liuyiyou.shop.prod.entity.ProdSku;
 import cn.liuyiyou.shop.prod.mapper.ProdMapper;
@@ -13,15 +14,18 @@ import cn.liuyiyou.shop.prod.vo.ProdSkuVo;
 import cn.liuyiyou.shop.prod.vo.ProdVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyListValueVo;
 import cn.liuyiyou.shop.prod.vo.SkuKeyValueVo;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +42,18 @@ import java.util.stream.Collectors;
  * @since 2018-10-30
  */
 @Service
+@Slf4j
+@Transactional
 @com.alibaba.dubbo.config.annotation.Service(version = "${prod.service.version}")
 public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IProdService {
 
 
     @Autowired
     private IProdSkuService prodSkuService;
+
+
+    @Reference(version = "1.0.0")
+    private IBrandService brandService;
 
 
     @Override
@@ -102,6 +112,7 @@ public class ProdServiceImpl extends ServiceImpl<ProdMapper, Prod> implements IP
         ProdVo prodVo = new ProdVo();
         BeanUtils.copyProperties(prod, prodVo);
         prodVo.setAlbums(Arrays.asList(prod.getAlbum().split(",")));
+        prodVo.setBrandName(brandService.getById(prod.getBrandId()).getBrandNameCn());
         LambdaQueryWrapper<ProdSku> skuWrapper = new QueryWrapper<ProdSku>().lambda().select().eq(ProdSku::getProdId, id);
         List<SkuKeyValueVo> skuKeyValueVoList = Lists.newArrayList();
         List<ProdSkuVo> prodSkuVos = Lists.newArrayList();

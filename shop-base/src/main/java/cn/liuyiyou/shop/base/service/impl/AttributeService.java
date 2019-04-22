@@ -32,6 +32,7 @@ import org.springframework.stereotype.Service;
  * @since 2019-04-12
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class AttributeService extends ServiceImpl<AttributeMapper, Attribute> implements IAttributeService {
 
     @Override

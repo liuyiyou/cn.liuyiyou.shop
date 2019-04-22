@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  * @since 2019-04-12
  */
 @Service
+@com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class CategoryAttributeService extends ServiceImpl<CategoryAttributeMapper, CategoryAttribute> implements ICategoryAttributeService {
 
     @Autowired

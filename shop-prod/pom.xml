@@ -90,15 +90,17 @@
         </dependency>
 
         <dependency>
-        <groupId>cn.liuyiyou.shop</groupId>
-        <artifactId>shop-common</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!--<groupId>cn.liuyiyou.shop</groupId>-->
-        <!--<artifactId>shop-base-api</artifactId>-->
-        <!--<version>0.0.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>cn.liuyiyou.shop</groupId>
+            <artifactId>shop-base-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
         <dependency>
             <groupId>cn.liuyiyou.shop</groupId>
@@ -108,14 +110,14 @@
 
         <!--nacos for spring-boot config and discover  start-->
         <!--<dependency>-->
-            <!--<groupId>com.alibaba.boot</groupId>-->
-            <!--<artifactId>nacos-config-spring-boot-starter</artifactId>-->
-            <!--<version>${nacos-config-spring-boot.version}</version>-->
+        <!--<groupId>com.alibaba.boot</groupId>-->
+        <!--<artifactId>nacos-config-spring-boot-starter</artifactId>-->
+        <!--<version>${nacos-config-spring-boot.version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>com.alibaba.boot</groupId>-->
-            <!--<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
-            <!--<version>${nacos-discovery-spring-boot.version}</version>-->
+        <!--<groupId>com.alibaba.boot</groupId>-->
+        <!--<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+        <!--<version>${nacos-discovery-spring-boot.version}</version>-->
         <!--</dependency>-->
         <!--nacos for spring-boot config and discover  end-->
 
@@ -147,7 +149,6 @@
         </dependency>
 
         <!-- Dubbo Spring Boot Starter -->
-
 
 
         <dependency>

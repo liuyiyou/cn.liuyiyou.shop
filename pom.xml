@@ -12,6 +12,8 @@
 
     <dependencies>
 
+
+
     </dependencies>
 
 
@@ -24,6 +26,7 @@
         <module>shop-prod-api</module>
         <module>shop-mobile</module>
         <module>shop-user</module>
+        <module>shop-order-api</module>
     </modules>
 
 </project>

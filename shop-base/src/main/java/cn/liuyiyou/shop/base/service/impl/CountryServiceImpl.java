@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author liuyiyou.cn
  * @since 2018-11-02
  */
-@Service(
-        version = "${dubbo.service.version}",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
-)
+//@Service(
+//        version = "${dubbo.service.version}",
+//        application = "${dubbo.application.id}",
+//        protocol = "${dubbo.protocol.id}",
+//        registry = "${dubbo.registry.id}"
+//)
 @org.springframework.stereotype.Service
 public class CountryServiceImpl implements CountryService {
 
