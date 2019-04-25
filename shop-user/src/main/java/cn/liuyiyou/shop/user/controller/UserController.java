@@ -33,7 +33,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
+//@CrossOrigin
 public class UserController extends BaseController {
 
     @Autowired
