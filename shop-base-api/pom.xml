@@ -70,6 +70,12 @@
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.10</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Swagger-ui End -->
     </dependencies>
 
