@@ -1,5 +1,6 @@
 package cn.liuyiyou.shop.prod.controller;
 
+import cn.liuyiyou.shop.base.api.BrandApi;
 import cn.liuyiyou.shop.base.entity.Brand;
 import cn.liuyiyou.shop.base.service.IBrandService;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -21,6 +22,10 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+
+    @Autowired
+    private BrandApi brandApi;
 
 
     @Autowired
@@ -69,7 +74,7 @@ public class TestController {
      */
     @GetMapping("/feign/brand/{id}")
     public Brand getBrandByFeigh(@PathVariable("id") Long id) {
-        Brand brand = brandService.getById(id);
+        Brand brand = brandApi.getBrandByFeigh(id);
         return brand;
     }
 }
