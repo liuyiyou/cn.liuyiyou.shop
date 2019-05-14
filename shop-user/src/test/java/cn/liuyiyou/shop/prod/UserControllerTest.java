@@ -1,11 +1,8 @@
 package cn.liuyiyou.shop.prod;
 
 import cn.liuyiyou.shop.user.vo.Prod;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.plugins.pagination.PageHelper;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,8 +16,8 @@ import java.util.List;
  */
 public class UserControllerTest extends UserApplicationTests {
     @Test
-    public void test(){
-        RestTemplate restTemplate=new RestTemplate();
+    public void test() {
+        RestTemplate restTemplate = new RestTemplate();
         //不能用 http://PROD-SERVICE/prod/list
         //PROD-SERVICE; nested exception is java.net.UnknownHostException: PROD-SE
         String page = restTemplate.getForEntity("http://localhost:10000/prod/list", String.class).getBody();

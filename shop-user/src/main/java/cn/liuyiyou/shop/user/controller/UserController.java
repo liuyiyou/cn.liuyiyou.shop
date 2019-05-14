@@ -4,6 +4,7 @@ package cn.liuyiyou.shop.user.controller;
 import cn.liuyiyou.shop.common.response.Response;
 import cn.liuyiyou.shop.common.response.Result;
 import cn.liuyiyou.shop.common.web.BaseController;
+import cn.liuyiyou.shop.prod.vo.ProdListReqVo;
 import cn.liuyiyou.shop.user.entity.User;
 import cn.liuyiyou.shop.user.service.IUserService;
 import cn.liuyiyou.shop.user.vo.Prod;
@@ -13,7 +14,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,9 +44,9 @@ public class UserController extends BaseController {
 
     @GetMapping("/prods")
     public Result<Page<Prod>> prods() {
-        String page = restTemplate.getForEntity("http://PROD-SERVICE/prod/list", String.class).getBody();
-        Page<Prod> prodPage = JSONObject.parseObject(page, new TypeReference<Page<Prod>>() {
-        });
+        ProdListReqVo prodListReqVo = new ProdListReqVo();
+        String page = restTemplate.getForEntity("http://PROD-SERVICE/prod/list", String.class,prodListReqVo).getBody();
+        Page<Prod> prodPage = JSONObject.parseObject(page, new TypeReference<Page<Prod>>() {});
         return Response.success(prodPage);
     }
 

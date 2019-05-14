@@ -29,9 +29,6 @@ import org.springframework.web.client.RestTemplate;
 @com.alibaba.dubbo.config.annotation.Service(version = "${base.service.version}")
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements IBrandService {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Override
     public IPage<Brand> getBrandByPage(PageVo pageVo) {
         Page<Brand> pageQuery = new Page<>(pageVo.getPageNum(), pageVo.getPageSize());
@@ -39,16 +36,4 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
         return this.page(pageQuery, queryWrapper);
     }
 
-//    @Override
-//    public IPage<Prod> getProdsPageByBrandId(int brandId, int page, int pageSize) {
-//        String url = "http://PROD-SERVICE/prod/prods/" + brandId + "/" + page + "-" + pageSize;
-//        log.info("url::{}",url);
-//        String result = restTemplate.getForEntity(url, String.class).getBody();
-//        JSONObject object = JSONObject.parseObject(result);
-//        Page<Prod> prodPage = new Page<>();
-//        prodPage.setTotal(object.getLong("total"));
-//        List<Prod> records = JSONObject.parseArray(object.getString("records"), Prod.class);
-//        prodPage.setRecords(records);
-//        return prodPage;
-//    }
 }
