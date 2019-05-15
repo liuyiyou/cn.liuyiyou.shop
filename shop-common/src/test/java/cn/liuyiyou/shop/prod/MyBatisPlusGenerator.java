@@ -28,13 +28,24 @@ import static com.baomidou.mybatisplus.annotation.IdType.AUTO;
  */
 public class MyBatisPlusGenerator {
 
+    @Test
+    public void getOs() {
+        String osName = System.getProperty("os.name");
+        System.out.println(osName);
+    }
+
 
     @Test
     public void shopBaseGenerator() {
         String outPutDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-base/src/main/java";
         String xmlOutPurDir = "/Users/liuyiyou/code/github/cn.liuyiyou.shop/shop-base/src/main/resources/mappers/";
+        String osName = System.getProperty("os.name");
+        if (osName.contains("Win")) {
+            outPutDir = "F:\\github\\cn.liuyiyou.shop\\shop-base\\src\\main\\java";
+            xmlOutPurDir = "F:\\github\\cn.liuyiyou.shop\\shop-base\\src\\main\\resources\\mappers\\";
+        }
         String dbName = "shop-base";
-        String[] tableName = new String[]{"category_attribute"};
+        String[] tableName = new String[]{"area"};
         String basePackageName = "cn.liuyiyou.shop.base";
         generator(outPutDir, xmlOutPurDir, dbName, tableName, basePackageName);
 
