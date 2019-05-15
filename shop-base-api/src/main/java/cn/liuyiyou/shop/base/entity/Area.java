@@ -27,6 +27,11 @@ public class Area implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+
+    /**
+     * 上级id
+     */
+    private Long pid;
     /**
      * 名称
      */

@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.liuyiyou.shop.base.entity.Area">
         <id column="id" property="id" />
+        <result column="pid" property="pid" />
         <result column="name" property="name" />
         <result column="level" property="level" />
         <result column="create_time" property="createTime" />
@@ -13,7 +14,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, level, create_time, update_time
+        id,pid, name, level, create_time, update_time
     </sql>
 
 </mapper>
