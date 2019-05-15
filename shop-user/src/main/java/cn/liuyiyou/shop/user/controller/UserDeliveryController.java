@@ -45,7 +45,7 @@ public class UserDeliveryController {
     }
 
 
-    @ApiOperation(value = "获取收货地址")
+    @ApiOperation(value = "获取收货地址详情")
     @GetMapping("/{id}")
     public Result<UserDelivery> get(@PathVariable("id") Long id, HttpServletRequest request) {
         Integer uid = getUid(request);

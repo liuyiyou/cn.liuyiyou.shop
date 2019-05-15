@@ -69,7 +69,7 @@ public class UserApplication {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("供应链平台系统 后台接口文档")
+                .title("一优商城用户中心接口文档")
                 .description("参数类型中带有optional表示该参数可为空，如果没有表示该参数必填")
                 .termsOfServiceUrl("http://localhost:8080/")
                 .version("1.0")
