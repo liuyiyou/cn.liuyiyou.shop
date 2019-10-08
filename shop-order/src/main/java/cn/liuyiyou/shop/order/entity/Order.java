@@ -94,17 +94,17 @@ public class Order implements Serializable {
     @TableField("cancel_reason")
     private String cancelReason;
     /**
-     * 收货人所在区（对应ibalife_base.base_county.county_id）
+     * 收货人所在区（对应liuyiyou.cn_base.base_county.county_id）
      */
     @TableField("consign_country")
     private Integer consignCountry;
     /**
-     * 收货人所在省（对应ibalife_base.base_province.prov_id）
+     * 收货人所在省（对应liuyiyou.cn_base.base_province.prov_id）
      */
     @TableField("consign_province")
     private Integer consignProvince;
     /**
-     * 收货人所在市（对应ibalife_base.base_city.city_id）
+     * 收货人所在市（对应liuyiyou.cn_base.base_city.city_id）
      */
     @TableField("consign_city")
     private Integer consignCity;

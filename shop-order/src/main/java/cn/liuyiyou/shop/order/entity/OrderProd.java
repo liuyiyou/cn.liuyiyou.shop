@@ -68,7 +68,7 @@ public class OrderProd implements Serializable {
     @TableField("total_price")
     private Float totalPrice;
     /**
-     * 产品对应国家馆（ibalife_prod.product.origin）
+     * 产品对应国家馆（liuyiyou.cn_prod.product.origin）
      */
     @TableField("county_id")
     private String countyId;

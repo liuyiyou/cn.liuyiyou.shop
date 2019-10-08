@@ -14,10 +14,10 @@
 //import javax.sql.DataSource;
 //
 ///**
-// * @author: liuyiyou@yanglaoban.com
+// * @author: liuyiyou@liuyiyou.cn
 // * @date: 2018/11/14
 // * @version: V1.0
-// * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+// * @Copyright: 2018 liuyiyou.cn Inc. All rights reserved.
 // */
 //@Configuration
 //@MapperScan(basePackages = OrderDatasourceConfig.PACKAGE, sqlSessionFactoryRef = "orderSqlSessionFactory")

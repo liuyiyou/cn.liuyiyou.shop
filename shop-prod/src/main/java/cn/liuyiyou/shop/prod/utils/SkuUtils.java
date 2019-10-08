@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author: liuyiyou@yanglaoban.com
+ * @author: liuyiyou@liuyiyou.cn
  * @date: 2018/11/2
  * @version: V1.0
- * @Copyright: 2018 yanglaoban.com Inc. All rights reserved.
+ * @Copyright: 2018 liuyiyou.cn Inc. All rights reserved.
  */
 public abstract class SkuUtils {
 

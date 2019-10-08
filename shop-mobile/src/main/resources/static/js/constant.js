@@ -4,4 +4,4 @@ BASE_BASE_URL = "http://localhost:10010";
 PROD_BASE_URL = "http://localhost:10000";
 
 
-OSS_URL = "https://oss.yanglaoban.com/"
+OSS_URL = "https://oss.liuyiyou.cn/"
