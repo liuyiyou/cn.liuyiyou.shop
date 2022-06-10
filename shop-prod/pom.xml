@@ -29,7 +29,7 @@
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <nacos-config-spring-boot.version>0.2.0</nacos-config-spring-boot.version>
         <nacos-discovery-spring-boot.version>0.2.1</nacos-discovery-spring-boot.version>
-        <dubbo.version>2.6.2</dubbo.version>
+        <dubbo.version>2.6.12</dubbo.version>
         <spring-boot.version>2.0.7.RELEASE</spring-boot.version>
 
     </properties>
